@@ -1,20 +1,22 @@
-name: Unzip Files
+name: Find and move index
 on: [push]
 jobs:
-  unzip:
+  move:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Unzip archive
+      
+      - name: Find and Move
         run: |
-          if ls *.zip >/dev/null 2>&1; then
-            unzip -o *.zip
-            rm *.zip
-            git config --global user.name "GitHub Action"
-            git config --global user.email "action@github.com"
-            git add .
-            git commit -m "Auto-unzipped files"
-            git push
-          else
-            echo "No zip file found!"
-          fi
+          # پیدا کردن فایل index.html در هر جای مخزن و کپی کردنش به ریشه اصلی
+          find . -name "index.html" -exec cp {} ./index.html \;
+          
+          # همین کار رو برای titration-lab.html هم انجام بده (اگر وجود داشت)
+          find . -name "titration-lab.html" -exec cp {} ./titration-lab.html \;
+          
+          # کانفیگ گیت و پوش کردن تغییرات
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add .
+          git commit -m "Auto-move HTML files to root" || true
+          git push
