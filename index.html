@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>آزمایشگاه ریاضی شیمی — نسخه ۰٫۴</title>
+<title>آزمایشگاه ریاضی شیمی — نسخه ۰٫۵</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <style>
@@ -112,8 +112,8 @@ td.outl{background:rgba(183,121,31,.30)!important;outline:2px solid var(--acc2);
 @media(max-width:480px){.p56 .two button.act{width:100%;margin-right:0}.p56 .cel-jump a{font-size:12px;padding:3px 10px}.dbwrap{max-height:340px}}
 </style></head><body>
 <header><h1>آزمایشگاه ریاضی شیمی</h1><p>سینتیک، محاسبات و ابزارهای شیمیایی، همه در مرورگر شما</p></header>
-<div id="status">نسخه ۰٫۴ · در حال شروع… (اگر این پیام عوض نشد، اسکریپت اجرا نشده یا صفحه‌ی قدیمی در حافظه‌ی مرورگر است)</div>
-<nav><button class="on" data-t="kin">سینتیک واکنش</button><button data-t="sc">میدان اسکالر</button><button data-t="s3">گرادیان سه‌بعدی</button><button data-t="ch">مشتق زنجیره‌ای</button><button data-t="vf">میدان برداری</button><button data-t="v3">میدان برداری سه‌بعدی</button><button data-t="el">الکتریسته</button><button data-t="mg">مغناطیس صفحه‌ای</button><button data-t="m3">مغناطیس سه‌بعدی</button><button data-t="la">بردار و ماتریس</button><button data-t="lp">لاپلاسین و گرما</button><button data-t="ln">انتگرال خطی</button><button data-t="mi">انتگرال سطحی و حجمی</button><button data-t="cas">ماشین‌حساب</button><button data-t="cel">🧪 Chemical Excel Lab</button></nav><main><section id="kin" class="on"><details class="how" open><summary>توضیح این بخش</summary><p>در این بخش می‌بینید غلظت یک ماده با گذشت زمان چطور کم می‌شود. «مرتبه‌ی واکنش» تعیین می‌کند سرعت واکنش چقدر به غلظت وابسته است. با اسلایدر ثابت سرعت k را عوض کنید و تغییر منحنی را ببینید. اگر داده‌ی آزمایشگاهی دارید، برنامه k را با بازه‌ی اطمینان برازش می‌کند و بهترین مرتبه را پیشنهاد می‌دهد.</p></details>
+<div id="status">نسخه ۰٫۵ · در حال شروع… (اگر این پیام عوض نشد، اسکریپت اجرا نشده یا صفحه‌ی قدیمی در حافظه‌ی مرورگر است)</div>
+<nav><button class="on" data-t="kin">سینتیک واکنش</button><button data-t="sc">میدان اسکالر</button><button data-t="s3">گرادیان سه‌بعدی</button><button data-t="ch">مشتق زنجیره‌ای</button><button data-t="vf">میدان برداری</button><button data-t="v3">میدان برداری سه‌بعدی</button><button data-t="el">الکتریسته</button><button data-t="mg">مغناطیس صفحه‌ای</button><button data-t="m3">مغناطیس سه‌بعدی</button><button data-t="la">بردار و ماتریس</button><button data-t="lp">لاپلاسین و گرما</button><button data-t="ln">انتگرال خطی</button><button data-t="mi">انتگرال سطحی و حجمی</button><button data-t="cas">ماشین‌حساب</button><button data-t="cel">🧪 Chemical Excel Lab</button><button data-t="ti">⚗️ آزمایشگاه تیتراسیون</button></nav><main><section id="kin" class="on"><details class="how" open><summary>توضیح این بخش</summary><p>در این بخش می‌بینید غلظت یک ماده با گذشت زمان چطور کم می‌شود. «مرتبه‌ی واکنش» تعیین می‌کند سرعت واکنش چقدر به غلظت وابسته است. با اسلایدر ثابت سرعت k را عوض کنید و تغییر منحنی را ببینید. اگر داده‌ی آزمایشگاهی دارید، برنامه k را با بازه‌ی اطمینان برازش می‌کند و بهترین مرتبه را پیشنهاد می‌دهد.</p></details>
   <div class="grid">
     <div>
       <h2>مدل و پارامترها</h2>
@@ -672,7 +672,7 @@ td.outl{background:rgba(183,121,31,.30)!important;outline:2px solid var(--acc2);
 <div id="qr_out"></div>
 </div>
 </section>
-</main>
+<section id="ti"><details class="how" open><summary>توضیح این بخش</summary><p>شبیه‌ساز تیتراسیون اسید و باز (قوی/ضعیف، چندپروتونه، دما)، برازش ثابت‌های پروتونه‌شدن به روش مقاله‌ی Berto و همکاران (۲۰۲۴)، آزمایشگاه خطا و آمار، و کنترل کیفیت الکترود. این بخش مستقل از موتور پایتون صفحه است و بلافاصله کار می‌کند.</p></details><iframe src="titration-lab.html" title="آزمایشگاه تیتراسیون" loading="lazy" style="width:100%;height:88vh;min-height:640px;border:0;border-radius:6px;background:#e8eff1"></iframe></section></main>
 <script>window.HK={};window.INIT=[];
 window.addEventListener('error',e=>{if(window.__ready)return;const S=document.getElementById('status');if(S){S.className='';S.textContent='خطای اسکریپت: '+(e.message||'نامشخص')+' (خط '+(e.lineno||'?')+')'}});
 window.addEventListener('unhandledrejection',e=>{if(window.__ready)return;const S=document.getElementById('status');if(S){S.className='';S.textContent='خطای بارگذاری: '+String(e.reason&&e.reason.message||e.reason||'نامشخص').slice(0,200)}});
@@ -4112,7 +4112,7 @@ const lib=(u,label)=>new Promise((res,rej)=>{
 });
 let step='',py,err,sciP;const loaded={};
 async function boot(){
- const st=(i,t)=>{S.className='';S.textContent='نسخه ۰٫۴ · ('+i+'/۴) '+t};
+ const st=(i,t)=>{S.className='';S.textContent='نسخه ۰٫۵ · ('+i+'/۴) '+t};
 
  // مرحله ۱: اسکریپت Pyodide و سپس موتور WebAssembly با مسیر صریح
  st('۱','دانلود موتور پایتون…');step='۱ · pyodide.js';
@@ -4150,7 +4150,7 @@ async function ensure(tab){
  if(SCI[tab])await needSci();
  window.__ready=true;S.textContent='موتور پایتون آماده است ✓';S.className='ready';
 }
-document.querySelectorAll('nav button:not([data-t="cel"])').forEach(b=>b.disabled=true);
+document.querySelectorAll('nav button:not([data-t="cel"]):not([data-t="ti"])').forEach(b=>b.disabled=true);
 for(let i=0;i<2&&!py;i++){
  try{
   py=await boot();
