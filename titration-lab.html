@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>آزمایشگاه تیتراسیون</title>
+<style>
+html,body{margin:0;background:#e8eff1}
+.tl{--bg:#e8eff1;--panel:#f5f9fa;--ink:#10303c;--muted:#587482;--rule:#b7cad2;--water:#0e7c8c;--water-d:#0a5a66;--amber:#c9861a;--rose:#b3364c;--good:#2f7d4f;
+  font-family:Vazirmatn,"IRANSansX","Noto Sans Arabic",Tahoma,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;font-size:15px;
+  max-width:1080px;margin:0 auto;padding:0 0 40px;min-height:100vh;direction:rtl;text-align:right}
+.tl *{box-sizing:border-box}
+.tl header{padding:22px 16px 6px}
+.tl h1{font-size:23px;margin:0 0 2px;font-weight:800;letter-spacing:0}
+.tl header p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
+.tl nav{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 8px 0;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;
+  border-bottom:1px solid var(--rule);
+  background-image:repeating-linear-gradient(to left,var(--rule) 0 1px,transparent 1px 8px);background-size:100% 6px;background-repeat:no-repeat;background-position:0 100%}
+.tl nav button{font:inherit;font-size:14px;background:none;border:0;border-bottom:4px solid transparent;color:var(--muted);padding:6px 12px 12px;cursor:pointer}
+.tl nav button[aria-selected=true]{color:var(--ink);font-weight:700;border-bottom-color:var(--water)}
+.tl nav button:focus-visible,.tl button:focus-visible,.tl input:focus-visible,.tl select:focus-visible,.tl textarea:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+.tl section.panel{padding:6px 16px 0}
+.tl section.panel[hidden]{display:none}
+.tl .cols{display:flex;flex-direction:column}
+@media(min-width:900px){.tl .cols{display:grid;flex-direction:initial;grid-template-columns:minmax(300px,380px) 1fr;gap:28px;align-items:start}}
+.tl fieldset{border:0;border-top:1px solid var(--rule);margin:16px 0 0;padding:10px 0 0}
+.tl legend{font-weight:700;font-size:14px;padding:0 0 0 8px;color:var(--water-d)}
+.tl .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.tl label{display:block;font-size:12.5px;color:var(--muted)}
+.tl input,.tl select,.tl textarea{font:inherit;font-size:14px;width:100%;margin-top:2px;padding:7px 9px;border:1px solid var(--rule);border-radius:5px;background:#fff;color:var(--ink);direction:ltr;text-align:left}
+.tl select{direction:rtl;text-align:right}
+.tl textarea{min-height:110px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.5}
+.tl .chk{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--ink);margin:6px 0}
+.tl .chk input{width:auto;margin:0}
+.tl .row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.tl button.btn{font:inherit;font-size:14px;padding:8px 14px;border-radius:5px;border:1px solid var(--water);background:var(--water);color:#fff;cursor:pointer}
+.tl button.btn.ghost{background:transparent;color:var(--water-d)}
+.tl button.chip{font:inherit;font-size:12.5px;padding:3px 10px;border-radius:99px;border:1px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer}
+.tl button.btn:active,.tl button.chip:active{transform:translateY(1px)}
+.tl .hint{font-size:12px;color:var(--muted);margin:4px 0 0}
+.tl .msg{font-size:13.5px;margin:10px 0;padding:8px 10px;border-inline-start:3px solid var(--water);background:var(--panel)}
+.tl .msg.err{border-color:var(--rose);color:var(--rose)}
+.tl .msg.warn{border-color:var(--amber)}
+.tl .seg{display:flex;gap:0;margin:2px 0 8px;border:1px solid var(--rule);border-radius:6px;overflow:hidden;width:max-content;max-width:100%}
+.tl .seg button{font:inherit;font-size:13px;padding:5px 12px;border:0;background:#fff;color:var(--muted);cursor:pointer;border-inline-start:1px solid var(--rule)}
+.tl .seg button:first-child{border-inline-start:0}
+.tl .seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.tl .plot{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:6px 4px 4px;margin:6px 0 10px}
+.tl .plot svg{display:block;width:100%;height:auto;direction:ltr}
+.tl .plot text{font-family:inherit;fill:var(--muted);font-size:10px}
+.tl .legend{display:flex;flex-wrap:wrap;gap:4px 12px;padding:2px 10px 4px;font-size:12px;color:var(--muted)}
+.tl .legend i{display:inline-block;width:14px;height:3px;margin-inline-end:5px;vertical-align:middle;border-radius:2px}
+.tl h3{font-size:15px;margin:18px 0 4px;font-weight:700}
+.tl .tbl{overflow-x:auto}
+.tl table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tl th{font-weight:600;color:var(--muted);text-align:right;border-bottom:1px solid var(--ink);padding:4px 8px;white-space:nowrap}
+.tl td{padding:4px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.tl td.num,.tl th.num{direction:ltr;text-align:left}
+.tl .ok{color:var(--good);font-weight:600}.tl .mid{color:var(--amber);font-weight:600}.tl .bad{color:var(--rose);font-weight:600}
+.tl .list{list-style:none;margin:6px 0;padding:0}
+.tl .list li{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid var(--rule);padding:5px 0;font-size:13px}
+.tl .list button{font:inherit;font-size:12px;border:0;background:none;color:var(--rose);cursor:pointer}
+.tl details{border-top:1px solid var(--rule);padding:8px 0}
+.tl summary{cursor:pointer;font-weight:600}
+.tl code,.tl .eq{direction:ltr;unicode-bidi:embed;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;background:#fff;border:1px solid var(--rule);border-radius:4px;padding:1px 5px}
+.tl .eq{display:block;margin:6px 0;padding:6px 8px;overflow-x:auto;text-align:left}
+.tl .busy{opacity:.6;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.tl *{transition:none!important;animation:none!important}}
+
+@media(max-width:899px){.tl .panel[data-panel=sim] .cols>div:nth-child(2){order:-1}}
+
+</style>
+</head>
+<body>
+<div class="tl" id="tl-root">
+<header>
+  <h1>آزمایشگاه تیتراسیون</h1>
+  <p>شبیه‌سازی منحنی تیتراسیون، برازش ثابت‌های پروتونه‌شدن از داده‌های پتانسیومتری، و بررسی اثر خطاهای سیستماتیک؛ بر پایه‌ی مقاله‌ی Berto و همکاران (۲۰۲۴).</p>
+</header>
+<nav role="tablist" aria-label="بخش‌ها">
+  <button role="tab" aria-selected="true" data-tab="sim">شبیه‌ساز</button>
+  <button role="tab" aria-selected="false" data-tab="fit">برازش ثابت‌ها</button>
+  <button role="tab" aria-selected="false" data-tab="err">آزمایشگاه خطا</button>
+  <button role="tab" aria-selected="false" data-tab="lab">خطا و آمار تیتراسیون</button>
+  <button role="tab" aria-selected="false" data-tab="cal">کالیبراسیون و QC</button>
+  <button role="tab" aria-selected="false" data-tab="qty">محاسبات کمی</button>
+  <button role="tab" aria-selected="false" data-tab="ext">غیرآبی و روش‌های ابزاری</button>
+  <button role="tab" aria-selected="false" data-tab="ref">راهنما</button>
+</nav>
+
+<!-- ============ SIM ============ -->
+<section class="panel" data-panel="sim"><div class="cols">
+ <div>
+  <fieldset><legend>نمونه‌های آماده</legend>
+   <div class="row" id="sim-presets" style="margin-top:2px"></div>
+  </fieldset>
+  <fieldset><legend>سامانه</legend>
+   <label>نوع آنالیت
+    <select id="sim-kind">
+     <option value="strongAcid">اسید قوی (با باز قوی)</option>
+     <option value="strongBase">باز قوی (با اسید قوی)</option>
+     <option value="acid" selected>اسید ضعیف / چندپروتونه (با باز قوی)</option>
+     <option value="base">باز ضعیف / چندبازی (با اسید قوی)</option>
+    </select></label>
+   <div class="grid2" style="margin-top:10px">
+    <label>غلظت آنالیت (mol/L)<input id="sim-C" type="number" step="any" value="0.1" inputmode="decimal"></label>
+    <label>حجم نمونه (mL)<input id="sim-V0" type="number" step="any" value="25" inputmode="decimal"></label>
+    <label>غلظت تیترانت (mol/L)<input id="sim-Ct" type="number" step="any" value="0.1" inputmode="decimal"></label>
+    <label>pKw<input id="sim-pkw" type="number" step="any" value="14" inputmode="decimal"></label>
+   </div>
+   <label class="chk" style="margin-top:8px"><input type="checkbox" id="sim-pkwauto"> pKw از دما محاسبه شود (به‌جای مقدار بالا؛ ۱۳٫۹۹۵ در ۲۵°C، نه ۱۴)</label>
+   <div class="grid2" style="margin-top:10px">
+    <label>دما (°C)<input id="sim-T" type="number" step="any" value="25" inputmode="decimal"></label>
+    <label>ΔH تفکیک (kJ/mol، برای همه‌ی pKaها؛ ۰ = بدون تصحیح)<input id="sim-dH" type="number" step="any" value="0" inputmode="decimal"></label>
+   </div>
+   <label class="chk" style="margin-top:6px"><input type="checkbox" id="sim-thermal"> انبساط حجمی آب با دما</label>
+   <label style="margin-top:10px">تیترانت<select id="sim-tstr"><option value="strong" selected>قوی</option><option value="weak">ضعیف (اسید یا باز ضعیف)</option></select></label>
+   <label id="sim-tpka-wrap" hidden style="margin-top:8px">pKa تیترانت ضعیف (HX برای تیترانت اسیدی؛ BH⁺ برای تیترانت بازی)<input id="sim-tpka" type="number" step="any" value="9.25" inputmode="decimal"></label>
+   <label id="sim-pka-wrap" style="margin-top:10px">pKaها (به ترتیب صعودی، با کاما جدا کنید)<input id="sim-pka" type="text" value="4.76" inputmode="decimal"></label>
+   <p class="hint" id="sim-pka-hint">برای باز ضعیف، pKa اسید مزدوج را وارد کنید (مثلاً NH₄⁺ ← 9.25).</p>
+   <label style="margin-top:10px">ادامه‌ی تیتراسیون تا (٪ از کل هم‌ارزها)<input id="sim-ext" type="number" step="5" value="130" inputmode="decimal"></label>
+  </fieldset>
+  <div class="row"><button class="btn" id="sim-run">رسم منحنی</button></div>
+  <div id="sim-msg"></div>
+  <div id="sim-jump"></div>
+ </div>
+ <div>
+  <div class="seg" id="sim-views" role="group" aria-label="نمای نمودار">
+   <button data-view="ph" aria-pressed="true">pH</button>
+   <button data-view="d" aria-pressed="false">مشتق</button>
+   <button data-view="alpha" aria-pressed="false">گونه‌ها</button>
+   <button data-view="gran" aria-pressed="false">گران</button>
+  </div>
+  <div class="plot" id="sim-plot"></div>
+  <div id="sim-note" class="hint"></div>
+  <h3>نقاط هم‌ارزی</h3>
+  <div class="tbl" id="sim-eq"></div>
+  <h3>انتخاب شناساگر</h3>
+  <label style="max-width:260px">نقطه‌ی هم‌ارزی<select id="sim-ind-eq"></select></label>
+  <div class="tbl" id="sim-ind"></div>
+ </div>
+</div></section>
+
+<!-- ============ FIT ============ -->
+<section class="panel" data-panel="fit" hidden><div class="cols">
+ <div>
+  <fieldset><legend>داده‌ها</legend>
+   <div class="row" style="margin-top:2px">
+    <button class="btn" id="fit-bench">بارگذاری دیتاست مقاله (شبیه‌سازی‌شده)</button>
+   </div>
+   <p class="hint">شش منحنی: سه غلظت اسید شش‌پروتونه، هر کدام دو تکرار، با نوفه‌ی ۰٫۰۵ mV.</p>
+   <ul class="list" id="fit-list"></ul>
+   <details><summary>افزودن منحنی از داده‌ی خودتان</summary>
+    <div class="grid2" style="margin-top:8px">
+     <label>نام<input id="fit-name" type="text" value="منحنی ۱"></label>
+     <label>غلظت لیگاند C<sub>L</sub> (mM)<input id="fit-CL" type="number" step="any" value="4" inputmode="decimal"></label>
+     <label>حجم اولیه (mL)<input id="fit-V0" type="number" step="any" value="25" inputmode="decimal"></label>
+     <label>پروتون اضافی H₀ (mM)<input id="fit-H0" type="number" step="any" value="0" inputmode="decimal"></label>
+    </div>
+    <label style="margin-top:8px">داده‌ها: هر خط «حجم تیترانت (mL)  E (mV)» (یا pH)<textarea id="fit-data" spellcheck="false" placeholder="0.00  547.2&#10;0.06  551.9&#10;..."></textarea></label>
+    <div class="row"><button class="btn ghost" id="fit-add">افزودن منحنی</button>
+     <label style="margin:0"><input id="fit-file" type="file" accept=".csv,.txt,.tsv" style="padding:4px"></label></div>
+   </details>
+  </fieldset>
+  <fieldset><legend>مدل</legend>
+   <div class="grid2">
+    <label>نوع آنالیت<select id="fit-analyte"><option value="acid">اسید H<sub>n</sub>A (تیترانت: باز)</option><option value="base">باز (تیترانت: اسید)</option></select></label>
+    <label>تعداد مراحل n<input id="fit-n" type="number" min="1" max="8" step="1" value="6" inputmode="numeric"></label>
+    <label>بار شکل A (z<sub>A</sub>)<input id="fit-zA" type="number" step="1" value="-6" inputmode="numeric"></label>
+    <label>غلظت تیترانت (mol/L)<input id="fit-Ct" type="number" step="any" value="0.1" inputmode="decimal"></label>
+    <label>pKw<input id="fit-pkw" type="number" step="any" value="13.77" inputmode="decimal"></label>
+    <label>مشاهده<select id="fit-obs"><option value="E">emf (mV)</option><option value="pH">pH<sub>c</sub></option></select></label>
+   </div>
+   <label style="margin-top:10px">حدس اولیه‌ی logK مرحله‌ای (جدا شده با کاما)<input id="fit-guess" type="text" value="9.6, 7.6, 5.6, 3.6, 2.6, 1.6"></label>
+   <div class="grid2" style="margin-top:10px">
+    <label>قدرت یونی<select id="fit-mode"><option value="const">ثابت (ثابت‌های استوکیومتری)</option><option value="var">متغیر (ثابت‌های ترمودینامیکی)</option></select></label>
+    <label>معادله‌ی ضریب فعالیت<select id="fit-gm"><option value="dh">DH (A=0.51, B=1)</option><option value="davies">Davies</option><option value="edh">EDH (B=1.5)</option></select></label>
+    <label>نمک زمینه C<sub>s</sub> (mol/L)<input id="fit-Cs" type="number" step="any" value="0.1" inputmode="decimal"></label>
+   </div>
+   <p class="hint" id="fit-mode-hint">در حالت قدرت یونی متغیر، pKw را ترمودینامیکی (≈ 13.997) و گزینه‌ی E′₀ را برازش‌پذیر بگذارید.</p>
+  </fieldset>
+  <fieldset><legend>الکترود (معادله‌ی ۱۰ مقاله)</legend>
+   <div class="grid2">
+    <label>E′₀ (mV)<input id="fit-E0" type="number" step="any" value="405" inputmode="decimal"></label>
+    <label>شیب S (mV)<input id="fit-S" type="number" step="any" value="-59.16" inputmode="decimal"></label>
+    <label>j<sub>A</sub> (mV·L/mol)<input id="fit-jA" type="number" step="any" value="-64" inputmode="decimal"></label>
+    <label>j<sub>B</sub> (mV·L/mol)<input id="fit-jB" type="number" step="any" value="0" inputmode="decimal"></label>
+   </div>
+  </fieldset>
+  <fieldset><legend>برازش</legend>
+   <div class="grid2">
+    <label>وزن‌دهی<select id="fit-w"><option value="1">وزن‌دار (w = 1/s²)</option><option value="0">بدون وزن</option></select></label>
+    <label>بیشینه‌ی تکرار<input id="fit-maxit" type="number" value="120" inputmode="numeric"></label>
+    <label>s<sub>E</sub> (mV یا pH)<input id="fit-sE" type="number" step="any" value="0.15" inputmode="decimal"></label>
+    <label>s<sub>V</sub> (mL)<input id="fit-sV" type="number" step="any" value="0.005" inputmode="decimal"></label>
+   </div>
+   <p class="hint" style="margin-top:8px">پارامترهای برازش‌پذیر علاوه بر logβ:</p>
+   <label class="chk"><input type="checkbox" id="fit-rE0"> E′₀</label>
+   <label class="chk"><input type="checkbox" id="fit-rS"> شیب S</label>
+   <label class="chk"><input type="checkbox" id="fit-rjA"> j<sub>A</sub></label>
+   <label class="chk"><input type="checkbox" id="fit-rCt"> غلظت تیترانت</label>
+   <label style="margin-top:6px">غلظت‌ها<select id="fit-rconc"><option value="none">ثابت</option><option value="CL">C<sub>L</sub> هر منحنی (پروتون = n·C<sub>L</sub>)</option><option value="fH">پروتون کل هر منحنی (C<sub>L</sub> ثابت)</option></select></label>
+  </fieldset>
+  <div class="row"><button class="btn" id="fit-run">اجرای برازش</button><button class="btn ghost" id="fit-export">خروجی CSV</button></div>
+  <div id="fit-msg"></div>
+ </div>
+ <div>
+  <div id="fit-sum"></div>
+  <div class="tbl" id="fit-res"></div>
+  <div class="tbl" id="fit-par"></div>
+  <h3 id="fit-plot-h" hidden>برازش روی داده</h3>
+  <label id="fit-curve-wrap" style="max-width:260px" hidden>منحنی<select id="fit-curve"></select></label>
+  <div class="plot" id="fit-plot" hidden></div>
+  <div class="plot" id="fit-resplot" hidden></div>
+  <div id="fit-qc"></div>
+ </div>
+</div></section>
+
+<!-- ============ ERR ============ -->
+<section class="panel" data-panel="err" hidden><div class="cols">
+ <div>
+  <p class="hint" style="margin-top:12px">همان دیتاست شش‌منحنی‌ی مقاله ساخته و ابتدا با ورودی درست برازش می‌شود؛ سپس هر خطا جداگانه اعمال و تغییر logK گزارش می‌شود. مقادیر مقاله از ستون BSTAC جدول‌های ۳ و ۴ آمده‌اند.</p>
+  <fieldset><legend>خطاها</legend>
+   <label>خطا در E′₀ (mV)<input id="err-dE0" type="number" step="any" value="1" inputmode="decimal"></label>
+   <label style="margin-top:8px">خطا در غلظت تیترانت (٪)<input id="err-ct" type="number" step="any" value="-2" inputmode="decimal"></label>
+   <label style="margin-top:8px">خطا در غلظت اسید (٪)<input id="err-acid" type="number" step="any" value="-2" inputmode="decimal"></label>
+   <label class="chk" style="margin-top:10px"><input type="checkbox" id="err-ion" checked> تغییر قدرت یونی در طول تیتراسیون (برازش فعالیتی)</label>
+   <label>معادله‌ی ضریب فعالیت<select id="err-gm"><option value="dh">DH (A=0.51, B=1)</option><option value="davies">Davies</option></select></label>
+  </fieldset>
+  <fieldset><legend>داده</legend>
+   <div class="grid2">
+    <label>نوفه‌ی emf (mV)<input id="err-noise" type="number" step="any" value="0.05" inputmode="decimal"></label>
+    <label>seed<input id="err-seed" type="number" step="1" value="7" inputmode="numeric"></label>
+   </div>
+  </fieldset>
+  <div class="row"><button class="btn" id="err-run">اجرا</button></div>
+  <div id="err-msg"></div>
+ </div>
+ <div id="err-out"></div>
+</div></section>
+
+<!-- ============ LAB (errors & statistics) ============ -->
+<section class="panel" data-panel="lab" hidden><div class="cols">
+ <div>
+  <p class="hint" style="margin-top:12px">سامانه از آخرین «رسم منحنی» در تب شبیه‌ساز گرفته می‌شود. چند تکرار تیتراسیون با خطاهای انتخابی شبیه‌سازی می‌شود و نتیجه‌ی تحلیلگر با مقدار واقعی سنجیده می‌شود.</p>
+  <fieldset><legend>تشخیص نقطه‌ی پایان</legend>
+   <label>روش<select id="lab-method"><option value="ideal">ایده‌آل (هم‌ارزی دقیق)</option><option value="ind" selected>شناساگر</option><option value="pot">پتانسیومتری (مشتق اول)</option></select></label>
+   <label id="lab-ind-wrap" style="margin-top:8px">شناساگر<select id="lab-ind"></select></label>
+   <label id="lab-k-wrap" hidden style="margin-top:8px">شماره‌ی هم‌ارزی k<input id="lab-k" type="number" step="1" value="1"></label>
+   <div id="lab-pot-wrap" hidden class="grid2" style="margin-top:8px">
+    <label>گام حجم (mL)<input id="lab-step" type="number" step="any" value="0.1"></label>
+    <label>نوفه‌ی pH (σ)<input id="lab-sph" type="number" step="any" value="0.01"></label>
+   </div>
+  </fieldset>
+  <fieldset><legend>خطاهای سیستماتیک</legend>
+   <div class="grid2">
+    <label>کالیبراسیون بورت (٪)<input id="lab-cal" type="number" step="any" value="0"></label>
+    <label>انحراف غلظت تیترانت از برچسب (٪)<input id="lab-F" type="number" step="any" value="0"></label>
+    <label>افت تیتر باز با CO₂ (٪)<input id="lab-co2" type="number" step="any" value="0"></label>
+    <label>حجم شاهد (mL)<input id="lab-blank" type="number" step="any" value="0"></label>
+    <label>تبخیر نمونه (mL)<input id="lab-evap" type="number" step="any" value="0"></label>
+    <label>اضافه‌ی تیترانت پس از پایان (mL)<input id="lab-over" type="number" step="any" value="0"></label>
+    <label>خطای ثابت پیپت (mL)<input id="lab-pip" type="number" step="any" value="0"></label>
+   </div>
+   <label class="chk" style="margin-top:8px"><input type="checkbox" id="lab-bcorr"> حجم شاهد از نتیجه کم شود</label>
+  </fieldset>
+  <fieldset><legend>خطاهای تصادفی (σ، نرمال)</legend>
+   <div class="grid2">
+    <label>خواندن بورت (mL)<input id="lab-sread" type="number" step="any" value="0.02"></label>
+    <label>قطره‌ی آخر (mL)<input id="lab-sdrop" type="number" step="any" value="0.02"></label>
+    <label>پیپت (mL)<input id="lab-spip" type="number" step="any" value="0.02"></label>
+    <label>تعداد تکرار<input id="lab-n" type="number" step="1" value="5"></label>
+    <label>seed<input id="lab-seed" type="number" step="1" value="1"></label>
+   </div>
+  </fieldset>
+  <fieldset><legend>خطای فاحش</legend>
+   <label>سناریو<select id="lab-gross"><option value="none">هیچ</option><option value="misread">خواندن اشتباه بورت (mL به نتیجه افزوده می‌شود)</option><option value="wrongconc">غلظت تیترانت اشتباه وارد شد (ضریب)</option><option value="spill">ریختن بخشی از نمونه (کسر)</option><option value="wrongind">شناساگر نادرست</option></select></label>
+   <label style="margin-top:8px">اندازه (mL / ضریب / کسر)<input id="lab-mag" type="number" step="any" value="1"></label>
+   <label style="margin-top:8px">شناساگر نادرست<select id="lab-wind"></select></label>
+  </fieldset>
+  <div class="row"><button class="btn" id="lab-run">اجرا</button></div>
+  <div id="lab-msg"></div>
+ </div>
+ <div id="lab-out"></div>
+</div></section>
+
+<!-- ============ CAL ============ -->
+<section class="panel" data-panel="cal" hidden><div class="cols">
+ <div>
+  <fieldset><legend>کالیبراسیون الکترود (اسید قوی با باز استاندارد)</legend>
+   <label>داده‌ها: «حجم (mL)  E (mV)» در هر خط<textarea id="cal-data" spellcheck="false"></textarea></label>
+   <div class="grid2" style="margin-top:8px">
+    <label>غلظت اسید (mol/L)<input id="cal-Ca" type="number" step="any" value="0.01" inputmode="decimal"></label>
+    <label>حجم اسید (mL)<input id="cal-V0" type="number" step="any" value="25" inputmode="decimal"></label>
+    <label>غلظت باز (mol/L)<input id="cal-Ct" type="number" step="any" value="0.1" inputmode="decimal"></label>
+    <label>pKw<input id="cal-pkw" type="number" step="any" value="13.77" inputmode="decimal"></label>
+   </div>
+   <label class="chk"><input type="checkbox" id="cal-rjB"> برازش j<sub>B</sub></label>
+   <label class="chk"><input type="checkbox" id="cal-rCa"> غلظت اسید را هم برازش کن</label>
+  </fieldset>
+  <div class="row"><button class="btn" id="cal-run">محاسبه‌ی پارامترها</button><button class="btn ghost" id="cal-demo">داده‌ی نمونه</button></div>
+  <div id="cal-msg"></div>
+  <fieldset><legend>نمودار کنترل E′₀</legend>
+   <label>مقادیر E′₀ در روزهای قبل (mV، با کاما یا خط جدید)<textarea id="cal-hist" spellcheck="false" style="min-height:70px">405.1, 404.8, 405.3, 405.0, 405.9</textarea></label>
+   <div class="row"><button class="btn ghost" id="cal-chart">رسم نمودار کنترل</button></div>
+  </fieldset>
+ </div>
+ <div>
+  <div id="cal-sum"></div>
+  <div class="plot" id="cal-plot" hidden></div>
+  <div id="cal-ctl"></div>
+ </div>
+</div></section>
+
+<!-- ============ QTY (v0.9: quick analytical quantities) ============ -->
+<section class="panel" data-panel="qty" hidden><div class="cols">
+ <div>
+  <fieldset><legend>تیتر (mg/mL) و عیار Assay</legend>
+   <div class="grid2">
+    <label>غلظت تیترانت C<sub>t</sub> (mol/L)<input id="qty-Ct" type="number" step="any" value="0.1" inputmode="decimal"></label>
+    <label>حجم تیترانت (mL)<input id="qty-Vt" type="number" step="any" value="25" inputmode="decimal"></label>
+    <label>جرم مولی آنالیت (g/mol)<input id="qty-MW" type="number" step="any" value="100.09" inputmode="decimal"></label>
+    <label>نسبت a/b (آنالیت/تیترانت)<input id="qty-ratio" type="number" step="any" value="0.5" inputmode="decimal"></label>
+    <label>جرم نمونه (g)<input id="qty-ms" type="number" step="any" value="0.15" inputmode="decimal"></label>
+    <label>حجم بالن / حجم آلیکوت (mL)<input id="qty-flask" type="text" value="250 / 25" inputmode="decimal"></label>
+   </div>
+   <div class="row"><button class="btn" id="qty-run1">محاسبه</button><button class="btn ghost" id="qty-demo1">نمونه (CaCO₃ با HCl)</button></div>
+   <div id="qty-out1" class="sum"></div>
+  </fieldset>
+  <fieldset><legend>استانداردسازی HClO₄ با KHP و ضریب F</legend>
+   <div class="grid2">
+    <label>جرم KHP (g)<input id="qty-khp" type="number" step="any" value="0.5106" inputmode="decimal"></label>
+    <label>حجم HClO₄ (mL)<input id="qty-vh" type="number" step="any" value="25" inputmode="decimal"></label>
+    <label>خلوص KHP (0 تا 1)<input id="qty-pkhp" type="number" step="any" value="1" inputmode="decimal"></label>
+    <label>غلظت اسمی (mol/L)<input id="qty-nom" type="number" step="any" value="0.1" inputmode="decimal"></label>
+   </div>
+   <div class="row"><button class="btn" id="qty-run2">محاسبه</button></div>
+   <div id="qty-out2" class="sum"></div>
+  </fieldset>
+  <fieldset><legend>کربنات تیترانت با دو نقطهٔ پایان (روش مقاله)</legend>
+   <div class="grid2">
+    <label>نقطهٔ پایان اول V₁ (mL)<input id="qty-v1" type="number" step="any" value="20" inputmode="decimal"></label>
+    <label>نقطهٔ پایان دوم V₂ (mL)<input id="qty-v2" type="number" step="any" value="30" inputmode="decimal"></label>
+    <label>غلظت اسید (mol/L)<input id="qty-ca" type="number" step="any" value="0.1" inputmode="decimal"></label>
+    <label>حجم نمونهٔ باز (mL)<input id="qty-vs" type="number" step="any" value="50" inputmode="decimal"></label>
+   </div>
+   <div class="row"><button class="btn" id="qty-run3">محاسبه</button></div>
+   <div id="qty-out3" class="sum"></div>
+  </fieldset>
+ </div>
+ <div>
+  <fieldset><legend>نتایج هم‌سو (Concordance)</legend>
+   <label>حجم‌های تکرارها (mL، با کاما یا خط جدید)<textarea id="qty-reps" spellcheck="false" style="min-height:64px">24.82, 24.79, 24.84</textarea></label>
+   <div class="grid2">
+    <label>حد مطلق (mL)<input id="qty-tol" type="number" step="any" value="0.05" inputmode="decimal"></label>
+    <label>حد نسبی<input id="qty-tolr" type="number" step="any" value="0.002" inputmode="decimal"></label>
+   </div>
+   <div class="row"><button class="btn" id="qty-run4">بررسی</button></div>
+   <div id="qty-out4" class="sum"></div>
+  </fieldset>
+  <fieldset><legend>LOD و LOQ</legend>
+   <div class="grid2">
+    <label>σ سفید (واحد سیگنال)<input id="qty-sig" type="number" step="any" value="0.002" inputmode="decimal"></label>
+    <label>شیب S (سیگنال بر غلظت)<input id="qty-slope" type="number" step="any" value="1.5" inputmode="decimal"></label>
+    <label>سبک<select id="qty-style"><option value="ich">ICH (۳٫۳σ)</option><option value="classic">کلاسیک (۳σ)</option></select></label>
+   </div>
+   <div class="row"><button class="btn" id="qty-run5">محاسبه</button></div>
+   <div id="qty-out5" class="sum"></div>
+  </fieldset>
+  <fieldset><legend>ماسک‌کردن با سیانید — کدام فلز تیترشدنی است؟</legend>
+   <div class="grid2">
+    <label>pH بافر<input id="qty-mph" type="number" step="any" value="10" inputmode="decimal"></label>
+    <label>[CN⁻] کل (mol/L)<input id="qty-mcn" type="number" step="any" value="0.01" inputmode="decimal"></label>
+    <label>غلظت فلز (mol/L)<input id="qty-cm" type="number" step="any" value="0.01" inputmode="decimal"></label>
+   </div>
+   <div class="row"><button class="btn" id="qty-run6">جدول انتخاب‌پذیری</button></div>
+   <div id="qty-out6" class="sum"></div>
+   <p class="hint">قاعدهٔ نوک‌تیزی پایان: K″·C ≥ 10⁶. آزادسازی (Demasking) با فرمالدهید برای Zn–CN. فلزهای خارج از جدول CN، ماسک نمی‌شوند.</p>
+  </fieldset>
+ </div>
+</div></section>
+
+<!-- ============ EXTENDED FAMILIES ============ -->
+<section class="panel" data-panel="ext" hidden><div class="cols">
+ <div>
+  <div class="seg" id="ex-fam" role="group" aria-label="خانواده" style="flex-wrap:wrap">
+   <button data-fam="nonaq" aria-pressed="true">غیرآبی</button>
+   <button data-fam="amp" aria-pressed="false">آمپرومتری</button>
+   <button data-fam="thermo" aria-pressed="false">ترمومتری</button>
+   <button data-fam="kf" aria-pressed="false">کارل فیشر</button>
+   <button data-fam="coul" aria-pressed="false">کولن‌سنجی</button>
+   <button data-fam="std" aria-pressed="false">استانداردسازی</button>
+   <button data-fam="gum" aria-pressed="false">عدم‌قطعیت GUM</button>
+  </div>
+  <div id="ex-form"></div>
+  <div class="row"><button class="btn" id="ex-run">محاسبه</button></div>
+  <div id="ex-msg"></div>
+ </div>
+ <div>
+  <div class="plot" id="ex-plot" hidden></div>
+  <div id="ex-res"></div>
+  <div id="ex-note" style="font-size:13px;color:var(--muted);margin-top:8px"></div>
+ </div>
+</div></section>
+
+<!-- ============ REF ============ -->
+<section class="panel" data-panel="ref" hidden>
+ <h3>روابط به‌کاررفته</h3>
+ <span class="eq">T<sub>H</sub> = [H] − K<sub>w</sub>/[H] + C<sub>L</sub>·Σ iβ<sub>i</sub>[H]^i / (1 + Σ β<sub>i</sub>[H]^i)</span>
+ <span class="eq">E = E′₀ + S·log[H⁺] + j<sub>A</sub>[H⁺] + j<sub>B</sub>[OH⁻]  (Eq. 10)</span>
+ <span class="eq">U = √( Σ w<sub>n</sub>(E<sub>exp</sub> − E<sub>calc</sub>)² / (N − p) ),  w = 1/s²,  s² = s<sub>E</sub>² + (∂E/∂V)² s<sub>V</sub>²  (Eq. 2–4)</span>
+ <span class="eq">log γ = −A z² √I / (1 + B√I)   (DH)   |   Davies: −A z² (√I/(1+√I) − 0.3 I)</span>
+ <span class="eq">β<sup>T</sup> = β · γ<sub>H<sub>i</sub>A</sub> / (γ<sub>A</sub> γ<sub>H</sub><sup>i</sup>)</span>
+ <span class="eq">s²(log K<sub>n</sub>) = s²(log β<sub>n</sub>) + s²(log β<sub>n−1</sub>) − 2·cov</span>
+ <h3>راهنمای عملی (از نتیجه‌گیری مقاله)</h3>
+ <details open><summary>کالیبراسیون الکترود</summary><p>پیش از هر تیتراسیون و پس از آن کالیبره کنید. تغییر حدود ۱ mV در E′₀ طی چند روز عادی است و معادل ۰٫۰۱۷ واحد pH است؛ همین مقدار روی logK اثر معنادار دارد. اگر رانش دیدید، کل داده را کنار بگذارید و از نمودار کنترل استفاده کنید.</p></details>
+ <details><summary>غلظت‌ها و خلوص</summary><p>باز قلیایی را مرتب استاندارد کنید (مثلاً با پتاسیم هیدروژن فتالات خشک) و با روش Gran کربناته‌شدن را بسنجید. محلول تازه با آب فوق‌خالص تازه بسازید. خلوص ترکیب مورد تیتر با آنالیزهای مکمل (CHNS، IR، NMR، HPLC) تأیید شود.</p></details>
+ <details><summary>پوشش داده</summary><p>برای هر گونه، دست‌کم ۱۰ تا ۱۵ نقطه باید بین ۲۰ تا ۸۰ درصد بیشینه‌ی فراوانی آن گونه باشند. ثابتی که فقط چند نقطه به آن حساس است، عدم‌قطعیت بزرگی دارد؛ مانند logK₁ و logK₆ در دیتاست مقاله.</p></details>
+ <details><summary>قدرت یونی</summary><p>تغییر قدرت یونی در طول تیتراسیون باید زیر ۱۰٪ بماند. غلظت ۰٫۱ mol/L نمک زمینه برای گونه‌های پربار اغلب کم است. اگر تغییر قابل‌اجتناب نیست، داده را هم در حالت ثابت و هم متغیر پردازش کنید و معادله‌ی ضریب فعالیت و پارامترهای آن را گزارش کنید.</p></details>
+ <details><summary>منابع</summary><p>S. Berto et al., «A tutorial on potentiometric data processing. Analysis of software for optimization of protonation constants», <i>Anal. Chim. Acta</i> 1303 (2024) 342476, doi:10.1016/j.aca.2024.342476 (دسترسی آزاد). دیتاست: doi:10.17632/cfhkhmk6rt.1.</p>
+ <p class="hint">این ابزار الگوریتم برازش را خودش پیاده کرده (Levenberg–Marquardt) و کدی از نرم‌افزارهای مقاله ندارد. معیار «۹۵ تا ۱۰۵٪» برای بازده شیب الکترود، قاعده‌ی عمومی است و از مقاله نیست.</p></details>
+</section>
+</div>
+
+<script>
+/* ===== TitrationLab core — pure JS, no dependencies ===== */
+const TLCore = (function () {
+'use strict';
+const LN10 = Math.LN10, log10 = Math.log10;
+const NERNST25 = -59.16;
+
+/* ---------- utilities ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function gauss(rng){let u=0,v=0;while(u===0)u=rng();v=rng();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function brent(f,x1,x2,tol,maxIt){
+  tol=tol||1e-12;maxIt=maxIt||100;
+  let a=x1,b=x2,c=x2,fa=f(a),fb=f(b),fc=fb,d=b-a,e=d;
+  if(fa===0)return a; if(fb===0)return b;
+  if(fa*fb>0)return NaN;
+  for(let i=0;i<maxIt;i++){
+    if((fb>0&&fc>0)||(fb<0&&fc<0)){c=a;fc=fa;d=b-a;e=d;}
+    if(Math.abs(fc)<Math.abs(fb)){a=b;b=c;c=a;fa=fb;fb=fc;fc=fa;}
+    const tol1=2*2.2e-16*Math.abs(b)+0.5*tol, xm=0.5*(c-b);
+    if(Math.abs(xm)<=tol1||fb===0)return b;
+    if(Math.abs(e)>=tol1&&Math.abs(fa)>Math.abs(fb)){
+      const s=fb/fa;let p,q;
+      if(a===c){p=2*xm*s;q=1-s;}
+      else{const qq=fa/fc,r=fb/fc;p=s*(2*xm*qq*(qq-r)-(b-a)*(r-1));q=(qq-1)*(r-1)*(s-1);}
+      if(p>0)q=-q;p=Math.abs(p);
+      const m1=3*xm*q-Math.abs(tol1*q),m2=Math.abs(e*q);
+      if(2*p<(m1<m2?m1:m2)){e=d;d=p/q;}else{d=xm;e=d;}
+    }else{d=xm;e=d;}
+    a=b;fa=fb;
+    b+=Math.abs(d)>tol1?d:(xm>=0?tol1:-tol1);
+    fb=f(b);
+  }
+  return b;
+}
+function solveLinear(A,b){ // Gauss with partial pivoting
+  const n=b.length,M=A.map((r,i)=>r.slice().concat([b[i]]));
+  for(let c=0;c<n;c++){
+    let p=c;for(let r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;
+    if(Math.abs(M[p][c])<1e-300)return null;
+    [M[c],M[p]]=[M[p],M[c]];
+    for(let r=c+1;r<n;r++){const f=M[r][c]/M[c][c];for(let k=c;k<=n;k++)M[r][k]-=f*M[c][k];}
+  }
+  const x=new Array(n);
+  for(let r=n-1;r>=0;r--){let s=M[r][n];for(let k=r+1;k<n;k++)s-=M[r][k]*x[k];x[r]=s/M[r][r];}
+  return x;
+}
+function invert(A){
+  const n=A.length,M=A.map((r,i)=>r.slice().concat(Array.from({length:n},(_,j)=>i===j?1:0)));
+  for(let c=0;c<n;c++){
+    let p=c;for(let r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;
+    if(Math.abs(M[p][c])<1e-300)return null;
+    [M[c],M[p]]=[M[p],M[c]];
+    const d=M[c][c];for(let k=0;k<2*n;k++)M[c][k]/=d;
+    for(let r=0;r<n;r++)if(r!==c){const f=M[r][c];if(f!==0)for(let k=0;k<2*n;k++)M[r][k]-=f*M[c][k];}
+  }
+  return M.map(r=>r.slice(n));
+}
+
+/* ---------- activity coefficients ---------- */
+function gammaLog(z,I,gm){
+  const sI=Math.sqrt(Math.max(I,0)),A=0.51,z2=z*z;
+  if(gm==='davies')return -A*z2*(sI/(1+sI)-0.3*I);
+  if(gm==='edh')return -A*z2*sI/(1+1.5*sI);
+  return -A*z2*sI/(1+sI); // 'dh': A=0.51, B=1 (as in the paper's comparison)
+}
+// convert cumulative log-constants between thermodynamic (I=0) and stoichiometric (I)
+function toStoich(logbT,zA,I,gm){
+  const gH=gammaLog(1,I,gm),gA=gammaLog(zA,I,gm);
+  return logbT.map((v,k)=>{const i=k+1;return v+gA+i*gH-gammaLog(zA+i,I,gm);});
+}
+function toThermo(logbS,zA,I,gm){
+  const gH=gammaLog(1,I,gm),gA=gammaLog(zA,I,gm);
+  return logbS.map((v,k)=>{const i=k+1;return v-(gA+i*gH-gammaLog(zA+i,I,gm));});
+}
+function cumToStep(lb){return lb.map((v,i)=>i===0?v:v-lb[i-1]);}
+function stepToCum(lk){let s=0;return lk.map(v=>s+=v);}
+
+/* ---------- chemical model ---------- */
+// mass balance for the proton component (A^(zA) is the reference species):
+// T = [H] - [OH] + C_L * sum(i*beta_i*h^i)/(1+sum(beta_i*h^i))
+function solveH(T,Ctot,beta,n,Kw){
+  const f=x=>{
+    const h=Math.pow(10,x);let hp=1,num=0,den=1;
+    for(let i=1;i<=n;i++){hp*=h;const t=beta[i-1]*hp;den+=t;num+=i*t;}
+    return h-Kw/h+Ctot*num/den-T;
+  };
+  const x=brent(f,-17,3,1e-13,200);
+  return Math.pow(10,x);
+}
+function betasFromLog(logb){return logb.map(v=>Math.pow(10,v));}
+
+// M: {n,zA,nInit,sign,mode:'const'|'var',gmodel,Kw,Cs}
+// P: {logb[],E0,S,jA,jB,Ct}   cv:{V0,CL,H0,fH,obs}
+function pointCalc(M,P,cv,V,wantAlpha,hint){
+  const n=M.n,Vt=cv.V0+V;
+  const T=((M.nInit*cv.CL+cv.H0)*cv.fH*cv.V0+M.sign*P.Ct*V)/Vt;
+  const Ctot=cv.CL*cv.V0/Vt;
+  let h,I=NaN,lgH=0,Kw=M.Kw,beta;
+  if(M.mode!=='var'){
+    beta=betasFromLog(P.logb);
+    h=solveH(T,Ctot,beta,n,Kw);
+  }else{
+    const cion=(Math.abs(cv.H0*cv.fH)*cv.V0+P.Ct*V)/Vt;
+    I=(hint&&isFinite(hint.I))?hint.I:M.Cs+0.5*cion+1e-3;
+    for(let it=0;it<80;it++){
+      lgH=gammaLog(1,I,M.gmodel);
+      Kw=M.Kw/Math.pow(10,2*lgH);
+      const lgA=gammaLog(M.zA,I,M.gmodel);
+      beta=P.logb.map((v,k)=>Math.pow(10,v+lgA+(k+1)*lgH-gammaLog(M.zA+k+1,I,M.gmodel)));
+      h=solveH(T,Ctot,beta,n,Kw);
+      let hp=1,den=1,s2=M.zA*M.zA;const terms=[1];
+      for(let i=1;i<=n;i++){hp*=h;const t=beta[i-1]*hp;den+=t;terms.push(t);}
+      let zs=0;for(let i=0;i<=n;i++){const z=M.zA+i;zs+=z*z*terms[i];}
+      const Inew=M.Cs+0.5*(cion+h+Kw/h+Ctot*zs/den);
+      if(Math.abs(Inew-I)<1e-8){I=Inew;break;}
+      I=0.5*(I+Inew);
+    }
+    if(hint)hint.I=I;
+  }
+  let y;
+  if(cv.obs==='pH')y=-log10(h)-lgH;
+  else y=P.E0+P.S*(log10(h)+lgH)+P.jA*h+P.jB*Kw/h;
+  const out={y,h,I,pH:-log10(h)-lgH};
+  if(wantAlpha){
+    let hp=1,den=1;const t=[1];
+    for(let i=1;i<=n;i++){hp*=h;const v=beta[i-1]*hp;den+=v;t.push(v);}
+    out.alpha=t.map(v=>v/den);
+  }
+  return out;
+}
+
+/* ---------- derivative (local 5-point LS slope, non-uniform x) ---------- */
+function localSlope(x,y){
+  const n=x.length,d=new Array(n);
+  for(let i=0;i<n;i++){
+    const a=Math.max(0,i-2),b=Math.min(n-1,i+2);
+    let sx=0,sy=0,c=0;for(let k=a;k<=b;k++){sx+=x[k];sy+=y[k];c++;}
+    const mx=sx/c,my=sy/c;let sxy=0,sxx=0;
+    for(let k=a;k<=b;k++){sxy+=(x[k]-mx)*(y[k]-my);sxx+=(x[k]-mx)**2;}
+    d[i]=sxx>0?sxy/sxx:0;
+  }
+  return d;
+}
+
+/* ---------- fitting (Levenberg–Marquardt) ---------- */
+function runFit(o){
+  const M={n:o.n,zA:o.zA,nInit:o.nInit,sign:o.sign,mode:o.mode||'const',gmodel:o.gmodel||'dh',Kw:o.Kw,Cs:o.Cs||0};
+  const W={logb:o.logb0.slice(),E0:o.calib.E0,S:o.calib.S,jA:o.calib.jA||0,jB:o.calib.jB||0,Ct:o.Ct};
+  const obs=o.obs||'E';
+  const cws=o.curves.map(c=>({name:c.name,V0:c.V0,CL:c.CL,H0:c.H0||0,fH:c.fH||1,obs,V:c.V.slice(),y:c.y.slice(),w:null,CL0:c.CL,hint:c.V.map(()=>({I:NaN}))}));
+  const sE=o.sE,sV=o.sV;
+  cws.forEach(c=>{
+    const d=localSlope(c.V,c.y);
+    c.w=c.V.map((_,i)=>o.weighted?1/(sE*sE+d[i]*d[i]*sV*sV):1);
+  });
+  const R=o.refine||{};
+  const spec=[];
+  W.logb.forEach((_,i)=>{ if(!(o.fixedLogb&&o.fixedLogb[i])) spec.push({name:'logb'+(i+1),kind:'logb',i,get:()=>W.logb[i],set:v=>{W.logb[i]=v;},step:1e-5,clip:1.5}); });
+  if(obs==='E'){
+    if(R.E0)spec.push({name:'E0',kind:'E0',get:()=>W.E0,set:v=>{W.E0=v;},step:1e-4,clip:30});
+    if(R.S)spec.push({name:'S',kind:'S',get:()=>W.S,set:v=>{W.S=v;},step:1e-4,clip:5});
+    if(R.jA)spec.push({name:'jA',kind:'jA',get:()=>W.jA,set:v=>{W.jA=v;},step:1e-3,clip:200});
+    if(R.jB)spec.push({name:'jB',kind:'jB',get:()=>W.jB,set:v=>{W.jB=v;},step:1e-3,clip:200});
+  }
+  if(R.Ct)spec.push({name:'Ct',kind:'Ct',get:()=>W.Ct,set:v=>{W.Ct=v;},step:W.Ct*1e-6,clip:W.Ct*0.2});
+  cws.forEach((c,k)=>{
+    if(R.CL&&c.CL>0)spec.push({name:'CL'+(k+1),kind:'CL',k,get:()=>c.CL,set:v=>{c.CL=v;},step:c.CL*1e-6,clip:c.CL*0.3});
+    if(R.fH)spec.push({name:'fH'+(k+1),kind:'fH',k,get:()=>c.fH,set:v=>{c.fH=v;},step:1e-6,clip:0.3});
+  });
+  const p=spec.length;
+  let N=0;cws.forEach(c=>N+=c.V.length);
+  if(N-p<=0)throw new Error('تعداد نقاط داده از تعداد پارامترها کمتر است.');
+  const resid=()=>{
+    const r=[];
+    for(const c of cws)for(let i=0;i<c.V.length;i++){
+      const yc=pointCalc(M,W,c,c.V[i],false,c.hint[i]).y;
+      r.push(Math.sqrt(c.w[i])*(c.y[i]-yc));
+    }
+    return r;
+  };
+  const ssq=r=>{let s=0;for(const v of r){if(!isFinite(v))return Infinity;s+=v*v;}return s;};
+  const jac=()=>{
+    const J=[];const base=spec.map(s=>s.get());
+    const cols=[];
+    for(let j=0;j<p;j++){
+      const s=spec[j],x0=base[j];
+      s.set(x0+s.step);const rp=resid();
+      s.set(x0-s.step);const rm=resid();
+      s.set(x0);
+      cols.push(rp.map((v,i)=>(rm[i]-v)/(2*s.step))); // d(-r)/dx... r=sqrt(w)(y-f) => dr/dx=-sqrt(w)df/dx ; (rm-rp)/2h = -dr/dx*... fixed below
+    }
+    return cols; // cols[j][i] = d f_w / d x_j  (since r=y-f: (rm-rp)/(2h) = df/dx)
+  };
+  let r=resid(),S=ssq(r),lam=1e-3,it=0,converged=false;
+  const maxIt=o.maxIt||120;
+  if(p>0){
+    for(it=0;it<maxIt;it++){
+      if(S<1e-24){converged=true;break;}
+      const cols=jac();
+      const A=Array.from({length:p},()=>new Array(p).fill(0)),g=new Array(p).fill(0);
+      for(let a=0;a<p;a++){
+        for(let b=a;b<p;b++){let s=0;const ca=cols[a],cb=cols[b];for(let i=0;i<N;i++)s+=ca[i]*cb[i];A[a][b]=s;A[b][a]=s;}
+        let s=0;for(let i=0;i<N;i++)s+=cols[a][i]*r[i];g[a]=s;
+      }
+      let improved=false,stepMax=0;
+      for(let tries=0;tries<30;tries++){
+        const Ad=A.map((row,i)=>row.map((v,j)=>i===j?v*(1+lam)+1e-300:v));
+        const d=solveLinear(Ad,g);
+        if(!d){lam*=10;continue;}
+        const old=spec.map(s=>s.get());
+        let mx=0;
+        spec.forEach((s,j)=>{let dj=d[j];if(Math.abs(dj)>s.clip)dj=Math.sign(dj)*s.clip;mx=Math.max(mx,Math.abs(dj)/(Math.abs(old[j])+1e-3));s.set(old[j]+dj);});
+        const rn=resid(),Sn=ssq(rn);
+        if(Sn<S){const rel=(S-Sn)/S;r=rn;S=Sn;lam=Math.max(lam/10,1e-12);improved=true;stepMax=mx;if(rel<1e-13||mx<1e-10)converged=true;break;}
+        spec.forEach((s,j)=>s.set(old[j]));lam*=10;
+        if(lam>1e12)break;
+      }
+      if(!improved){converged=true;break;}
+      if(converged)break;
+    }
+  }else{converged=true;}
+  // final statistics
+  const dof=N-p;
+  const U2=S/dof;
+  let cov=null,sd=new Array(p).fill(NaN),corr=null;
+  if(p>0){
+    const cols=jac();
+    const A=Array.from({length:p},(_,a)=>Array.from({length:p},(_,b)=>{let s=0;for(let i=0;i<N;i++)s+=cols[a][i]*cols[b][i];return s;}));
+    const inv=invert(A);
+    if(inv){
+      cov=inv.map(row=>row.map(v=>v*U2));
+      sd=cov.map((row,i)=>Math.sqrt(Math.max(row[i],0)));
+      corr=cov.map((row,i)=>row.map((v,j)=>v/(sd[i]*sd[j]||1)));
+    }
+  }
+  const idx={};spec.forEach((s,j)=>idx[s.name]=j);
+  // stepwise constants with covariance
+  const nl=M.n,logb=W.logb.slice();
+  const sdb=new Array(nl).fill(0);
+  const logbIdx=[];for(let i=0;i<nl;i++)logbIdx.push(idx['logb'+(i+1)]);
+  for(let i=0;i<nl;i++){const j=logbIdx[i];sdb[i]=(j!==undefined&&cov)?sd[j]:0;}
+  const logK=cumToStep(logb),sdK=new Array(nl).fill(0);
+  for(let i=0;i<nl;i++){
+    if(i===0){sdK[i]=sdb[0];continue;}
+    const ja=logbIdx[i],jb=logbIdx[i-1];
+    let v=sdb[i]**2+sdb[i-1]**2;
+    if(cov&&ja!==undefined&&jb!==undefined)v-=2*cov[ja][jb];
+    sdK[i]=Math.sqrt(Math.max(v,0));
+  }
+  // calculated curves + species coverage
+  const curvesOut=cws.map(c=>{
+    const calc=[],alpha=[],I=[];
+    for(let i=0;i<c.V.length;i++){const q=pointCalc(M,W,c,c.V[i],true,c.hint[i]);calc.push(q.y);alpha.push(q.alpha);I.push(q.I);}
+    return {name:c.name,V:c.V,yexp:c.y,ycalc:calc,alpha,I,w:c.w,CL:c.CL,fH:c.fH,
+            res:c.y.map((v,i)=>v-calc[i]),wres:c.y.map((v,i)=>Math.sqrt(c.w[i])*(v-calc[i]))};
+  });
+  const coverage=[];
+  for(let s=0;s<=nl;s++){
+    let mx=0;curvesOut.forEach(c=>c.alpha.forEach(a=>{if(a[s]>mx)mx=a[s];}));
+    let cnt=0;curvesOut.forEach(c=>c.alpha.forEach(a=>{if(a[s]>=0.2*mx&&a[s]<=0.8*mx)cnt++;}));
+    coverage.push({species:s,max:mx,count:cnt});
+  }
+  const params={};spec.forEach((s,j)=>params[s.name]={value:s.get(),sd:sd[j]});
+  return {M,logb,sdb,logK,sdK,calib:{E0:W.E0,S:W.S,jA:W.jA,jB:W.jB},Ct:W.Ct,params,
+          curves:curvesOut,SSR:S,U:Math.sqrt(U2),dof,N,p,iterations:it,converged,cov,corr,spec:spec.map(s=>s.name),coverage};
+}
+
+/* ---------- synthetic data ---------- */
+function synthCurve(M,P,cv,Vend,npts,noiseSD,rng){
+  const V=[],y=[];
+  for(let k=0;k<npts;k++){
+    const v=Vend*k/(npts-1);
+    let yy=pointCalc(M,P,cv,v,false).y;
+    if(noiseSD>0)yy+=noiseSD*gauss(rng);
+    V.push(v);y.push(yy);
+  }
+  return {name:cv.name,V0:cv.V0,CL:cv.CL,H0:cv.H0||0,fH:1,V,y};
+}
+const PAPER={
+  logK:[10,8,6,4,3,2], pKw:13.77, I:0.1, V0:25, Ct:0.1, CLs:[2e-3,4e-3,5e-3],
+  calib:{E0:405.0,S:-59.16,jA:-64,jB:0}
+};
+function benchmark(opts){
+  opts=opts||{};
+  const noise=opts.noise!=null?opts.noise:0.05,seed=opts.seed||7,npts=opts.npts||101;
+  const rng=mulberry32(seed);
+  const M={n:6,zA:-6,nInit:6,sign:-1,mode:'const',gmodel:'dh',Kw:Math.pow(10,-PAPER.pKw),Cs:0};
+  const P={logb:stepToCum(PAPER.logK),E0:PAPER.calib.E0,S:PAPER.calib.S,jA:PAPER.calib.jA,jB:0,Ct:PAPER.Ct};
+  const curves=[];
+  PAPER.CLs.forEach(CL=>{
+    for(let rep=1;rep<=2;rep++){
+      const cv={name:`C=${CL*1e3} mM #${rep}`,V0:PAPER.V0,CL,H0:0,fH:1,obs:'E'};
+      const Veq=6*CL*PAPER.V0/PAPER.Ct;
+      curves.push(synthCurve(M,P,cv,1.115*Veq,npts,noise,rng));
+    }
+  });
+  return curves;
+}
+
+/* ---------- titration simulator (v2: temperature, weak titrant, adaptive grid) ---------- */
+// def: {kind:'strongAcid'|'strongBase'|'acid'|'base', C, V0, Ct, pKa[] (ascending), pKw,
+//       pKwAuto, T(°C), dH(kJ/mol), thermal, tWeak, tpKa}
+function pKwOfT(Tc){const T=Tc+273.15;return 4787.3/T+7.1321*Math.log10(T)+0.010365*T-22.80;}
+function pKaAtT(pKa25,dH,Tc){
+  if(!dH)return pKa25;const T=Tc+273.15;
+  return pKa25+(dH*1000)/(8.314462618*Math.LN10)*(1/T-1/298.15);
+}
+// exact proton balance: ligs=[{C, logb:[cumulative log beta]}], T = analytical proton excess
+function protonSolve(T,ligs,Kw){
+  const f=x=>{
+    const h=Math.pow(10,x);let s=h-Kw/h-T;
+    for(const L of ligs){let hp=1,den=1,num=0;
+      for(let i=0;i<L.logb.length;i++){hp*=h;const t=Math.pow(10,L.logb[i])*hp;den+=t;num+=(i+1)*t;}
+      s+=L.C*num/den;}
+    return s;};
+  /* non-aqueous solvents have pKs up to ~35: widen the lower bracket (mirrors engine/equilibrium.py) */
+  return brent(f,Math.min(-20,Math.log10(Kw)-4),4,1e-13,200);
+}
+function buildSim(def){
+  const strong=def.kind==='strongAcid'||def.kind==='strongBase';
+  const n=strong?0:def.pKa.length;
+  const Tc=def.T==null?25:def.T,dH=def.dH||0;
+  const pKwv=(def.pKw>0&&!def.pKwAuto)?def.pKw:pKwOfT(Tc);
+  const Kw=Math.pow(10,-pKwv);
+  const pKaT=strong?[]:def.pKa.map(p=>pKaAtT(p,dH,Tc));
+  const logK=[];for(let i=1;i<=n;i++)logK.push(pKaT[n-i]);
+  const logb=stepToCum(logK);
+  const isAcidAnalyte=(def.kind==='strongAcid'||def.kind==='acid');
+  const M={n,zA:isAcidAnalyte?-n:0,nInit:def.kind==='acid'?n:0,sign:isAcidAnalyte?-1:1,mode:'const',gmodel:'dh',Kw,Cs:0};
+  const cv={V0:def.V0,CL:strong?0:def.C,H0:def.kind==='strongAcid'?def.C:(def.kind==='strongBase'?-def.C:0),fH:1,obs:'pH'};
+  const P={logb,E0:0,S:0,jA:0,jB:0,Ct:def.Ct};
+  const equivTotal=((strong?1:n)*def.C)*def.V0/def.Ct;
+  const tWeak=!!def.tWeak,tpKaT=tWeak?pKaAtT(def.tpKa,dH,Tc):null;
+  const fT=def.thermal?1+2.1e-4*(Tc-25):1;
+  const pH=V=>{
+    if(V<0)V=0;
+    const V0e=def.V0*fT,Cte=def.Ct/fT,Vt=V0e+V,ca=def.C*def.V0/Vt,cb=Cte*V/Vt;
+    let T=0;const ligs=[];
+    if(def.kind==='strongAcid')T+=ca;else if(def.kind==='strongBase')T-=ca;
+    else{ligs.push({C:ca,logb});if(def.kind==='acid')T+=n*ca;}
+    if(!tWeak)T+=isAcidAnalyte?-cb:cb;
+    else{ligs.push({C:cb,logb:[tpKaT]});if(!isAcidAnalyte)T+=cb;}
+    return -protonSolve(T,ligs,Kw);
+  };
+  const dir=isAcidAnalyte?1:-1;
+  return {M,P,cv,n,logK,logb,pH,dir,equivTotal,isAcidAnalyte,strong,def,pKw:pKwv,T:Tc};
+}
+// adaptive grid: bisect every interval whose pH change exceeds dphMax (curve is then non-uniform)
+function simCurve(sim,Vmax,npts,adaptive,dphMax,maxPts){
+  if(adaptive===undefined)adaptive=true;dphMax=dphMax||0.05;maxPts=maxPts||4000;
+  let V=[],pH=[];
+  for(let i=0;i<npts;i++){const v=Vmax*i/(npts-1);V.push(v);pH.push(sim.pH(v));}
+  if(adaptive){
+    for(let pass=0;pass<14&&V.length<maxPts;pass++){
+      const nv=[],np=[];
+      for(let i=0;i<V.length-1;i++){
+        if(Math.abs(pH[i+1]-pH[i])>dphMax&&(V[i+1]-V[i])>Vmax*1e-7){const m=0.5*(V[i]+V[i+1]);nv.push(m);np.push(sim.pH(m));}
+      }
+      if(!nv.length)break;
+      const all=V.map((v,i)=>[v,pH[i]]).concat(nv.map((v,i)=>[v,np[i]])).sort((a,b)=>a[0]-b[0]);
+      V=all.map(a=>a[0]);pH=all.map(a=>a[1]);
+    }
+  }
+  return {V,pH};
+}
+// 3-point first derivative on a non-uniform grid
+function firstDerivative(x,y){
+  const n=x.length,d=new Array(n);
+  for(let i=1;i<n-1;i++){const h1=x[i]-x[i-1],h2=x[i+1]-x[i];
+    d[i]=(h1*h1*y[i+1]-h2*h2*y[i-1]+(h2*h2-h1*h1)*y[i])/(h1*h2*(h1+h2));}
+  d[0]=(y[1]-y[0])/(x[1]-x[0]);d[n-1]=(y[n-1]-y[n-2])/(x[n-1]-x[n-2]);
+  return d;
+}
+// pH jump over ±0.1 % of the first equivalence volume (visual-indicator criterion: >= 2)
+function jumpCheck(sim){
+  const def=sim.def,ve=def.C*def.V0/def.Ct;
+  const jump=Math.abs(sim.pH(ve*1.001)-sim.pH(ve*0.999));
+  const weakWeak=!!def.tWeak&&!sim.strong;
+  return {jump,ok:jump>=2,weakWeak,Ve:ve};
+}
+function findEquivalence(sim,Vmax){
+  const N=1500,V=[],p=[];
+  for(let i=0;i<=N;i++){const v=Vmax*i/N;V.push(v);p.push(sim.pH(v));}
+  const d=p.map((_,i)=>{const a=Math.max(0,i-1),b=Math.min(N,i+1);return Math.abs((p[b]-p[a])/(V[b]-V[a]));});
+  const dmax=Math.max(...d);const res=[];
+  const dd=v=>{const e=Vmax*1e-6;return Math.abs((sim.pH(v+e)-sim.pH(Math.max(0,v-e)))/(v+e-Math.max(0,v-e)));};
+  for(let i=2;i<N-1;i++){
+    if(d[i]>d[i-1]&&d[i]>=d[i+1]&&d[i]>0.02*dmax){
+      let lo=V[i-1],hi=V[i+1];
+      for(let k=0;k<60;k++){const m1=lo+(hi-lo)/3,m2=hi-(hi-lo)/3;if(dd(m1)<dd(m2))lo=m1;else hi=m2;}
+      const vc=(lo+hi)/2;
+      const jump=Math.abs(sim.pH(vc*1.02)-sim.pH(vc*0.98));
+      if(jump>0.35&&vc>0)res.push({V:vc,pH:sim.pH(vc),dpH:dd(vc),jump});
+    }
+  }
+  return res;
+}
+function volumeAtPH(sim,target,Vmax){
+  const N=2000;let prev=sim.pH(0)-target,pv=0;
+  for(let i=1;i<=N;i++){
+    const v=Vmax*i/N,cur=sim.pH(v)-target;
+    if(prev===0)return pv;
+    if(prev*cur<0)return brent(x=>sim.pH(x)-target,pv,v,1e-12,100);
+    prev=cur;pv=v;
+  }
+  return NaN;
+}
+const INDICATORS=[
+  {name:'متیل ویولت',pK:0.8,lo:0.0,hi:1.6,c:'زرد ← بنفش'},
+  {name:'تیمول بلو (اسیدی)',pK:1.7,lo:1.2,hi:2.8,c:'قرمز ← زرد'},
+  {name:'متیل اورانژ',pK:3.7,lo:3.1,hi:4.4,c:'قرمز ← زرد'},
+  {name:'بروموکرزول سبز',pK:4.7,lo:3.8,hi:5.4,c:'زرد ← آبی'},
+  {name:'متیل رد',pK:5.1,lo:4.4,hi:6.2,c:'قرمز ← زرد'},
+  {name:'برموتیمول بلو',pK:7.0,lo:6.0,hi:7.6,c:'زرد ← آبی'},
+  {name:'فنول رد',pK:7.9,lo:6.8,hi:8.2,c:'زرد ← قرمز'},
+  {name:'تیمول بلو (بازی)',pK:8.9,lo:8.0,hi:9.6,c:'زرد ← آبی'},
+  {name:'فنل‌فتالئین',pK:9.4,lo:8.2,hi:10.0,c:'بی‌رنگ ← صورتی',fade:13.0},
+  {name:'آلیزارین زرد R',pK:11.2,lo:10.1,hi:12.0,c:'زرد ← قرمز'}
+];
+// endpoint model: colour change perceived at pH = pK_In (50 % conversion)
+function indicatorErrors(sim,eq,Vmax){
+  return INDICATORS.map(ind=>{
+    const Vend=volumeAtPH(sim,ind.pK,Vmax);
+    const err=isFinite(Vend)?(Vend-eq.V)/eq.V*100:NaN;
+    return {...ind,mid:ind.pK,Vend,err};
+  });
+}
+// Gran plot before the first equivalence point. Weak-acid form: V[H+] = Ka (Veq - V)
+// (the "extra factor [HA]/[A-]" in the chat source is wrong, see CONTRADICTIONS #3).
+function granAnalysis(sim,Vmax){
+  const def=sim.def;if(sim.n>1)return null;
+  const eq=findEquivalence(sim,Vmax);if(!eq.length)return null;
+  const Ve=eq[0].V,Kw=sim.M.Kw,pts=[];
+  const acid=sim.isAcidAnalyte;
+  for(let i=1;i<=60;i++){
+    const V=Ve*(0.2+0.7*i/60),pH=sim.pH(V),h=Math.pow(10,-pH);
+    const x=acid?h:Kw/h;
+    pts.push({V,F:(sim.strong?(def.V0+V):V)*x});
+  }
+  let sx=0,sy=0;pts.forEach(q=>{sx+=q.V;sy+=q.F;});const mx=sx/pts.length,my=sy/pts.length;
+  let sxy=0,sxx=0;pts.forEach(q=>{sxy+=(q.V-mx)*(q.F-my);sxx+=(q.V-mx)**2;});
+  const m=sxy/sxx,b=my-m*mx;
+  const K=sim.strong?null:-m,Kname=acid?'Ka':'Kb';
+  return {pts,slope:m,intercept:b,Veq:-b/m,K,Kname,Ka:acid?K:null,eqV:Ve};
+}
+
+/* ---------- statistics (Student t, Grubbs, Dixon) ---------- */
+function betacf(a,b,x){
+  const tiny=1e-300,qab=a+b,qap=a+1,qam=a-1;let c=1,d=1-qab*x/qap;d=1/(Math.abs(d)>tiny?d:tiny);let h=d;
+  for(let m=1;m<400;m++){const m2=2*m;
+    let aa=m*(b-m)*x/((qam+m2)*(a+m2));d=1+aa*d;d=1/(Math.abs(d)>tiny?d:tiny);c=1+aa/c;c=Math.abs(c)>tiny?c:tiny;h*=d*c;
+    aa=-(a+m)*(qab+m)*x/((a+m2)*(qap+m2));d=1+aa*d;d=1/(Math.abs(d)>tiny?d:tiny);c=1+aa/c;c=Math.abs(c)>tiny?c:tiny;
+    const del=d*c;h*=del;if(Math.abs(del-1)<1e-15)break;}
+  return h;
+}
+function lgamma(z){ // Lanczos
+  const g=7,c=[0.99999999999980993,676.5203681218851,-1259.1392167224028,771.32342877765313,-176.61502916214059,12.507343278686905,-0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];
+  if(z<0.5)return Math.log(Math.PI/Math.abs(Math.sin(Math.PI*z)))-lgamma(1-z);
+  z-=1;let x=c[0];for(let i=1;i<g+2;i++)x+=c[i]/(z+i);const t=z+g+0.5;
+  return 0.5*Math.log(2*Math.PI)+(z+0.5)*Math.log(t)-t+Math.log(x);
+}
+function betai(a,b,x){
+  if(x<=0)return 0;if(x>=1)return 1;
+  const lb=lgamma(a+b)-lgamma(a)-lgamma(b)+a*Math.log(x)+b*Math.log1p(-x);
+  return x<(a+1)/(a+b+2)?Math.exp(lb)*betacf(a,b,x)/a:1-Math.exp(lb)*betacf(b,a,1-x)/b;
+}
+function tCdf(t,df){const x=df/(df+t*t),tail=0.5*betai(df/2,0.5,x);return t>0?1-tail:tail;}
+function tQuantile(p,df){
+  if(!(p>0&&p<1&&df>0))throw new Error('p یا df نامعتبر');
+  if(p===0.5)return 0;let lo=-1e4,hi=1e4;
+  for(let i=0;i<200;i++){const m=0.5*(lo+hi);if(tCdf(m,df)<p)lo=m;else hi=m;}
+  return 0.5*(lo+hi);
+}
+const Stats={
+  mean:x=>x.reduce((a,b)=>a+b,0)/x.length,
+  sd:x=>{const m=Stats.mean(x);return Math.sqrt(x.reduce((a,b)=>a+(b-m)**2,0)/(x.length-1));},
+  ci:(x,level)=>{level=level||0.95;const n=x.length;if(n<2)return null;const t=tQuantile(0.5+level/2,n-1),m=Stats.mean(x),hw=t*Stats.sd(x)/Math.sqrt(n);return {mean:m,hw,lo:m-hw,hi:m+hw,t};},
+  grubbs:(x,alpha)=>{
+    alpha=alpha||0.05;const n=x.length;if(n<3)return null;const m=Stats.mean(x),s=Stats.sd(x);if(!(s>0))return null;
+    let idx=0,mx=-1;x.forEach((v,i)=>{const d=Math.abs(v-m);if(d>mx){mx=d;idx=i;}});
+    const t=tQuantile(1-alpha/(2*n),n-2),crit=(n-1)/Math.sqrt(n)*Math.sqrt(t*t/(n-2+t*t)),G=mx/s;
+    return {index:idx,G,crit,outlier:G>crit};},
+  dixon:x=>{ // r10, 95 %, literature table n=3..10
+    const Q95={3:0.970,4:0.829,5:0.710,6:0.625,7:0.568,8:0.526,9:0.493,10:0.466},n=x.length;if(!Q95[n])return null;
+    const idx=x.map((v,i)=>i).sort((a,b)=>x[a]-x[b]),s=idx.map(i=>x[i]),r=s[n-1]-s[0];if(!(r>0))return null;
+    const qh=(s[n-1]-s[n-2])/r,ql=(s[1]-s[0])/r,hi=qh>=ql,q=hi?qh:ql;
+    return {index:hi?idx[n-1]:idx[0],Q:q,crit:Q95[n],outlier:q>Q95[n]};}
+};
+
+/* ---------- laboratory error simulation ---------- */
+function eqFirstDeriv(V,p,expected){
+  const d=firstDerivative(V,p).map(Math.abs),span=0.2*(V[V.length-1]-V[0]);
+  let idx=-1,best=-1;
+  for(let i=1;i<V.length-1;i++){if(Math.abs(V[i]-expected)<=span&&d[i]>best){best=d[i];idx=i;}}
+  if(idx<0)return NaN;
+  const x=[V[idx-1],V[idx],V[idx+1]].map(v=>v-V[idx]),y=[d[idx-1],d[idx],d[idx+1]];
+  // parabola y = a x^2 + b x + c through 3 points
+  const D=(x[0]-x[1])*(x[0]-x[2])*(x[1]-x[2]);
+  const a=(x[2]*(y[1]-y[0])+x[1]*(y[0]-y[2])+x[0]*(y[2]-y[1]))/D;
+  const b=(x[2]*x[2]*(y[0]-y[1])+x[1]*x[1]*(y[2]-y[0])+x[0]*x[0]*(y[1]-y[2]))/D;
+  if(Math.abs(a)<1e-300)return V[idx];
+  const xm=-b/(2*a);return Math.abs(xm)>Math.max(x[2],-x[0])?V[idx]:V[idx]+xm;
+}
+// cfg: {cal,F,co2,blank,blankCorr,evap,over,sRead,sDrop,sPip,pipBias,gross,mag,wrongInd}
+// opt: {method:'ideal'|'ind'|'pot', ind, k, step, sPH}
+function labReplicate(def,cfg,rng,opt){
+  const g=cfg.gross||'none';
+  let vpip=def.V0+(cfg.pipBias||0);if(cfg.sPip>0)vpip+=cfg.sPip*gauss(rng);
+  const spill=g==='spill'?(cfg.mag||0):0;
+  const nmol=def.C*vpip*(1-spill),vact=vpip-(cfg.evap||0);
+  if(!(vact>0))throw new Error('تبخیر از حجم نمونه بیشتر است.');
+  const cact=nmol/vact,ctact=def.Ct*(cfg.F==null?1:cfg.F)*(1-(cfg.co2||0));
+  const k=opt.k||1,unit=cact*vact/ctact;
+  let vend;
+  if(opt.method==='ideal'||!opt.method){vend=k*unit;}
+  else{
+    const sa=buildSim({...def,C:cact,V0:vact,Ct:ctact}),Vmax=sa.equivTotal*1.5;
+    if(opt.method==='ind'){
+      const ind=(g==='wrongind'&&cfg.wrongInd)?cfg.wrongInd:opt.ind;
+      vend=volumeAtPH(sa,ind.pK,Vmax);
+      if(!isFinite(vend))throw new Error('شناساگر در این سامانه تغییر رنگ نمی‌دهد.');
+    }else{
+      const step=opt.step||0.1,N=Math.ceil(Vmax/step),V=[],p=[];
+      for(let i=0;i<=N;i++){const v=i*step;V.push(v);p.push(sa.pH(v)+(opt.sPH||0)*gauss(rng));}
+      vend=eqFirstDeriv(V,p,unit*k);
+      if(!isFinite(vend))throw new Error('نقطه‌ی هم‌ارزی پیدا نشد.');
+    }
+  }
+  let vdel=vend+(cfg.over||0)+(cfg.blank||0);
+  if(cfg.sDrop>0)vdel+=cfg.sDrop*gauss(rng);
+  const f=1+(cfg.cal||0);let vread=vdel*f;
+  if(cfg.sRead>0)vread+=Math.SQRT2*cfg.sRead*gauss(rng);
+  if(cfg.blankCorr)vread-=(cfg.blank||0)*f;
+  if(g==='misread')vread+=(cfg.mag||0);
+  const ctEntry=def.Ct*(g==='wrongconc'?(cfg.mag||1):1);
+  return {c:ctEntry*vread/(k*def.V0),vread,vend};
+}
+function labRun(def,cfg,opt,n,seed){
+  const rng=mulberry32(seed||1),vals=[];
+  for(let i=0;i<n;i++)vals.push(labReplicate(def,cfg,rng,opt).c);
+  const m=Stats.mean(vals),true_=def.C;
+  const sd=n>=2?Stats.sd(vals):null;
+  return {vals,mean:m,sd,rsd:sd!=null&&m!==0?sd/Math.abs(m)*100:null,sem:sd!=null?sd/Math.sqrt(n):null,
+    bias:(m-true_)/true_*100,rec:m/true_*100,ci:Stats.ci(vals),grubbs:Stats.grubbs(vals),dixon:Stats.dixon(vals),true:true_};
+}
+const LAB_SCENARIOS=[
+  ['بورت +۰٫۵٪ (کالیبره نیست)',{cal:0.005}],
+  ['غلظت واقعی تیترانت ۲٪ کمتر از برچسب',{F:0.98}],
+  ['جذب CO₂: افت ۱٪ تیتر باز',{co2:0.01}],
+  ['شاهد ۰٫۱۰ mL (اصلاح‌نشده)',{blank:0.10}],
+  ['یک قطره اضافه‌ی تیترانت (۰٫۰۵ mL)',{over:0.05}],
+  ['تبخیر ۰٫۵ mL از نمونه',{evap:0.5}],
+  ['خطای پیپت +۰٫۰۳ mL',{pipBias:0.03}],
+  ['فاحش: خواندن بورت ۱٫۰۰ mL اشتباه',{gross:'misread',mag:1}],
+  ['فاحش: غلظت تیترانت ۱٫۱ برابر وارد شد',{gross:'wrongconc',mag:1.1}],
+  ['فاحش: ۵٪ نمونه ریخت',{gross:'spill',mag:0.05}]
+];
+function labSensitivity(def,opt){
+  const rng=mulberry32(0),base=labReplicate(def,{},rng,opt).c;
+  return LAB_SCENARIOS.map(([name,cfg])=>{
+    try{const c=labReplicate(def,cfg,rng,opt).c;return {name,c,shift:(c-base)/base*100};}
+    catch(e){return {name,c:NaN,shift:NaN,err:e.message};}
+  });
+}
+
+function distribution(logb,pHs){
+  const n=logb.length;
+  return pHs.map(pH=>{
+    const h=Math.pow(10,-pH);let hp=1,den=1;const t=[1];
+    for(let i=1;i<=n;i++){hp*=h;const v=Math.pow(10,logb[i-1])*hp;den+=v;t.push(v);}
+    return t.map(v=>v/den);
+  });
+}
+
+return {gammaLog,toStoich,toThermo,cumToStep,stepToCum,pointCalc,runFit,benchmark,PAPER,
+  synthCurve,mulberry32,gauss,brent,buildSim,simCurve,findEquivalence,volumeAtPH,indicatorErrors,
+  INDICATORS,granAnalysis,distribution,localSlope,NERNST25,
+  pKwOfT,pKaAtT,protonSolve,firstDerivative,jumpCheck,Stats,tQuantile,tCdf,eqFirstDeriv,labReplicate,labRun,labSensitivity,LAB_SCENARIOS,
+  grubbs:Stats.grubbs};
+})();
+if(typeof module!=='undefined')module.exports=TLCore;
+
+</script>
+<script>
+/* ===== TitrationLab UI ===== */
+(function(){
+'use strict';
+const C=TLCore;
+const $=id=>document.getElementById(id);
+const val=id=>parseFloat($(id).value);
+const PAL=['#0e7c8c','#c9861a','#b3364c','#4b6cb7','#2f7d4f','#7a4e9e','#8a6d3b','#d0568a'];
+const SUB='₀₁₂₃₄₅₆₇₈';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function normDigits(s){return String(s).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/[،؛]/g,',');}
+function parseList(s){return normDigits(s).split(/[\s,;]+/).filter(Boolean).map(Number);}
+function parseTable(text){
+  const V=[],y=[];
+  normDigits(text).split(/\r?\n/).forEach(line=>{
+    const p=line.trim().split(/[\s,;\t]+/).map(Number);
+    if(p.length>=2&&isFinite(p[0])&&isFinite(p[1])){V.push(p[0]);y.push(p[1]);}
+  });
+  return {V,y};
+}
+function msg(id,text,kind){$(id).innerHTML=text?`<div class="msg ${kind||''}">${text}</div>`:'';}
+const fx=(v,d)=>isFinite(v)?v.toFixed(d==null?3:d):'—';
+function pm(v,sd){
+  if(!isFinite(v))return '—';
+  if(!(sd>0))return v.toFixed(4);
+  const d=Math.max(0,Math.min(6,1-Math.floor(Math.log10(sd))));
+  return v.toFixed(d)+' ± '+sd.toFixed(d);
+}
+function table(head,rows,cls){
+  return `<table><thead><tr>${head.map((h,i)=>`<th class="${cls&&cls[i]||''}">${h}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${cls&&cls[i]||''}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+function download(name,text){
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'}));
+  a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+}
+
+/* ---------- charts (plain SVG, no library) ---------- */
+function niceTicks(min,max,count){
+  const span=(max-min)||1,raw=span/count,mag=Math.pow(10,Math.floor(Math.log10(raw))),nm=raw/mag;
+  const step=(nm<1.5?1:nm<3?2:nm<7?5:10)*mag,t=[];
+  for(let v=Math.ceil(min/step-1e-9)*step;v<=max+step*1e-6;v+=step)t.push(+v.toFixed(12));
+  return {t,step};
+}
+const tickFmt=(v,step)=>v.toFixed(Math.min(6,Math.max(0,-Math.floor(Math.log10(step)+1e-9))));
+function ext(arr){let a=Infinity,b=-Infinity;arr.forEach(v=>{if(isFinite(v)){if(v<a)a=v;if(v>b)b=v;}});return [a,b];}
+function chart(cont,cfg){
+  const W=360,H=cfg.h||260,m={l:50,r:12,t:12,b:42},pw=W-m.l-m.r,ph=H-m.t-m.b;
+  const xs=[],ys=[];
+  cfg.series.forEach(s=>s.x.forEach((v,i)=>{if(isFinite(v)&&isFinite(s.y[i])){xs.push(v);ys.push(s.y[i]);}}));
+  (cfg.hlines||[]).forEach(h=>ys.push(h.y));(cfg.vlines||[]).forEach(v=>xs.push(v.x));
+  let [x0,x1]=ext(xs),[y0,y1]=ext(ys);
+  if(cfg.xmin!=null)x0=cfg.xmin;if(cfg.xmax!=null)x1=cfg.xmax;
+  if(!isFinite(x0)){cont.innerHTML='';return;}
+  if(x1===x0){x1+=1;x0-=1;}
+  const padY=(y1-y0||1)*0.05;
+  if(cfg.ymin!=null)y0=cfg.ymin;else y0-=padY;
+  if(cfg.ymax!=null)y1=cfg.ymax;else y1+=padY;
+  const X=v=>m.l+(v-x0)/(x1-x0)*pw,Y=v=>m.t+(1-(v-y0)/(y1-y0))*ph;
+  const tx=niceTicks(x0,x1,5),ty=niceTicks(y0,y1,5);
+  let g='';
+  ty.t.forEach(v=>{g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#dfe8ec"/><text x="${m.l-5}" y="${Y(v)+3}" text-anchor="end">${tickFmt(v,ty.step)}</text>`;});
+  tx.t.forEach(v=>{g+=`<line y1="${m.t}" y2="${H-m.b}" x1="${X(v)}" x2="${X(v)}" stroke="#eef3f5"/><text x="${X(v)}" y="${H-m.b+14}" text-anchor="middle">${tickFmt(v,tx.step)}</text>`;});
+  g+=`<rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}" fill="none" stroke="#b7cad2"/>`;
+  g+=`<text x="${m.l+pw/2}" y="${H-5}" text-anchor="middle">${esc(cfg.xlabel||'')}</text>`;
+  g+=`<text transform="translate(11 ${m.t+ph/2}) rotate(-90)" text-anchor="middle">${esc(cfg.ylabel||'')}</text>`;
+  g+=`<clipPath id="clp${cfg.id||0}"><rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}"/></clipPath><g clip-path="url(#clp${cfg.id||0})">`;
+  (cfg.hlines||[]).forEach(h=>{g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(h.y)}" y2="${Y(h.y)}" stroke="${h.color||'#587482'}" stroke-dasharray="${h.dash||'4 3'}"/>`;});
+  (cfg.vlines||[]).forEach(v=>{g+=`<line y1="${m.t}" y2="${H-m.b}" x1="${X(v.x)}" x2="${X(v.x)}" stroke="${v.color||'#b3364c'}" stroke-dasharray="3 3" opacity=".7"/>`;});
+  cfg.series.forEach((s,si)=>{
+    const col=s.color||PAL[si%PAL.length],mode=s.mode||'line';
+    if(mode==='line'||mode==='both'){
+      let d='',pen=false;
+      s.x.forEach((v,i)=>{const yy=s.y[i];if(!isFinite(v)||!isFinite(yy)){pen=false;return;}d+=(pen?'L':'M')+X(v).toFixed(1)+' '+Y(yy).toFixed(1);pen=true;});
+      g+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="${s.width||1.8}" ${s.dash?`stroke-dasharray="${s.dash}"`:''} stroke-linejoin="round"/>`;
+    }
+    if(mode==='dots'||mode==='both'){
+      s.x.forEach((v,i)=>{if(isFinite(v)&&isFinite(s.y[i]))g+=`<circle cx="${X(v).toFixed(1)}" cy="${Y(s.y[i]).toFixed(1)}" r="${s.r||1.8}" fill="${col}" opacity=".85"/>`;});
+    }
+  });
+  g+='</g>';
+  const legend=cfg.series.filter(s=>s.name).map((s,si)=>`<span><i style="background:${s.color||PAL[si%PAL.length]}"></i>${esc(s.name)}</span>`).join('');
+  cont.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cfg.title||'نمودار')}">${g}</svg>${legend?`<div class="legend">${legend}</div>`:''}`;
+}
+function bars(cont,cfg){
+  const W=360,H=230,m={l:50,r:12,t:14,b:36},pw=W-m.l-m.r,ph=H-m.t-m.b;
+  const all=[0];cfg.series.forEach(s=>s.values.forEach(v=>all.push(v)));
+  let [y0,y1]=ext(all);const pad=(y1-y0||1)*0.08;y0-=pad;y1+=pad;
+  const Y=v=>m.t+(1-(v-y0)/(y1-y0))*ph,ty=niceTicks(y0,y1,5);
+  const gw=pw/cfg.groups.length,bw=Math.min(18,gw*0.8/cfg.series.length);
+  let g='';
+  ty.t.forEach(v=>{g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v===0?'#587482':'#dfe8ec'}"/><text x="${m.l-5}" y="${Y(v)+3}" text-anchor="end">${tickFmt(v,ty.step)}</text>`;});
+  cfg.groups.forEach((lab,gi)=>{
+    const cx=m.l+gw*(gi+0.5);
+    g+=`<text x="${cx}" y="${H-m.b+14}" text-anchor="middle">${esc(lab)}</text>`;
+    cfg.series.forEach((s,si)=>{
+      const v=s.values[gi],x=cx+(si-(cfg.series.length-1)/2)*(bw+2)-bw/2,yy=Y(v),y0p=Y(0);
+      if(isFinite(v))g+=`<rect x="${x.toFixed(1)}" y="${Math.min(yy,y0p).toFixed(1)}" width="${bw}" height="${Math.max(Math.abs(yy-y0p),0.5).toFixed(1)}" fill="${s.color||PAL[si]}"/>`;
+    });
+  });
+  g+=`<text transform="translate(11 ${m.t+ph/2}) rotate(-90)" text-anchor="middle">${esc(cfg.ylabel||'')}</text>`;
+  const legend=cfg.series.map((s,si)=>`<span><i style="background:${s.color||PAL[si]}"></i>${esc(s.name)}</span>`).join('');
+  cont.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cfg.title||'نمودار میله‌ای')}">${g}</svg><div class="legend">${legend}</div>`;
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('#tl-root nav button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#tl-root nav button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('#tl-root .panel').forEach(p=>p.hidden=p.dataset.panel!==b.dataset.tab);
+  window.scrollTo({top:0});
+}));
+
+/* =====================================================================
+   SIMULATOR
+   ===================================================================== */
+const SIM={view:'ph',last:null};
+const PRESETS=[
+ {n:'HCl ← NaOH',kind:'strongAcid',C:0.1,V0:25,Ct:0.1,pka:''},
+ {n:'استیک اسید',kind:'acid',C:0.1,V0:25,Ct:0.1,pka:'4.76'},
+ {n:'فسفریک اسید',kind:'acid',C:0.1,V0:25,Ct:0.1,pka:'2.15, 7.20, 12.35'},
+ {n:'آمونیاک ← HCl',kind:'base',C:0.1,V0:25,Ct:0.1,pka:'9.25'},
+ {n:'کربنات ← HCl',kind:'base',C:0.05,V0:25,Ct:0.1,pka:'6.35, 10.33'},
+ {n:'اسید شش‌پروتونه (مقاله)',kind:'acid',C:0.004,V0:25,Ct:0.1,pka:'2, 3, 4, 6, 8, 10'}
+];
+PRESETS.forEach((p,i)=>{
+  const b=document.createElement('button');b.className='chip';b.textContent=p.n;
+  b.addEventListener('click',()=>{$('sim-kind').value=p.kind;$('sim-C').value=p.C;$('sim-V0').value=p.V0;$('sim-Ct').value=p.Ct;$('sim-pka').value=p.pka;simKindUI();simRun();});
+  $('sim-presets').appendChild(b);
+});
+function simKindUI(){
+  const k=$('sim-kind').value,strong=k==='strongAcid'||k==='strongBase';
+  $('sim-pka-wrap').hidden=strong;$('sim-pka-hint').hidden=strong;
+  $('sim-pka-hint').textContent=k==='base'?'pKa اسید مزدوج را وارد کنید (مثلاً NH₄⁺ ← 9.25؛ برای کربنات: 6.35 و 10.33).':'برای اسید چندپروتونه pKa₁ < pKa₂ < … را وارد کنید.';
+}
+$('sim-kind').addEventListener('change',simKindUI);simKindUI();
+document.querySelectorAll('#sim-views button').forEach(b=>b.addEventListener('click',()=>{
+  SIM.view=b.dataset.view;document.querySelectorAll('#sim-views button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderSim();
+}));
+function simRun(){
+  msg('sim-msg','');
+  const kind=$('sim-kind').value,Cc=val('sim-C'),V0=val('sim-V0'),Ct=val('sim-Ct'),pKw=val('sim-pkw'),ext=val('sim-ext');
+  const strong=kind==='strongAcid'||kind==='strongBase';
+  let pKa=strong?[]:parseList($('sim-pka').value);
+  if(!(Cc>0&&V0>0&&Ct>0&&(pKw>0||$('sim-pkwauto').checked)&&ext>0)){msg('sim-msg','غلظت‌ها، حجم و pKw باید مثبت باشند.','err');return;}
+  if(!strong&&(!pKa.length||pKa.some(v=>!isFinite(v))||pKa.length>8)){msg('sim-msg','pKaها را به صورت عدد و با کاما وارد کنید (حداکثر ۸ مرحله).','err');return;}
+  pKa=pKa.slice().sort((a,b)=>a-b);
+  const T=isFinite(val('sim-T'))?val('sim-T'):25,dH=isFinite(val('sim-dH'))?val('sim-dH'):0,tWeak=$('sim-tstr').value==='weak',tpKa=val('sim-tpka');
+  if(tWeak&&!isFinite(tpKa)){msg('sim-msg','pKa تیترانت ضعیف را وارد کنید.','err');return;}
+  if(!(T>=-5&&T<=150)){msg('sim-msg','دما باید بین ‎−۵ و ۱۵۰ درجه باشد.','err');return;}
+  const sim=C.buildSim({kind,C:Cc,V0,Ct,pKa,pKw,pKwAuto:$('sim-pkwauto').checked,T,dH,thermal:$('sim-thermal').checked,tWeak,tpKa});
+  const Vmax=sim.equivTotal*ext/100;
+  const curve=C.simCurve(sim,Vmax,500),eq=C.findEquivalence(sim,Vmax);
+  SIM.last={sim,Vmax,curve,eq};
+  const sel=$('sim-ind-eq');sel.innerHTML=eq.map((e,i)=>`<option value="${i}">هم‌ارزی ${i+1} — V = ${fx(e.V,2)} mL، pH = ${fx(e.pH,2)}</option>`).join('');
+  renderSim();renderEq();renderInd();renderJump();
+}
+function renderJump(){
+  const L=SIM.last;if(!L)return;const j=C.jumpCheck(L.sim);
+  $('sim-jump').innerHTML=j.ok?`<div class="msg">جهش pH در ±۰٫۱٪ هم‌ارزی: ${fx(j.jump,2)} (≥ ۲): شناساگر رنگی می‌تواند کار کند. pKw به‌کاررفته: ${fx(L.sim.pKw,3)}.</div>`:
+    `<div class="msg warn">جهش pH در ±۰٫۱٪ هم‌ارزی فقط ${fx(j.jump,2)} است (&lt; ۲)؛ ${j.weakWeak?'در تیتراسیون ضعیف/ضعیف شناساگر معمولی جواب نمی‌دهد. ':''}برای دقت ۰٫۱٪ از تیتراسیون پتانسیومتری استفاده کنید. pKw به‌کاررفته: ${fx(L.sim.pKw,3)}.</div>`;
+}
+$('sim-tstr').addEventListener('change',()=>{$('sim-tpka-wrap').hidden=$('sim-tstr').value!=='weak';});
+function renderSim(){
+  const L=SIM.last;if(!L)return;
+  const {sim,curve,eq}=L,vl=eq.map(e=>({x:e.V}));
+  $('sim-note').textContent='';
+  if(SIM.view==='ph'){
+    chart($('sim-plot'),{id:1,series:[{x:curve.V,y:curve.pH,name:'pH'}],xlabel:'حجم تیترانت (mL)',ylabel:'pH',vlines:vl,ymin:0,ymax:14,title:'منحنی تیتراسیون'});
+  }else if(SIM.view==='d'){
+    const dd=C.firstDerivative(curve.V,curve.pH),x=curve.V.slice(1,-1),y=dd.slice(1,-1).map(Math.abs);
+    chart($('sim-plot'),{id:2,series:[{x,y,name:'|dpH/dV|'}],xlabel:'حجم تیترانت (mL)',ylabel:'|dpH/dV|  (pH/mL)',vlines:vl,ymin:0,title:'مشتق اول'});
+    $('sim-note').textContent='قله‌ی مشتق اول، نقطه‌ی هم‌ارزی را نشان می‌دهد.';
+  }else if(SIM.view==='alpha'){
+    if(sim.n===0){$('sim-plot').innerHTML='<p class="hint" style="padding:12px">برای اسید یا باز قوی، گونه‌ی پروتون‌دار وجود ندارد.</p>';return;}
+    const pHs=[];for(let p=0;p<=14.001;p+=0.05)pHs.push(p);
+    const D=C.distribution(sim.logb,pHs);
+    const series=[];for(let i=sim.n;i>=0;i--){series.push({x:pHs,y:D.map(r=>r[i]),name:'H'+(SUB[i]||i)+'A'});}
+    chart($('sim-plot'),{id:3,series,xlabel:'pH',ylabel:'کسر مولی α',xmin:0,xmax:14,ymin:0,ymax:1.02,title:'توزیع گونه‌ها'});
+    $('sim-note').textContent='A شکل کاملاً بدون پروتون است؛ H'+(SUB[sim.n]||sim.n)+'A شکل کاملاً پروتون‌دار.';
+  }else{
+    const g=C.granAnalysis(sim,L.Vmax);
+    if(!g){$('sim-plot').innerHTML='<p class="hint" style="padding:12px">نمودار گران فقط برای سامانه‌های قوی یا تک‌پروتونه تعریف شده است.</p>';return;}
+    const xs=g.pts.map(q=>q.V),line=[0,g.Veq];
+    chart($('sim-plot'),{id:4,series:[{x:xs,y:g.pts.map(q=>q.F),mode:'dots',name:'F گران'},{x:line,y:line.map(v=>g.slope*v+g.intercept),name:'برون‌یابی',dash:'4 3',width:1.2}],
+      xlabel:'حجم تیترانت (mL)',ylabel:sim.strong?'(V₀+V)·x':'V·x',xmin:0,hlines:[{y:0}],title:'نمودار گران'});
+    $('sim-note').innerHTML=`V<sub>eq</sub> از گران = <b>${fx(g.Veq,3)}</b> mL (مشتق: ${fx(g.eqV,3)} mL)`+(g.K?`، p${g.Kname} ≈ <b>${fx(-Math.log10(g.K),2)}</b>`:'')+'. نقاط از ۲۰٪ تا ۹۰٪ حجم هم‌ارزی گرفته شده‌اند.';
+  }
+}
+function renderEq(){
+  const L=SIM.last,{sim,eq}=L,def=sim.def;
+  if(!eq.length){$('sim-eq').innerHTML='<p class="hint">نقطه‌ی هم‌ارزی مشخصی پیدا نشد (جهش pH کوچک است).</p>';return;}
+  const unit=def.C*def.V0/def.Ct;
+  $('sim-eq').innerHTML=table(['#','V مشاهده (mL)','V نظری (mL)','pH','غلظت محاسبه‌شده (mol/L)'],eq.map(e=>{
+    const k=Math.max(1,Math.round(e.V/unit));
+    return [k,fx(e.V,3),fx(k*unit,3),fx(e.pH,2),(def.Ct*e.V/(k*def.V0)).toPrecision(4)];
+  }),['num','num','num','num','num']);
+}
+function renderInd(){
+  const L=SIM.last;if(!L||!L.eq.length){$('sim-ind').innerHTML='';return;}
+  const e=L.eq[+$('sim-ind-eq').value||0];
+  const rows=C.indicatorErrors(L.sim,e,L.Vmax).sort((a,b)=>Math.abs(a.err||1e9)-Math.abs(b.err||1e9));
+  $('sim-ind').innerHTML=table(['شناساگر','گستره‌ی pH','تغییر رنگ','خطای شناساگر (٪)','داوری'],rows.map(r=>{
+    const a=Math.abs(r.err),cls=a<=0.1?'ok':a<=0.5?'mid':'bad',t=a<=0.1?'مناسب':a<=0.5?'قابل‌قبول':'نامناسب';
+    return [esc(r.name),`${r.lo} – ${r.hi} (pK ${r.pK})`,esc(r.c),isFinite(r.err)?(r.err>0?'+':'')+fx(r.err,2):'—',`<span class="${cls}">${t}</span>`];
+  }),['','num','','num','']);
+}
+$('sim-ind-eq').addEventListener('change',renderInd);
+$('sim-run').addEventListener('click',simRun);
+simRun();
+
+/* =====================================================================
+   FIT
+   ===================================================================== */
+const FIT={curves:[],last:null,pm:null};
+function renderCurveList(){
+  const ul=$('fit-list');
+  if(!FIT.curves.length){ul.innerHTML='<li><span class="hint">هنوز منحنی‌ای اضافه نشده است.</span></li>';return;}
+  ul.innerHTML=FIT.curves.map((c,i)=>`<li><span><bdi>${esc(c.name)}</bdi> <span class="hint"><bdi>${c.V.length}</bdi> نقطه · C<sub>L</sub> = <bdi>${fx(c.CL*1e3,2)} mM</bdi></span></span><button data-i="${i}" aria-label="حذف ${esc(c.name)}">حذف</button></li>`).join('');
+  ul.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{FIT.curves.splice(+b.dataset.i,1);renderCurveList();}));
+}
+function autoZ(){const n=parseInt($('fit-n').value)||1;$('fit-zA').value=$('fit-analyte').value==='acid'?-n:0;}
+$('fit-n').addEventListener('change',autoZ);$('fit-analyte').addEventListener('change',autoZ);
+$('fit-mode').addEventListener('change',()=>{
+  const v=$('fit-mode').value==='var';
+  if(v){$('fit-rE0').checked=true;if(Math.abs(val('fit-pkw')-13.77)<1e-9)$('fit-pkw').value=13.997;}
+  else if(Math.abs(val('fit-pkw')-13.997)<1e-9)$('fit-pkw').value=13.77;
+});
+function addCurve(){
+  const t=parseTable($('fit-data').value);
+  if(t.V.length<5){msg('fit-msg','دست‌کم ۵ خط عددی «حجم  مقدار» لازم است.','err');return;}
+  const CL=val('fit-CL')*1e-3,V0=val('fit-V0'),H0=(val('fit-H0')||0)*1e-3;
+  if(!(V0>0)||!(CL>=0)){msg('fit-msg','حجم و غلظت را درست وارد کنید.','err');return;}
+  FIT.curves.push({name:$('fit-name').value||('منحنی '+(FIT.curves.length+1)),V0,CL,H0,V:t.V,y:t.y,fH:1});
+  msg('fit-msg','');renderCurveList();
+}
+$('fit-add').addEventListener('click',addCurve);
+$('fit-file').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{$('fit-data').value=r.result;$('fit-name').value=f.name.replace(/\.[^.]+$/,'');};r.readAsText(f);
+});
+function loadBench(){
+  FIT.curves=C.benchmark({noise:0.05,seed:7});
+  $('fit-analyte').value='acid';$('fit-n').value=6;$('fit-zA').value=-6;$('fit-Ct').value=0.1;$('fit-pkw').value=13.77;
+  $('fit-obs').value='E';$('fit-guess').value='9.6, 7.6, 5.6, 3.6, 2.6, 1.6';$('fit-mode').value='const';
+  $('fit-E0').value=405;$('fit-S').value=-59.16;$('fit-jA').value=-64;$('fit-jB').value=0;
+  $('fit-Cs').value=0.1;
+  ['fit-rE0','fit-rS','fit-rjA','fit-rCt'].forEach(i=>$(i).checked=false);$('fit-rconc').value='none';
+  renderCurveList();msg('fit-msg','دیتاست بارگذاری شد؛ مقادیر الکترود و مدل مطابق مقاله تنظیم شد. «اجرای برازش» را بزنید.');
+}
+$('fit-bench').addEventListener('click',loadBench);
+renderCurveList();
+
+function readFitOpts(){
+  const n=parseInt($('fit-n').value),analyte=$('fit-analyte').value,mode=$('fit-mode').value,gm=$('fit-gm').value;
+  if(!(n>=1&&n<=8))throw new Error('تعداد مراحل باید بین ۱ و ۸ باشد.');
+  if(!FIT.curves.length)throw new Error('ابتدا دیتاست را بارگذاری یا منحنی اضافه کنید.');
+  const guess=parseList($('fit-guess').value);
+  if(guess.length!==n||guess.some(v=>!isFinite(v)))throw new Error(`حدس اولیه باید دقیقاً ${n} عدد باشد.`);
+  const Cs=val('fit-Cs'),obs=$('fit-obs').value,Ct=val('fit-Ct'),pKw=val('fit-pkw');
+  if(!(Ct>0)||!(pKw>0))throw new Error('غلظت تیترانت و pKw باید مثبت باشند.');
+  let logb0=C.stepToCum(guess);
+  if(mode==='var')logb0=C.toThermo(logb0,val('fit-zA'),Cs,gm);
+  const rc=$('fit-rconc').value;
+  return {n,zA:val('fit-zA'),nInit:analyte==='acid'?n:0,sign:analyte==='acid'?-1:1,mode,gmodel:gm,Kw:Math.pow(10,-pKw),Cs,Ct,
+    calib:{E0:val('fit-E0'),S:val('fit-S'),jA:val('fit-jA'),jB:val('fit-jB')},logb0,
+    curves:FIT.curves.map(c=>({...c,fH:1})),obs,weighted:$('fit-w').value==='1',sE:val('fit-sE'),sV:val('fit-sV'),maxIt:val('fit-maxit')||120,
+    refine:{E0:$('fit-rE0').checked,S:$('fit-rS').checked,jA:$('fit-rjA').checked,Ct:$('fit-rCt').checked,CL:rc==='CL',fH:rc==='fH'}};
+}
+function runFitUI(){
+  let o;try{o=readFitOpts();}catch(e){msg('fit-msg',esc(e.message),'err');return;}
+  msg('fit-msg','در حال برازش…');$('fit-run').classList.add('busy');
+  setTimeout(()=>{
+    try{
+      const t0=performance.now(),res=C.runFit(o);
+      FIT.last={res,o,ms:performance.now()-t0};msg('fit-msg','');renderFit();
+    }catch(e){msg('fit-msg','خطا در برازش: '+esc(e.message),'err');}
+    $('fit-run').classList.remove('busy');
+  },30);
+}
+$('fit-run').addEventListener('click',runFitUI);
+function renderFit(){
+  const {res,o,ms}=FIT.last,n=res.M.n,isVar=o.mode==='var';
+  const ok=res.converged;
+  $('fit-sum').innerHTML=`<div class="msg ${ok?'':'warn'}">${ok?'همگرا شد.':'به حداکثر تکرار رسید؛ نتیجه را با احتیاط بخوانید.'}</div>`+
+    table(['شاخص','مقدار'],[['تکرار',`${res.iterations}`],['نقاط داده N',`${res.N}`],['پارامترها p',`${res.p}`],['درجه‌ی آزادی',`${res.dof}`],
+      ['U = √(Σw·r² / (N−p))',res.U.toPrecision(3)],['زمان',`${Math.round(ms)} ms`]],['','num']);
+  const stoich=isVar?C.cumToStep(C.toStoich(res.logb,o.zA,o.Cs,o.gmodel)):null;
+  const head=['i',isVar?'logβ<sup>T</sup>':'logβ',isVar?'logK<sup>T</sup>':'logK'].concat(isVar?[`logK (I=${o.Cs})`]:[]);
+  const rows=[];
+  for(let i=0;i<n;i++)rows.push([i+1,pm(res.logb[i],res.sdb[i]),pm(res.logK[i],res.sdK[i])].concat(isVar?[fx(stoich[i],3)]:[]));
+  $('fit-res').innerHTML='<h3>ثابت‌های پروتونه‌شدن</h3>'+table(head,rows,['num','num','num','num']);
+  const prows=[];
+  res.spec.forEach(nm=>{if(!nm.startsWith('logb')){const p=res.params[nm];prows.push([nm,pm(p.value,p.sd)]);}});
+  $('fit-par').innerHTML=prows.length?'<h3>پارامترهای دیگر</h3>'+table(['پارامتر','مقدار'],prows,['','num']):'';
+  const sel=$('fit-curve');sel.innerHTML=res.curves.map((c,i)=>`<option value="${i}">${esc(c.name)}</option>`).join('');
+  ['fit-plot-h','fit-curve-wrap','fit-plot','fit-resplot'].forEach(i=>$(i).hidden=false);
+  renderFitPlots();
+  const cov=res.coverage.map(c=>{
+    const cls=c.count>=15?'ok':c.count>=10?'mid':'bad',t=c.count>=15?'کافی':c.count>=10?'مرزی':'کم';
+    return ['H'+(SUB[c.species]||c.species)+'A',fx(c.max*100,1),c.count,`<span class="${cls}">${t}</span>`];
+  });
+  let corrTxt='';
+  if(res.corr){
+    let mx=0,pr='';for(let a=0;a<n;a++)for(let b=a+1;b<n;b++){const v=Math.abs(res.corr[a][b]);if(v>mx&&isFinite(v)){mx=v;pr=`logβ${a+1} و logβ${b+1}`;}}
+    corrTxt=`<p class="hint">بیشترین همبستگی بین ثابت‌های برازش‌شده: ${pr} (|r| = ${fx(mx,3)}). از همبستگی‌ها در s(logK) مرحله‌ای لحاظ شده است.</p>`;
+  }
+  $('fit-qc').innerHTML='<h3>پوشش داده برای هر گونه</h3>'+table(['گونه','بیشینه‌ی فراوانی (٪)','نقاط بین ۲۰٪ و ۸۰٪ بیشینه','وضعیت'],cov,['','num','num',''])+
+    '<p class="hint">مقاله دست‌کم ۱۰ تا ۱۵ نقطه برای هر گونه را لازم می‌داند.</p>'+corrTxt;
+}
+function renderFitPlots(){
+  if(!FIT.last)return;
+  const {res,o}=FIT.last,c=res.curves[+$('fit-curve').value||0],u=o.obs==='E'?'mV':'pH';
+  chart($('fit-plot'),{id:5,series:[{x:c.V,y:c.yexp,mode:'dots',color:'#c9861a',name:'تجربی'},{x:c.V,y:c.ycalc,color:'#0e7c8c',name:'برازش'}],xlabel:'حجم تیترانت (mL)',ylabel:o.obs==='E'?'E (mV)':'pH',title:'برازش'});
+  chart($('fit-resplot'),{id:6,h:190,series:[{x:c.V,y:c.res,mode:'both',color:'#b3364c',r:1.6,width:0.8,name:'باقی‌مانده ('+u+')'}],hlines:[{y:0}],xlabel:'حجم تیترانت (mL)',ylabel:'باقی‌مانده ('+u+')',title:'باقی‌مانده‌ها'});
+}
+$('fit-curve').addEventListener('change',renderFitPlots);
+$('fit-export').addEventListener('click',()=>{
+  if(!FIT.last){msg('fit-msg','ابتدا برازش را اجرا کنید.','err');return;}
+  const {res,o}=FIT.last;let t='i,logbeta,sd_logbeta,logK,sd_logK\n';
+  for(let i=0;i<res.M.n;i++)t+=`${i+1},${res.logb[i]},${res.sdb[i]},${res.logK[i]},${res.sdK[i]}\n`;
+  t+='\nparam,value,sd\n';res.spec.filter(s=>!s.startsWith('logb')).forEach(s=>t+=`${s},${res.params[s].value},${res.params[s].sd}\n`);
+  t+=`\nU,${res.U}\nN,${res.N}\np,${res.p}\nmode,${o.mode}\n`;
+  download('titration-fit.csv',t);
+});
+
+/* =====================================================================
+   ERROR LAB
+   ===================================================================== */
+// differences from the reference run, taken from Table 3 / Table 4 (BSTAC column) of the paper
+const PAPER_D={
+  e0:[0.039,0.014,0.017,0.018,0.019,0.070],
+  ct:[0.293,0.166,0.137,0.078,0.007,0.000],
+  acid:[-0.031,0.018,0.058,0.073,0.055,0.114],
+  ion:[0.214,0.101,0.050,0.015,0.008,-0.220]
+};
+function runErr(){
+  msg('err-msg','در حال محاسبه…');$('err-run').classList.add('busy');
+  setTimeout(()=>{
+    try{
+      const noise=val('err-noise'),seed=val('err-seed'),dE0=val('err-dE0'),ctP=val('err-ct'),acP=val('err-acid'),gm=$('err-gm').value;
+      const cur=C.benchmark({noise:isFinite(noise)?noise:0.05,seed:seed||7});
+      const base={n:6,zA:-6,nInit:6,sign:-1,mode:'const',gmodel:'dh',Kw:Math.pow(10,-13.77),Cs:0.1,Ct:0.1,calib:{...C.PAPER.calib},
+        logb0:C.stepToCum([9.7,7.7,5.7,3.7,2.7,1.7]),curves:cur,refine:{},weighted:true,sE:0.15,sV:0.005,obs:'E',maxIt:150};
+      const ref=C.runFit(base),sc=[];
+      const diff=f=>f.map((v,i)=>v-ref.logK[i]);
+      if(dE0)sc.push({t:`E′₀ ${dE0>0?'+':''}${dE0} mV`,d:diff(C.runFit({...base,calib:{...base.calib,E0:405+dE0}}).logK),p:PAPER_D.e0,
+        note:'اندازه‌ها با مقاله هم‌خوان‌اند؛ علامت به جهت تعریف خطای E′₀ بستگی دارد (مقاله: ۴۰۶ به‌جای ۴۰۵).'});
+      if(ctP)sc.push({t:`غلظت تیترانت ${ctP>0?'+':''}${ctP}٪`,d:diff(C.runFit({...base,Ct:0.1*(1+ctP/100)}).logK),p:PAPER_D.ct,note:'خطا با مصرف تیترانت (از logK₆ به logK₁) افزایش می‌یابد.'});
+      if(acP)sc.push({t:`غلظت اسید ${acP>0?'+':''}${acP}٪ (پروتون کل برازش‌شده)`,d:diff(C.runFit({...base,curves:cur.map(c=>({...c,CL:c.CL*(1+acP/100)})),refine:{fH:true}}).logK),p:PAPER_D.acid,note:'اثر بیشتر روی ثابت‌های اسیدی‌تر (logK₆).'});
+      if($('err-ion').checked){
+        const lbT=C.toThermo(C.stepToCum(ref.logK),-6,0.1,gm);
+        const f=C.runFit({...base,mode:'var',gmodel:gm,Kw:Math.pow(10,-13.997),logb0:lbT,refine:{E0:true},calib:{...base.calib,E0:410}});
+        const st=C.cumToStep(C.toStoich(f.logb,-6,0.1,gm));
+        sc.push({t:'قدرت یونی متغیر در برازش',d:diff(st),p:PAPER_D.ion,note:`ثابت‌های ترمودینامیکی به I = 0.1 برگردانده شده‌اند. E′₀ برازش‌شده: ${fx(f.calib.E0,1)} mV.${gm!=='dh'?' مقاله‌ی مرجع با DH است.':''}`});
+      }
+      let h=`<h3>برازش مرجع (ورودی درست)</h3>`+table(['i','logK برازش‌شده','مقدار واقعی'],ref.logK.map((v,i)=>[i+1,pm(v,ref.sdK[i]),C.PAPER.logK[i]]),['num','num','num']);
+      h+=sc.map((s,k)=>`<h3>${s.t}</h3>`+table(['i','Δ logK (این ابزار)','Δ logK (مقاله)'],s.d.map((v,i)=>[i+1,(v>=0?'+':'')+fx(v,3),(s.p[i]>=0?'+':'')+fx(s.p[i],3)]),['num','num','num'])+
+        `<div class="plot" id="err-bar-${k}"></div><p class="hint">${s.note}</p>`).join('');
+      $('err-out').innerHTML=h;
+      sc.forEach((s,k)=>bars($('err-bar-'+k),{groups:['K₁','K₂','K₃','K₄','K₅','K₆'],ylabel:'Δ logK',title:s.t,
+        series:[{name:'این ابزار',values:s.d,color:'#0e7c8c'},{name:'مقاله (BSTAC)',values:s.p,color:'#c9861a'}]}));
+      msg('err-msg','');
+    }catch(e){msg('err-msg','خطا: '+esc(e.message),'err');}
+    $('err-run').classList.remove('busy');
+  },30);
+}
+$('err-run').addEventListener('click',runErr);
+
+/* =====================================================================
+   CALIBRATION + QC
+   ===================================================================== */
+function calDemo(){
+  const M={n:0,zA:0,nInit:0,sign:-1,mode:'const',gmodel:'dh',Kw:Math.pow(10,-13.77),Cs:0};
+  const P={logb:[],E0:405.7,S:-58.9,jA:-64,jB:0,Ct:0.1},cv={V0:25,CL:0,H0:0.01,fH:1,obs:'E'},rng=C.mulberry32(11);
+  const cur=C.synthCurve(M,P,{...cv,name:'demo'},3.1,40,0.1,rng);
+  $('cal-data').value=cur.V.map((v,i)=>v.toFixed(3)+'  '+cur.y[i].toFixed(2)).join('\n');
+  msg('cal-msg','داده‌ی نمونه با E′₀ = 405.7 mV و S = −58.9 mV ساخته شد (نوفه‌ی ۰٫۱ mV).');
+}
+$('cal-demo').addEventListener('click',calDemo);
+let CAL=null;
+$('cal-run').addEventListener('click',()=>{
+  const t=parseTable($('cal-data').value);
+  if(t.V.length<8){msg('cal-msg','دست‌کم ۸ نقطه لازم است.','err');return;}
+  const Ca=val('cal-Ca'),V0=val('cal-V0'),Ct=val('cal-Ct'),pKw=val('cal-pkw');
+  if(!(Ca>0&&V0>0&&Ct>0&&pKw>0)){msg('cal-msg','غلظت‌ها، حجم و pKw را درست وارد کنید.','err');return;}
+  try{
+    const res=C.runFit({n:0,zA:0,nInit:0,sign:-1,mode:'const',Kw:Math.pow(10,-pKw),Ct,calib:{E0:t.y[0]-C.NERNST25*Math.log10(Ca),S:C.NERNST25,jA:0,jB:0},logb0:[],
+      curves:[{name:'cal',V0,CL:0,H0:Ca,fH:1,V:t.V,y:t.y}],refine:{E0:true,S:true,jA:true,jB:$('cal-rjB').checked,fH:$('cal-rCa').checked},
+      weighted:false,sE:0.15,sV:0.005,obs:'E',maxIt:150});
+    CAL=res;msg('cal-msg','');
+    const S=res.params.S,eff=Math.abs(S.value)/59.16*100,effCls=eff>=95&&eff<=105?'ok':'bad';
+    const rows=res.spec.map(s=>[s,pm(res.params[s].value,res.params[s].sd)]);
+    $('cal-sum').innerHTML=`<div class="msg ${res.converged?'':'warn'}">${res.converged?'همگرا شد':'به حداکثر تکرار رسید'} در ${res.iterations} تکرار؛ σ = ${fx(res.U,3)} mV.</div>`+
+      table(['پارامتر','مقدار'],rows,['','num'])+
+      `<p>بازده‌ی شیب: <span class="${effCls}">${fx(eff,1)}٪</span> <span class="hint">(نظری: −59.16 mV در 25°C؛ بازه‌ی ۹۵ تا ۱۰۵٪ قاعده‌ی عمومی است.)</span></p>`;
+    const c=res.curves[0];$('cal-plot').hidden=false;
+    chart($('cal-plot'),{id:7,series:[{x:c.V,y:c.yexp,mode:'dots',color:'#c9861a',name:'تجربی'},{x:c.V,y:c.ycalc,color:'#0e7c8c',name:'برازش'}],xlabel:'حجم باز (mL)',ylabel:'E (mV)',title:'کالیبراسیون'});
+    if(res.params.E0)$('cal-hist').value=($('cal-hist').value.trim()?$('cal-hist').value.trim()+', ':'')+res.params.E0.value.toFixed(2);
+  }catch(e){msg('cal-msg','خطا: '+esc(e.message),'err');}
+});
+$('cal-chart').addEventListener('click',()=>{
+  const v=parseList($('cal-hist').value).filter(isFinite);
+  if(v.length<3){$('cal-ctl').innerHTML='<div class="msg err">دست‌کم ۳ مقدار لازم است.</div>';return;}
+  const mean=v.reduce((a,b)=>a+b,0)/v.length,sd=Math.sqrt(v.reduce((a,b)=>a+(b-mean)**2,0)/(v.length-1));
+  const drift=[];for(let i=1;i<v.length;i++)if(Math.abs(v[i]-v[i-1])>1)drift.push(i+1);
+  const outs=[];v.forEach((x,i)=>{if(Math.abs(x-mean)>2*sd)outs.push(i+1);});
+  const idx=v.map((_,i)=>i+1),hl=[{y:mean,color:'#587482'},{y:mean+2*sd,color:'#c9861a'},{y:mean-2*sd,color:'#c9861a'},{y:mean+3*sd,color:'#b3364c'},{y:mean-3*sd,color:'#b3364c'}];
+  $('cal-ctl').innerHTML='<h3>نمودار کنترل E′₀</h3><div class="plot" id="cal-ctl-plot"></div>';
+  chart($('cal-ctl-plot'),{id:8,series:[{x:idx,y:v,mode:'both',name:'E′₀',r:2.5}],hlines:hl,xlabel:'شماره‌ی کالیبراسیون',ylabel:'E′₀ (mV)',title:'نمودار کنترل'});
+  let t=`<p>میانگین ${fx(mean,2)} mV، انحراف معیار ${fx(sd,2)} mV.</p>`;
+  t+=drift.length?`<div class="msg warn">تغییر بیش از ۱ mV نسبت به کالیبراسیون قبلی در نقطه‌ی ${drift.join('، ')}. طبق مقاله، ۱ mV معادل حدود ۰٫۰۱۷ واحد pH است و روی logK اثر معنادار دارد؛ داده‌های آن بازه را دوباره بررسی کنید.</div>`:'<div class="msg">رانش بیش از ۱ mV بین کالیبراسیون‌های متوالی دیده نشد.</div>';
+  const gr=C.grubbs(v);if(gr)t+=`<p class="hint">Grubbs: G = ${fx(gr.G,3)}، بحرانی ${fx(gr.crit,3)} ← ${gr.outlier?`نقطه‌ی ${gr.index+1} پرت است (آزمون ±2σ ممکن است پرت را نبیند چون خودش در میانگین و σ حساب می‌شود)`:'پرتی یافت نشد'}.</p>`;
+  if(outs.length)t+=`<div class="msg warn">نقطه‌ی ${outs.join('، ')} خارج از ±2σ است (خطوط نارنجی ±2σ و قرمز ±3σ).</div>`;
+  $('cal-ctl').insertAdjacentHTML('beforeend',t);
+});
+
+/* =====================================================================
+   LAB: error & statistics
+   ===================================================================== */
+const labOpts=C.INDICATORS.map((d,i)=>`<option value="${i}">${esc(d.name)} (pK ${d.pK})</option>`).join('');
+$('lab-ind').innerHTML=labOpts;$('lab-wind').innerHTML=labOpts;$('lab-ind').value=8;$('lab-wind').value=2;
+function labMethodUI(){const m=$('lab-method').value;$('lab-ind-wrap').hidden=m!=='ind';$('lab-pot-wrap').hidden=m!=='pot';$('lab-k-wrap').hidden=m==='ind';}
+$('lab-method').addEventListener('change',labMethodUI);labMethodUI();
+function nv(id,d){const v=val(id);return isFinite(v)?v:d;}
+function runLab(){
+  if(!SIM.last){msg('lab-msg','ابتدا در تب «شبیه‌ساز» یک منحنی رسم کنید.','err');return;}
+  const def=SIM.last.sim.def,n=Math.round(nv('lab-n',5));
+  if(!(n>=1&&n<=200)){msg('lab-msg','تعداد تکرار باید بین ۱ و ۲۰۰ باشد.','err');return;}
+  const m=$('lab-method').value,k=Math.max(1,Math.round(nv('lab-k',1)));
+  if(m!=='ind'&&k>(def.kind==='strongAcid'||def.kind==='strongBase'?1:def.pKa.length)){msg('lab-msg','شماره‌ی هم‌ارزی بیشتر از تعداد مرحله‌هاست.','err');return;}
+  const opt={method:m,ind:C.INDICATORS[+$('lab-ind').value],k:m==='ind'?1:k,step:nv('lab-step',0.1),sPH:nv('lab-sph',0.01)};
+  const cfg={cal:nv('lab-cal',0)/100,F:1+nv('lab-F',0)/100,co2:nv('lab-co2',0)/100,blank:nv('lab-blank',0),blankCorr:$('lab-bcorr').checked,
+    evap:nv('lab-evap',0),over:nv('lab-over',0),sRead:nv('lab-sread',0),sDrop:nv('lab-sdrop',0),sPip:nv('lab-spip',0),pipBias:nv('lab-pip',0),
+    gross:$('lab-gross').value,mag:nv('lab-mag',0),wrongInd:C.INDICATORS[+$('lab-wind').value]};
+  msg('lab-msg','');
+  try{
+    const r=C.labRun(def,cfg,opt,n,Math.round(nv('lab-seed',1)));
+    const sens=C.labSensitivity(def,opt);
+    const f4=v=>v==null?'—':(+v).toPrecision(5);
+    const rows=[['مقدار واقعی (mol/L)',f4(r.true)],['میانگین (mol/L)',f4(r.mean)],
+      ['انحراف معیار (n−1)',r.sd==null?'—':f4(r.sd)],['RSD (٪)',r.rsd==null?'—':fx(r.rsd,3)],['خطای استاندارد میانگین',r.sem==null?'—':f4(r.sem)],
+      ['فاصله‌ی اطمینان ۹۵٪',r.ci?`${f4(r.ci.lo)} تا ${f4(r.ci.hi)} (t = ${fx(r.ci.t,3)})`:'—'],
+      ['اریبی (٪)',(r.bias>=0?'+':'')+fx(r.bias,3)],['بازیابی (٪)',fx(r.rec,3)]];
+    let h='<h3>خلاصه‌ی تکرارها</h3>'+table(['کمیت','مقدار'],rows,['','num']);
+    if(r.ci){const inside=r.ci.lo<=r.true&&r.true<=r.ci.hi;
+      h+=`<div class="msg ${inside?'':'warn'}">${inside?'مقدار واقعی درون فاصله‌ی اطمینان است: اریبی از نوفه‌ی تصادفی قابل تشخیص نیست.':'مقدار واقعی بیرون فاصله‌ی اطمینان است: یک خطای سیستماتیک وجود دارد (تکرار بیشتر آن را کم نمی‌کند).'}</div>`;}
+    if(r.grubbs)h+=`<p class="hint">Grubbs: G = ${fx(r.grubbs.G,3)}، بحرانی ${fx(r.grubbs.crit,3)} ← ${r.grubbs.outlier?`نقطه‌ی ${r.grubbs.index+1} پرت است`:'پرت نیست'}.`+
+      (r.dixon?` Dixon Q = ${fx(r.dixon.Q,3)}، بحرانی ${fx(r.dixon.crit,3)} ← ${r.dixon.outlier?`نقطه‌ی ${r.dixon.index+1} پرت است`:'پرت نیست'}.`:'')+'</p>';
+    h+='<div class="plot" id="lab-plot"></div>';
+    h+='<h3>اثر هر خطا به‌تنهایی</h3>'+table(['خطا','غلظت محاسبه‌شده','تغییر (٪)'],sens.map(s=>[esc(s.name),s.err?esc(s.err):f4(s.c),isFinite(s.shift)?(s.shift>=0?'+':'')+fx(s.shift,3):'—']),['','num','num']);
+    h+='<p class="hint">تغییر نسبت به همان روش بدون خطا سنجیده می‌شود؛ خطاهای تصادفی در این جدول صفر هستند.</p>';
+    $('lab-out').innerHTML=h;
+    const idx=r.vals.map((_,i)=>i+1),hl=[{y:r.true,color:'#2f7d4f'},{y:r.mean,color:'#587482'}];
+    if(r.ci){hl.push({y:r.ci.lo,color:'#c9861a'});hl.push({y:r.ci.hi,color:'#c9861a'});}
+    chart($('lab-plot'),{id:9,series:[{x:idx,y:r.vals,mode:'dots',name:'تکرارها'}],hlines:hl,xlabel:'شماره‌ی تکرار',ylabel:'غلظت (mol/L)',title:'تکرارها (سبز: واقعی، خاکستری: میانگین، نارنجی: CI)'});
+  }catch(e){msg('lab-msg','خطا: '+esc(e.message),'err');}
+}
+$('lab-run').addEventListener('click',runLab);
+
+window.TitrationLab={core:C,fx:fx,table:table,esc:esc,chart:chart,SIM:SIM};
+})();
+
+</script>
+<script>
+/* =====================================================================
+   PHASE-2 FAMILIES (v0.8) — redox / precipitation / EDTA / back titration
+   Self-contained UI module: injects its controls into the SIM panel, keeps
+   the acid-base paths untouched, mirrors engine/phase2.py + engine/activity.py.
+   ===================================================================== */
+const TLPhase2 = (function () {
+'use strict';
+const R = 8.314462618, FARADAY = 96485.33212;
+const LN10 = Math.LN10;
+
+/* ---------- activity (port of engine/activity.py) ---------- */
+function slope(Tc) { return Math.log(10) * R * (Tc + 273.15) / FARADAY; }
+function logGamma(z, I, model) {
+  const A = 0.509, s = Math.sqrt(Math.max(I, 0)), z2 = z * z;
+  if (model === 'davies') return -A * z2 * (s / (1 + s) - 0.3 * I);
+  if (model === 'edh') return -A * z2 * s / (1 + 1.5 * s);
+  return -A * z2 * s / (1 + s);
+}
+function gamm(z, I, model) { return Math.pow(10, logGamma(z, I, model)); }
+
+/* ---------- redox (port of the general electron-balance solver) ---------- */
+function coupleSplit(T, logR, a, b, cOx, cRed) {
+  let lo = 0, hi = T / cRed;
+  const f = red => {
+    const lgOx = red > 0 ? Math.min(350, Math.max(-350, (logR + b * Math.log10(red)) / a)) : -350;
+    return cOx * Math.pow(10, lgOx) + cRed * red - T;
+  };
+  for (let i = 0; i < 160; i++) {
+    const mid = 0.5 * (lo + hi);
+    if (f(mid) < 0) lo = mid; else hi = mid;
+    if (hi - lo <= 1e-15 * Math.max(hi, lo)) break;
+  }
+  const red = 0.5 * (lo + hi);
+  const lgOx = red > 0 ? Math.min(350, Math.max(-350, (logR + b * Math.log10(red)) / a)) : -350;
+  return [Math.pow(10, lgOx), red];
+}
+function redoxFormal(d, which) {
+  const s = slope(d.Tc);
+  const e = which === 1 ? d.e1 : d.e2, n = which === 1 ? d.n1 : d.n2;
+  const m = which === 1 ? d.m1 : d.m2;
+  let ef = e - (d.ph != null ? s * m / n * d.ph : 0);
+  if (d.I > 0 && d.z) {
+    const zox = which === 1 ? d.z[0] : d.z[2], zred = which === 1 ? d.z[1] : d.z[3];
+    const a = which === 1 ? d.a1 : d.a2, b = which === 1 ? d.b1 : d.b2;
+    ef += s / n * (a * logGamma(zox, d.I, d.gm) - b * logGamma(zred, d.I, d.gm));
+  }
+  return ef;
+}
+function redoxVeq(d) {
+  const asym = d.a1 !== 1 || d.b1 !== 1 || d.a2 !== 1 || d.b2 !== 1;
+  if (!asym) return d.n1 * d.cA * d.v0 / (d.n2 * d.cT);
+  const cRed1 = d.a1, cOx1 = d.b1, cOx2 = d.b2, cRed2 = d.a2;
+  return d.n1 * cRed1 * d.b2 * cRed2 * d.cA * d.v0 / (d.a1 * cOx1 * d.n2 * cOx2 * d.cT);
+}
+function redoxE(d, V) {
+  if (V <= 0) return NaN;
+  const s = slope(d.Tc), vt = d.v0 + V;
+  const cRed1 = d.a1, cOx1 = d.b1, cOx2 = d.b2, cRed2 = d.a2;
+  const t1 = cRed1 * d.cA * d.v0 / vt, t2 = cOx2 * d.cT * V / vt;
+  const e1f = redoxFormal(d, 1), e2f = redoxFormal(d, 2);
+  const bal = E => {
+    const [ox1] = coupleSplit(t1, d.n1 * (E - e1f) / s, d.a1, d.b1, cOx1, cRed1);
+    const [, red2] = coupleSplit(t2, d.n2 * (E - e2f) / s, d.a2, d.b2, cOx2, cRed2);
+    return d.n1 * ox1 / d.a1 - d.n2 * red2 / d.b2;
+  };
+  const lo = Math.min(e1f, e2f) - 40 * s / Math.min(d.n1, d.n2);
+  const hi = Math.max(e1f, e2f) + 40 * s / Math.min(d.n1, d.n2);
+  let a = lo, b = hi;
+  for (let i = 0; i < 200; i++) {
+    const mid = 0.5 * (a + b), fm = bal(mid);
+    if (bal(a) * fm <= 0) b = mid; else a = mid;
+    if (b - a < 1e-12) break;
+  }
+  return 0.5 * (a + b);
+}
+
+/* ---------- precipitation (pAg, activity-corrected Ksp) ---------- */
+function kspEff(d) {
+  if (!(d.I > 0)) return d.ksp;
+  return d.ksp / (gamm(1, d.I, d.gm) * gamm(-1, d.I, d.gm));
+}
+function precipAg(d, V) {
+  const vt = d.v0 + V, agT = d.cT * V / vt, xT = d.cA * d.v0 / vt, k = kspEff(d);
+  if (agT * xT <= k) return agT;
+  const dd = agT - xT;
+  return 0.5 * (dd + Math.sqrt(dd * dd + 4 * k));
+}
+function precipPAg(d, V) {
+  const ag = precipAg(d, V);
+  return ag <= 0 ? Infinity : -Math.log10(ag);
+}
+function precipVeq(d) { return d.cA * d.v0 / d.cT; }
+
+/* ---------- EDTA (pM with K'' = Kf·αY·αM·γ-factor) ---------- */
+const NH3_BETA = {
+  Ag: [3.31, 7.21], Cu: [4.31, 7.98, 11.02, 13.32], Zn: [2.37, 4.81, 7.31, 9.46],
+  Ni: [2.80, 5.04, 6.77, 7.96, 8.71, 8.74], Cd: [2.65, 4.75, 6.19, 7.12, 6.80, 5.14],
+  Co2: [2.11, 3.74, 4.79, 5.55, 5.73, 5.69]
+};
+function alphaY4(ph, pka) {
+  pka = pka || [1.99, 2.67, 6.16, 10.26];
+  const h = Math.pow(10, -ph);
+  let s = 1, beta = 1;
+  for (let k = 1; k <= pka.length; k++) { beta *= Math.pow(10, pka[pka.length - k]); s += beta * Math.pow(h, k); }
+  return 1 / s;
+}
+function alphaM(auxC, logBeta, ph) {
+  if (!auxC || !logBeta || !logBeta.length) return 1;
+  let s = 1;
+  for (let l = 0; l < logBeta.length; l++) s += Math.pow(10, logBeta[l]) * Math.pow(auxC, l + 1);
+  return 1 / s;
+}
+function edtaKeff(d) {
+  let k = Math.pow(10, d.logKf) * alphaY4(d.ph) * alphaM(d.auxC, d.auxM ? NH3_BETA[d.auxM] : null, d.ph);
+  if (d.I > 0) k *= gamm(d.zM, d.I, d.gm) * gamm(-4, d.I, d.gm) / gamm(d.zM - 4, d.I, d.gm);
+  return k;
+}
+function edtaPM(d, V) {
+  if (V < 0) return NaN;
+  const vt = d.v0 + V, mT = d.cA * d.v0 / vt, yT = d.cT * V / vt;
+  const k = edtaKeff(d);
+  const b = 1 + k * (yT - mT), disc = Math.sqrt(b * b + 4 * k * mT);
+  const root = b >= 0 ? 2 * mT / (b + disc) : (-b + disc) / (2 * k);
+  return -Math.log10(root);
+}
+function edtaVeq(d) { return d.cA * d.v0 / d.cT; }
+
+/* ---------- back titration ---------- */
+function backCalc(d) {
+  const nExcess = d.cT2 * d.vT2 / d.tr;
+  const nReact = d.cR * d.vR - nExcess;
+  if (nReact < 0) throw new Error('معرف اضافی بیش از مقدار افزوده مصرف شده است (داده ناسازگار).');
+  const nA = nReact / d.ra;
+  return { nA, cA: nA / d.vs, consumed: nReact };
+}
+
+/* ---------- family metadata ---------- */
+const META = {
+  redox: {
+    yname: { fa: 'پتانسیل E (V)', en: 'Potential E (V)' }, qty: 'E',
+    jump: 0.3, veq: redoxVeq, y: redoxE,
+    ind: [
+      { name: 'Ferroin', tr: 1.06, lo: 0.9, hi: 1.2 },
+      { name: 'Diphenylamine sulfonate', tr: 0.84, lo: 0.7, hi: 1.0 },
+      { name: 'Methylene blue', tr: 0.53, lo: 0.4, hi: 0.7 }
+    ]
+  },
+  precip: {
+    yname: { fa: 'pAg', en: 'pAg' }, qty: 'pAg',
+    jump: 1.5, veq: precipVeq, y: precipPAg,
+    ind: [
+      { name: 'Mohr (K2CrO4)', tr: 4.70, lo: 4.0, hi: 5.4 },
+      { name: 'Fajans (dichlorofluorescein)', tr: 4.85, lo: 4.0, hi: 5.4 }
+    ]
+  },
+  edta: {
+    yname: { fa: 'pM', en: 'pM' }, qty: 'pM',
+    jump: 2.0, veq: edtaVeq, y: edtaPM,
+    ind: [
+      { name: 'Eriochrome Black T', tr: 6.5, lo: 6.3, hi: 6.7 },
+      { name: 'Calmagite', tr: 6.1, lo: 5.9, hi: 6.3 },
+      { name: 'Murexide', tr: 5.0, lo: 4.8, hi: 5.2 }
+    ]
+  },
+  back: { yname: { fa: '—', en: '—' }, qty: 'calc', jump: 0, veq: () => Infinity, y: () => NaN, ind: [] }
+};
+function volumeAtTransition(def, fam, target, Vmax) {
+  const y = META[fam].y;
+  let prev = y(def, 0) - target, pv = 0;
+  for (let i = 1; i <= 2000; i++) {
+    const V = Vmax * i / 2000, cur = y(def, V) - target;
+    if (isFinite(prev) && isFinite(cur) && prev * cur < 0) {
+      let a = pv, b = V;
+      for (let k = 0; k < 80; k++) {
+        const mid = 0.5 * (a + b);
+        const ym = y(def, mid);
+        if ((y(def, a) - target) * (ym - target) <= 0) b = mid; else a = mid;
+      }
+      return 0.5 * (a + b);
+    }
+    prev = cur; pv = V;
+  }
+  return NaN;
+}
+function findEquivalents(def, fam, Vmax) {
+  const y = META[fam].y, N = 1200, V = [], p = [];
+  for (let i = 0; i <= N; i++) { const v = Vmax * i / N; V.push(v); p.push(y(def, v)); }
+  const d = p.map((_, i) => {
+    const a = Math.max(0, i - 1), b = Math.min(N, i + 1);
+    return (isFinite(p[a]) && isFinite(p[b])) ? Math.abs((p[b] - p[a]) / (V[b] - V[a])) : 0;
+  });
+  const dmax = Math.max(...d), res = [];
+  for (let i = 2; i < N - 1; i++) {
+    if (d[i] > d[i - 1] && d[i] >= d[i + 1] && d[i] > 0.02 * dmax) {
+      let lo = V[i - 1], hi = V[i + 1];
+      const dd = v => {
+        const e = Vmax * 1e-6;
+        const y1 = y(def, Math.max(0, v - e)), y2 = y(def, v + e);
+        return (isFinite(y1) && isFinite(y2)) ? Math.abs((y2 - y1) / (v + e - Math.max(0, v - e))) : 0;
+      };
+      for (let k = 0; k < 50; k++) {
+        const m1 = lo + (hi - lo) / 3, m2 = hi - (hi - lo) / 3;
+        if (dd(m1) < dd(m2)) lo = m1; else hi = m2;
+      }
+      const vc = 0.5 * (lo + hi);
+      const jump = Math.abs(y(def, vc * 1.02) - y(def, vc * 0.98));
+      if (jump > META[fam].jump * 0.3) res.push({ V: vc, y: y(def, vc), jump });
+    }
+  }
+  return res;
+}
+
+/* ---------- bilingual label helper ---------- */
+let LANG = 'fa';
+function L(o) { return o[LANG] || o.fa; }
+function applyLang(root) {
+  root.querySelectorAll('[data-fa]').forEach(el => {
+    el.textContent = LANG === 'fa' ? el.dataset.fa : el.dataset.en;
+  });
+}
+
+return { META, NH3_BETA, redoxE, precipPAg, edtaPM, kspEff, edtaKeff, alphaY4, alphaM,
+         backCalc, redoxVeq, precipVeq, edtaVeq, volumeAtTransition, findEquivalents,
+         setLang: l => { LANG = l; }, lang: () => LANG, L, applyLang, slope, logGamma };
+})();
+</script>
+
+<script>
+/* =====================================================================
+   PHASE-2 UI WIRING — injects family controls into the SIM panel and
+   dispatches the Run button. Acid-base behaviour is untouched.
+   ===================================================================== */
+(function () {
+'use strict';
+const { fx, table, esc, chart, SIM } = window.TitrationLab;   // helpers of the UI IIFE
+const $ = id => document.getElementById(id);
+const P2 = { last: null };
+
+const FAMILY_LABELS = {
+  acid_base: { fa: 'اسید و باز', en: 'Acid-base' },
+  redox: { fa: 'ردوکس', en: 'Redox' },
+  precip: { fa: 'رسوبی (نقره‌سنجی)', en: 'Precipitation (argentometry)' },
+  edta: { fa: 'کمپلکس‌سنجی EDTA', en: 'Complexometry (EDTA)' },
+  back: { fa: 'تیتراسیون برگشتی (حسابگر)', en: 'Back titration (calculator)' }
+};
+
+/* fields of the acid-base engine that make no sense for the other families */
+const AB_ONLY = ['sim-pkw', 'sim-pkwauto', 'sim-T', 'sim-dH', 'sim-thermal',
+                 'sim-tstr', 'sim-tpka-wrap', 'sim-pka-wrap', 'sim-pka-hint'];
+const VIEW_AB_ONLY = ['alpha', 'gran'];
+
+const P2_FIELDS = {
+  redox: ['e1', 'n1', 'e2', 'n2', 'ph', 'm1', 'm2', 'z', 'a1', 'b1', 'a2', 'b2', 'I'],
+  precip: ['ksp', 'I'],
+  edta: ['logkf', 'ph2', 'auxc', 'auxm', 'zm', 'I'],
+  back: ['cR', 'vR', 'cT2', 'vT2', 'vs', 'ra', 'tr']
+};
+
+const NUM = (id, def) => {
+  const raw = $(id) ? $(id).value.trim().replace('٫', '.') : '';
+  if (raw === '') return def;
+  const x = parseFloat(raw);
+  return isFinite(x) ? x : def;
+};
+
+function buildFieldset() {
+  const fs = document.createElement('fieldset');
+  fs.id = 'p2-fields';
+  fs.hidden = true;
+  const langBtn = document.createElement('button');
+  langBtn.type = 'button'; langBtn.className = 'chip'; langBtn.style.float = 'left';
+  langBtn.id = 'p2-lang';
+  fs.appendChild(langBtn);
+  const legend = document.createElement('legend');
+  legend.dataset.fa = 'پارامترهای خانواده (فاز ۲)';
+  legend.dataset.en = 'Family parameters (phase 2)';
+  fs.appendChild(legend);
+  const row = cls => {
+    const d = document.createElement('div');
+    d.className = 'grid2';
+    d.dataset.cls = cls;
+    fs.appendChild(d);
+    return d;
+  };
+  const cell = (parent, forId, fa, en, hint) => {
+    const lab = document.createElement('label');
+    lab.innerHTML = `<span data-fa="${fa}" data-en="${en}">${fa}</span>` +
+      (hint ? ` <span class="hint" data-fa="${hint[0]}" data-en="${hint[1]}">${hint[0]}</span>` : '');
+    const inp = document.createElement('input');
+    inp.id = 'p2-' + forId; inp.type = 'number'; inp.step = 'any'; inp.inputMode = 'decimal';
+    lab.appendChild(inp);
+    parent.appendChild(lab);
+    return inp;
+  };
+  const g1 = row('redox precip edta back');
+  const e1 = cell(g1, 'e1', 'پتانسیل استاندارد آنالیت E°₁ (V)', 'Analyte standard potential E°1 (V)');
+  e1.value = 0.77;
+  const n1 = cell(g1, 'n1', 'الکترون‌های آنالیت n₁', 'Analyte electrons n1'); n1.value = 1;
+  const e2 = cell(g1, 'e2', 'پتانسیل استاندارد تیترانت E°₂ (V)', 'Titrant standard potential E°2 (V)'); e2.value = 1.44;
+  const n2 = cell(g1, 'n2', 'الکترون‌های تیترانت n₂', 'Titrant electrons n2'); n2.value = 1;
+  const g2 = row('redox');
+  const ph = cell(g2, 'ph', 'pH (با m₁/m₂ در پتانسیل فرمال اثر می‌کند؛ خالی = بی‌اثر)', 'pH (formal shift via m1/m2; empty = none)');
+  const m1 = cell(g2, 'm1', 'پروتون‌های نیم‌واکنش آنالیت m₁', 'Analyte half-reaction protons m1');
+  const m2 = cell(g2, 'm2', 'پروتون‌های نیم‌واکنش تیترانت m₂', 'Titrant half-reaction protons m2');
+  const z = cell(g2, 'z', 'بارها z₁(ox),z₁(red),z₂(ox),z₂(red) — برای تصحیح فعالیت، اختیاری', 'Charges z1(ox),z1(red),z2(ox),z2(red) — activity correction, optional');
+  z.type = 'text'; z.placeholder = '3,2,4,3';
+  const g6 = row('redox');
+  const a1 = cell(g6, 'a1', 'توان [Ox]₁ در نسبت نرنست a₁ (پیش‌فرض ۱)', 'Exponent of [Ox]1 in the Nernst ratio a1 (default 1)'); a1.value = 1;
+  const b1 = cell(g6, 'b1', 'توان [Red]₁ در نسبت نرنست b₁ (پیش‌فرض ۱)', 'Exponent of [Red]1 in the Nernst ratio b1 (default 1)'); b1.value = 1;
+  const a2 = cell(g6, 'a2', 'توان [Ox]₂ در نسبت نرنست a₂ (پیش‌فرض ۱)', 'Exponent of [Ox]2 in the Nernst ratio a2 (default 1)'); a2.value = 1;
+  const b2 = cell(g6, 'b2', 'توان [Red]₂ در نسبت نرنست b₂ (Cr₂O₇²⁻/Cr³⁺ و I₂/I⁻: ۲)', 'Exponent of [Red]2 in the Nernst ratio b2 (Cr2O7/Cr3+ and I2/I-: 2)'); b2.value = 1;
+  const g3 = row('precip edta');
+  const ksp = cell(g3, 'ksp', 'Ksp نمک AgX (AgCl=1.8e-10، AgBr=5e-13، AgI=8.5e-17)', 'Ksp of AgX (AgCl=1.8e-10, AgBr=5e-13, AgI=8.5e-17)');
+  const logkf = cell(g3, 'logkf', 'log Kf کمپلکس MY (Ca=10.65، Mg=8.79، Zn=16.5)', 'log Kf of MY (Ca=10.65, Mg=8.79, Zn=16.5)');
+  const ph2 = cell(g3, 'ph2', 'pH بافر (EDTA)', 'Buffer pH (EDTA)'); ph2.value = 10;
+  const g4 = row('edta');
+  const auxc = cell(g4, 'auxc', 'غلظت لیگاند جانبی آزاد (NH₃؛ خالی = هیچ)', 'Free auxiliary ligand (NH3; empty = none)');
+  const auxm = cell(g4, 'auxm', 'فلز جدول β آمینی (Zn/Cu/Ni/Ag/Cd/Co2)', 'Metal of the NH3 beta table (Zn/Cu/Ni/Ag/Cd/Co2)');
+  auxm.type = 'text'; auxm.placeholder = 'Zn';
+  const zm = cell(g4, 'zm', 'بار فلز z_M (پیش‌فرض ۲)', 'Metal charge z_M (default 2)'); zm.value = 2;
+  const I = cell(g4, 'I', 'قدرت یونی I (mol/L؛ ۰ یا خالی = بدون تصحیح فعالیت)', 'Ionic strength I (mol/L; 0/empty = no activity correction)');
+  const g5 = row('back');
+  const cR = cell(g5, 'cR', 'غلظت معرف اضافی (mol/L)', 'Excess-reagent concentration (mol/L)'); cR.value = 0.1;
+  const vR = cell(g5, 'vR', 'حجم معرف اضافی (mL)', 'Excess-reagent volume (mL)'); vR.value = 50;
+  const cT2 = cell(g5, 'cT2', 'غلظت تیترانت برگشت (mol/L)', 'Back-titrant concentration (mol/L)'); cT2.value = 0.1;
+  const vT2 = cell(g5, 'vT2', 'حجم تیترانت برگشت مصرفی (mL)', 'Back-titrant volume consumed (mL)'); vT2.value = 20;
+  const vs = cell(g5, 'vs', 'حجم نمونه (mL)', 'Sample volume (mL)'); vs.value = 25;
+  const ra = cell(g5, 'ra', 'مول معرف به ازای هر مول آنالیت', 'Mol reagent per mol analyte'); ra.value = 1;
+  const tr = cell(g5, 'tr', 'مول تیترانت به ازای هر مول معرف', 'Mol titrant per mol reagent'); tr.value = 1;
+  P2.el = { e1, n1, e2, n2, ph, m1, m2, z, I, ksp, logkf, ph2, auxc, auxm, zm, cR, vR, cT2, vT2, vs, ra, tr, a1, b1, a2, b2 };
+  return fs;
+}
+
+function syncFamilyUI() {
+  const fam = $('sim-family').value;
+  const p2 = fam !== 'acid_base';
+  AB_ONLY.forEach(id => { const el = $(id); if (el) { const host = el.closest('label') || el.closest('p') || el.closest('div.grid2') || el; host.hidden = p2; } });
+  const fs = $('p2-fields');
+  fs.hidden = !p2;
+  fs.querySelectorAll('div.grid2').forEach(d => { d.hidden = !d.dataset.cls.split(' ').includes(fam); });
+  VIEW_AB_ONLY.forEach(v => {
+    const b = document.querySelector(`#sim-views button[data-view="${v}"]`);
+    if (b) b.hidden = p2;
+  });
+  const cur = document.querySelector('#sim-views button[aria-pressed="true"]');
+  if (p2 && cur && VIEW_AB_ONLY.includes(cur.dataset.view)) {
+    const phb = document.querySelector('#sim-views button[data-view="ph"]');
+    if (phb) phb.click();
+  }
+}
+
+function readDef(fam) {
+  const C = NUM('sim-C', 0.1), V0 = NUM('sim-V0', 25), Ct = NUM('sim-Ct', 0.1);
+  const I = NUM('p2-I', 0), gm = 'davies';
+  if (!(C > 0 && V0 > 0 && Ct > 0)) throw new Error('غلظت‌ها و حجم باید مثبت باشند.');
+  if (fam === 'redox') {
+    const e1 = NUM('p2-e1', NaN), e2 = NUM('p2-e2', NaN), n1 = NUM('p2-n1', 1), n2 = NUM('p2-n2', 1);
+    if (!(e1 < e2)) throw new Error('باید E°₂ > E°₁ باشد (تیترانت اکسنده‌ی قوی‌تر).');
+    const zraw = ($('p2-z').value || '').split(',').map(s => parseFloat(s.trim()));
+    const z = zraw.length === 4 && zraw.every(isFinite) ? zraw : null;
+    return { fam, cA: C, v0: V0, cT: Ct, e1, e2, n1, n2, Tc: 25,
+             ph: $('p2-ph').value.trim() === '' ? null : NUM('p2-ph', 0),
+             m1: NUM('p2-m1', 0), m2: NUM('p2-m2', 0), I, gm, z,
+             a1: NUM('p2-a1', 1), b1: NUM('p2-b1', 1),
+             a2: NUM('p2-a2', 1), b2: NUM('p2-b2', 1) };
+  }
+  if (fam === 'precip') {
+    const ksp = NUM('p2-ksp', NaN);
+    if (!(ksp > 0)) throw new Error('Ksp باید مثبت باشد.');
+    return { fam, cA: C, v0: V0, cT: Ct, ksp, I, gm };
+  }
+  if (fam === 'edta') {
+    const logkf = NUM('p2-logkf', NaN), ph2 = NUM('p2-ph2', 10);
+    if (!(logkf > 0)) throw new Error('log Kf باید مثبت باشد.');
+    const auxm = ($('p2-auxm').value || '').trim();
+    if (auxm && !TLPhase2.NH3_BETA[auxm]) throw new Error('فلز ناشناخته برای جدول NH₃.');
+    return { fam, cA: C, v0: V0, cT: Ct, logKf: logkf, ph: ph2,
+             auxC: NUM('p2-auxc', 0), auxM: auxm || null,
+             zM: NUM('p2-zm', 2), I, gm };
+  }
+  const cR = NUM('p2-cR', NaN), vR = NUM('p2-vR', NaN), cT2 = NUM('p2-cT2', NaN),
+        vT2 = NUM('p2-vT2', NaN), vs = NUM('p2-vs', NaN),
+        ra = NUM('p2-ra', 1), trr = NUM('p2-tr', 1);
+  if (!(cR > 0 && vR > 0 && cT2 > 0 && vT2 > 0 && vs > 0 && ra > 0 && trr > 0))
+    throw new Error('همه‌ی کمیت‌های برگشتی باید مثبت باشند.');
+  return { fam, cR, vR, cT2, vT2, vs, ra, tr: trr };
+}
+
+function msg(html, cls) { const el = $('sim-msg'); el.innerHTML = html ? `<div class="msg ${cls || ''}">${html}</div>` : ''; }
+
+function runP2() {
+  msg('');
+  let def;
+  try { def = readDef($('sim-family').value); }
+  catch (e) { msg(String(e.message || e), 'err'); return; }
+  const fam = def.fam;
+  if (fam === 'back') { renderBack(def); return; }
+  const meta = TLPhase2.META[fam];
+  const ext = NUM('sim-ext', 200);
+  const veq = meta.veq(def);
+  const Vmax = veq * ext / 100;
+  const N = 600, V = [], y = [];
+  for (let i = 0; i <= N; i++) { const v = Vmax * i / N; V.push(v); y.push(meta.y(def, v)); }
+  const eq = TLPhase2.findEquivalents(def, fam, Vmax);
+  P2.last = { def, fam, Vmax, V, y, eq, veq };
+  const sel = $('sim-ind-eq');
+  sel.innerHTML = eq.map((e, i) =>
+    `<option value="${i}">هم‌ارزی ${i + 1} — V = ${fx(e.V, 2)} mL، ${meta.qty} = ${fx(e.y, 3)}</option>`).join('');
+  renderP2(); renderP2Eq(); renderP2Ind(); renderP2Jump();
+}
+
+function renderP2() {
+  const L = P2.last; if (!L) return;
+  const meta = TLPhase2.META[L.fam];
+  const view = SIM.view || 'ph';
+  if (view === 'd') {
+    const dd = TLCore.firstDerivative(L.V, L.y.map(v => isFinite(v) ? v : NaN));
+    const x = L.V.slice(1, -1), yy = dd.slice(1, -1).map(Math.abs);
+    chart($('sim-plot'), { id: 21, series: [{ x, y: yy, name: '|d' + meta.qty + '/dV|' }],
+      xlabel: 'حجم تیترانت (mL)', ylabel: '|' + meta.qty + '/V|', vlines: L.eq.map(e => ({ x: e.V })), title: 'مشتق اول' });
+    $('sim-note').textContent = 'قله‌ی مشتق اول، نقطه‌ی هم‌ارزی را نشان می‌دهد.';
+  } else {
+    chart($('sim-plot'), { id: 20, series: [{ x: L.V, y: L.y, name: meta.qty }],
+      xlabel: 'حجم تیترانت (mL)', ylabel: TLPhase2.L(meta.yname),
+      vlines: L.eq.map(e => ({ x: e.V })), title: 'منحنی تیتراسیون — ' + FAMILY_LABELS[L.fam][TLPhase2.lang()] });
+    $('sim-note').textContent = '';
+  }
+}
+
+function renderP2Eq() {
+  const L = P2.last; if (!L) return;
+  if (!L.eq.length) { $('sim-eq').innerHTML = '<p class="hint">نقطه‌ی هم‌ارزی مشخصی پیدا نشد (جهش کوچک است).</p>'; return; }
+  $('sim-eq').innerHTML = table(
+    ['#', 'V مشاهده (mL)', 'V نظری (mL)', TLPhase2.META[L.fam].qty, 'غلظت محاسبه‌شده (mol/L)'],
+    L.eq.map(e => {
+      const k = Math.max(1, Math.round(e.V / L.veq));
+      const cf = L.fam === 'redox'
+        ? L.def.n2 * L.def.cT * e.V / (L.def.n1 * L.def.v0)
+        : L.def.cT * e.V / L.def.v0;
+      return [k, fx(e.V, 3), fx(k * L.veq, 3), fx(e.y, 3), cf.toPrecision(4)];
+    }), ['num', 'num', 'num', 'num', 'num']);
+}
+
+function renderP2Ind() {
+  const L = P2.last; if (!L) return;
+  const inds = TLPhase2.META[L.fam].ind;
+  if (!inds.length) { $('sim-ind').innerHTML = ''; return; }
+  const rows = inds.map(ind => {
+    const Vend = TLPhase2.volumeAtTransition(L.def, L.fam, ind.tr, L.Vmax);
+    const err = isFinite(Vend) ? (Vend - L.veq) / L.veq * 100 : NaN;
+    return { ind, Vend, err };
+  }).sort((a, b) => Math.abs(a.err || 1e9) - Math.abs(b.err || 1e9));
+  $('sim-ind').innerHTML = table(
+    ['شناساگر', 'نقطه‌ی گذار (' + TLPhase2.META[L.fam].qty + ')', 'V گذار (mL)', 'خطای شناساگر (٪)', 'داوری'],
+    rows.map(r => {
+      const a = Math.abs(r.err), cls = a <= 0.1 ? 'ok' : a <= 0.5 ? 'mid' : 'bad';
+      const t = a <= 0.1 ? 'مناسب' : a <= 0.5 ? 'قابل‌قبول' : 'نامناسب';
+      return [esc(r.ind.name), fx(r.ind.tr, 2), isFinite(r.Vend) ? fx(r.Vend, 2) : '—',
+              isFinite(r.err) ? (r.err > 0 ? '+' : '') + fx(r.err, 2) : '—',
+              `<span class="${cls}">${t}</span>`];
+    }), ['', 'num', 'num', 'num', '']);
+}
+
+function renderP2Jump() {
+  const L = P2.last; if (!L) return;
+  const meta = TLPhase2.META[L.fam];
+  const j = Math.abs(meta.y(L.def, L.veq * 1.001) - meta.y(L.def, L.veq * 0.999));
+  const ok = j >= meta.jump;
+  $('sim-jump').innerHTML = ok
+    ? `<div class="msg">جهش ${meta.qty} در ±۰٫۱٪ هم‌ارزی: ${fx(j, 3)} (≥ ${fx(meta.jump, 2)}): شناساگر/روش رنگی می‌تواند کار کند.</div>`
+    : `<div class="msg warn">جهش ${meta.qty} در ±۰٫۱٪ هم‌ارزی فقط ${fx(j, 3)} است (&lt; ${fx(meta.jump, 2)}): روش دستگاهی (پتانسیومتری/اسپکتروفتومتری) ارجح است.</div>`;
+}
+
+function renderBack(def) {
+  let r;
+  try { r = TLPhase2.backCalc(def); }
+  catch (e) { msg(String(e.message || e), 'err'); return; }
+  P2.last = { def, fam: 'back' };
+  $('sim-plot').innerHTML = `<div class="result-card"><div class="result-title">نتیجه تیتراسیون برگشتی</div>
+    <div class="result-value">${fx(r.nA, 4)} mmol · ${fx(r.cA, 5)} mol/L</div>
+    <div class="result-meta">معرف مصرف‌شده: ${fx(r.consumed, 4)} mmol · n = (C<sub>R</sub>V<sub>R</sub> − C<sub>T</sub>V<sub>T</sub>/ratio<sub>TR</sub>)/ratio<sub>RA</sub></div></div>`;
+  $('sim-eq').innerHTML = ''; $('sim-ind').innerHTML = ''; $('sim-jump').innerHTML = '';
+  $('sim-ind-eq').innerHTML = ''; $('sim-note').textContent = 'این خانواده حسابگر است و منحنی ندارد.';
+}
+
+/* ---------- injection ---------- */
+function inject() {
+  const famField = document.createElement('label');
+  famField.innerHTML = '<span>خانواده تیتراسیون</span>';
+  const sel = document.createElement('select');
+  sel.id = 'sim-family';
+  Object.keys(FAMILY_LABELS).forEach(k => {
+    const o = document.createElement('option');
+    o.value = k; o.textContent = FAMILY_LABELS[k].fa;
+    sel.appendChild(o);
+  });
+  famField.appendChild(sel);
+  const sysFieldset = $('sim-kind').closest('fieldset');
+  sysFieldset.insertBefore(famField, sysFieldset.firstChild);
+  const p2fs = buildFieldset();
+  sysFieldset.parentNode.insertBefore(p2fs, sysFieldset.nextSibling);
+
+  sel.addEventListener('change', () => { syncFamilyUI(); if (sel.value !== 'acid_base') runP2(); });
+  // capture on document: runs BEFORE the target's own original listener
+  document.addEventListener('click', ev => {
+    const btn = ev.target && ev.target.closest && ev.target.closest('#sim-run');
+    if (!btn || sel.value === 'acid_base') return;
+    ev.stopPropagation();
+    runP2();
+  }, true);
+  document.querySelectorAll('#sim-views button').forEach(b =>
+    b.addEventListener('click', () => { if (sel.value !== 'acid_base') renderP2(); }));
+
+  // phase-2 presets
+  const PRESETS2 = [
+    { n: 'Fe²⁺ ← Ce⁴⁺', fam: 'redox', v: { 'p2-e1': 0.77, 'p2-n1': 1, 'p2-e2': 1.44, 'p2-n2': 1 } },
+    { n: 'Fe²⁺ ← Cr₂O₇²⁻ (نامتقارن)', fam: 'redox', v: { 'sim-Ct': 0.016667, 'p2-e1': 0.771, 'p2-n1': 1, 'p2-e2': 1.33, 'p2-n2': 6, 'p2-ph': 0, 'p2-m2': 14, 'p2-b2': 2 } },
+    { n: 'Cl⁻ ← Ag⁺ (موهر)', fam: 'precip', v: { 'p2-ksp': 1.8e-10 } },
+    { n: 'Ca²⁺ ← EDTA (pH ۱۰)', fam: 'edta', v: { 'p2-logkf': 10.65, 'p2-ph2': 10 } },
+    { n: 'Zn²⁺ ← EDTA در NH₃', fam: 'edta', v: { 'p2-logkf': 16.5, 'p2-ph2': 10, 'p2-auxc': 0.1, 'p2-auxm': 'Zn' } },
+    { n: 'برگشتی: NH₃ با HCl اضافی', fam: 'back', v: { 'p2-cR': 0.1, 'p2-vR': 50, 'p2-cT2': 0.1, 'p2-vT2': 20, 'p2-vs': 25 } }
+  ];
+  PRESETS2.forEach(p => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.textContent = p.n;
+    b.addEventListener('click', () => {
+      sel.value = p.fam; syncFamilyUI();
+      Object.entries(p.v).forEach(([id, v]) => { $(id).value = v; });
+      runP2();
+    });
+    $('sim-presets').appendChild(b);
+  });
+
+  // language toggle of the phase-2 block
+  $('p2-lang').addEventListener('click', () => {
+    TLPhase2.setLang(TLPhase2.lang() === 'fa' ? 'en' : 'fa');
+    $('p2-lang').textContent = TLPhase2.lang() === 'fa' ? 'EN' : 'فا';
+    TLPhase2.applyLang($('p2-fields'));
+    if (P2.last && P2.last.fam !== 'back') { renderP2(); }
+  });
+  $('p2-lang').textContent = 'EN';
+  TLPhase2.applyLang($('p2-fields'));
+  syncFamilyUI();
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', inject);
+else inject();
+})();
+</script>
+
+<script>
+/* =====================================================================
+   QUICK ANALYTICAL QUANTITIES (v0.9) — mirrors engine/quantities.py:
+   titer, assay, KHP standardization, factor F, concordance, LOD/LOQ,
+   carbonate by double end point (Berto 2024 §2.6ii), CN masking table.
+   ===================================================================== */
+(function () {
+'use strict';
+const $ = id => document.getElementById(id);
+const fx = (x, d) => Number(x).toFixed(d);
+function nums(text) {
+  return text.split(/[\n,;\t]+/).map(s => s.trim()).filter(Boolean).map(Number)
+    .filter(x => Number.isFinite(x));
+}
+function flasks(text) {
+  const p = String(text).split('/').map(s => parseFloat(s));
+  const v_a = Number.isFinite(p[0]) && p[0] > 0 ? p[0] : 1;
+  const v_al = Number.isFinite(p[1]) && p[1] > 0 ? p[1] : v_a;
+  return [v_a, v_al];
+}
+
+/* ---- 1. titer + assay ---- */
+$('qty-run1').addEventListener('click', () => {
+  const Ct = +$('qty-Ct').value, Vt = +$('qty-Vt').value, MW = +$('qty-MW').value;
+  const ratio = +$('qty-ratio').value, ms = +$('qty-ms').value;
+  const [vF, vAl] = flasks($('qty-flask').value);
+  if (!(Ct > 0) || !(MW > 0) || !(ms > 0)) { $('qty-out1').innerHTML = '<p class="hint">مقادیر را درست وارد کنید.</p>'; return; }
+  const titer = Ct * ratio * MW;                       // mg per mL
+  const n_mmol = Ct * (Vt / 1000) * ratio * (vF / vAl) * 1000;
+  const mass_mg = n_mmol * MW;
+  const assay = n_mmol * MW / 1000 / ms * 100;
+  $('qty-out1').innerHTML =
+    `<p>تیتر: <b>${fx(titer, 4)}</b> mg آنالیت به ازای هر mL تیترانت` +
+    `&nbsp;|&nbsp; n آنالیت: <b>${fx(n_mmol, 4)}</b> mmol → جرم: <b>${fx(mass_mg, 2)}</b> mg` +
+    `&nbsp;|&nbsp; عیار Assay: <b>${fx(assay, 2)} %</b></p>`;
+});
+$('qty-demo1').addEventListener('click', () => {
+  $('qty-Ct').value = 0.1; $('qty-Vt').value = 25; $('qty-MW').value = 100.09;
+  $('qty-ratio').value = 0.5; $('qty-ms').value = 0.15; $('qty-flask').value = '250 / 25';
+  $('qty-run1').click();
+});
+
+/* ---- 2. KHP standardization + factor F ---- */
+$('qty-run2').addEventListener('click', () => {
+  const m = +$('qty-khp').value, v = +$('qty-vh').value, pur = +$('qty-pkhp').value, nom = +$('qty-nom').value;
+  if (!(v > 0) || !(pur > 0)) { $('qty-out2').innerHTML = '<p class="hint">مقادیر را درست وارد کنید.</p>'; return; }
+  const C = m * pur / 204.22 / (v / 1000);             // KHP MW = 204.22, monoprotic
+  const F = nom > 0 ? C / nom : NaN;
+  $('qty-out2').innerHTML =
+    `<p>C(HClO₄) = <b>${fx(C, 5)}</b> mol/L &nbsp;|&nbsp; ضریب F = C/C_nominal = <b>${fx(F, 4)}</b></p>` +
+    `<p class="hint">F باید خیلی به ۱ نزدیک بماند؛ اگر نه، تیتر تیترانت را در همهٔ محاسبات ضرب کنید.</p>`;
+});
+
+/* ---- 3. carbonate by two end points (Berto 2.6ii) ---- */
+$('qty-run3').addEventListener('click', () => {
+  const v1 = +$('qty-v1').value, v2 = +$('qty-v2').value, ca = +$('qty-ca').value, vs = +$('qty-vs').value;
+  if (!(ca > 0) || !(vs > 0) || v2 < v1 || 2 * v1 < v2) {
+    $('qty-out3').innerHTML = '<p class="hint">داده با OH⁻/CO₃²⁻ سازگار نیست: باید V₂ ≥ V₁ و 2V₁ ≥ V₂.</p>'; return;
+  }
+  const cCo3 = (v2 - v1) * ca / vs, cOh = (2 * v1 - v2) * ca / vs;
+  $('qty-out3').innerHTML =
+    `<p>[CO₃²⁻] = <b>${fx(cCo3, 5)}</b> mol/L &nbsp;|&nbsp; [OH⁻] آزاد = <b>${fx(cOh, 5)}</b> mol/L</p>` +
+    `<p class="hint">اگر کربنات بیش از حدود ۰٫۵ تا ۱٪ تیتر باشد، مقاله توصیه می‌کند محلول دور ریخته شود.</p>`;
+});
+
+/* ---- 4. concordance ---- */
+$('qty-run4').addEventListener('click', () => {
+  const v = nums($('qty-reps').value);
+  if (v.length < 2) { $('qty-out4').innerHTML = '<p class="hint">دست‌کم دو حجم وارد کنید.</p>'; return; }
+  const spread = Math.max(...v) - Math.min(...v);
+  const mean = v.reduce((a, b) => a + b, 0) / v.length;
+  const thr = Math.max(+$('qty-tol').value || 0.05, (+$('qty-tolr').value || 0) * Math.abs(mean));
+  const ok = spread <= thr + 1e-9;
+  $('qty-out4').innerHTML =
+    `<p>دامنه: <b>${fx(spread, 4)}</b> mL، میانگین: <b>${fx(mean, 4)}</b> mL، آستانه: <b>${fx(thr, 4)}</b> mL → ` +
+    `<b>${ok ? 'هم‌سو ✔' : 'ناهم‌سو ✖ (تکرار کنید)'}</b></p>`;
+});
+
+/* ---- 5. LOD / LOQ ---- */
+$('qty-run5').addEventListener('click', () => {
+  const s = +$('qty-sig').value, S = +$('qty-slope').value;
+  const style = $('qty-style').value;
+  if (!(S > 0) || s < 0) { $('qty-out5').innerHTML = '<p class="hint">شیب باید مثبت باشد.</p>'; return; }
+  const k = style === 'ich' ? 3.3 : 3.0;
+  $('qty-out5').innerHTML =
+    `<p>LOD = <b>${fx(k * s / S, 6)}</b> &nbsp;|&nbsp; LOQ = <b>${fx(10 * s / S, 6)}</b> &nbsp;(سبک ${style === 'ich' ? 'ICH' : 'کلاسیک'})</p>` +
+    `<p class="hint">تعریف جهانی واحدی وجود ندارد؛ سبک انتخابی را در گزارش ذکر کنید.</p>`;
+});
+
+/* ---- 6. CN masking table (mirrors quantities.edta_masking_selectivity) ---- */
+const EDTA_LOGKF = { 'Ca²⁺': 10.65, 'Mg²⁺': 8.79, 'Zn²⁺': 16.50, 'Cd²⁺': 16.46, 'Cu²⁺': 18.80, 'Ni²⁺': 18.62, 'Pb²⁺': 18.04, 'Mn²⁺': 13.87, 'Fe³⁺': 25.10 };
+const CN_BETA = { 'Zn²⁺': [0, 0, 0, 19.6], 'Cd²⁺': [0, 0, 0, 18.9], 'Cu²⁺': [0, 0, 0, 30.5], 'Ni²⁺': [0, 0, 0, 31.3] };
+const HCN_PKA = 9.21;
+$('qty-run6').addEventListener('click', () => {
+  const ph = +$('qty-mph').value, cnTot = +$('qty-mcn').value, cm = +$('qty-cm').value;
+  const alphaY = (window.TLPhase2 && TLPhase2.alphaY4) ? TLPhase2.alphaY4(ph) : (() => {
+    const h = Math.pow(10, -ph), pka = [1.99, 2.67, 6.16, 10.26];
+    let s = 1, b = 1;
+    for (let k = 1; k <= 4; k++) { b *= Math.pow(10, pka[4 - k]); s += b * Math.pow(h, k); }
+    return 1 / s;
+  })();
+  const ka = Math.pow(10, -HCN_PKA), h = Math.pow(10, -ph);
+  const cnFree = cnTot * ka / (ka + h);                // CN- → HCN correction
+  let rows = '';
+  for (const [m, lkf] of Object.entries(EDTA_LOGKF)) {
+    const betas = CN_BETA[m];
+    let aM = 1;
+    if (betas && cnFree > 0) {
+      let s = 1;
+      for (let l = 0; l < betas.length; l++) s += Math.pow(10, betas[l]) * Math.pow(cnFree, l + 1);
+      aM = 1 / s;
+    }
+    const logK2 = lkf + Math.log10(alphaY) + Math.log10(aM);
+    const logKC = logK2 + Math.log10(cm);
+    const ok = logKC >= 6;
+    rows += `<tr><td>${m}</td><td>${fx(logK2, 2)}</td><td>${fx(logKC, 2)}</td>` +
+      `<td>${ok ? 'تیترشدنی ✔' : 'ماسک شده ✖'}</td></tr>`;
+  }
+  $('qty-out6').innerHTML =
+    `<p>[CN⁻] آزاد = ${fx(cnFree, 5)} mol/L (اصلاح HCN در این pH)</p>` +
+    `<table><tr><th>فلز</th><th>log K″</th><th>log(K″C)</th><th>وضعیت</th></tr>${rows}</table>`;
+});
+})();
+/* =====================================================================
+   EXTENDED FAMILIES (v1.0) — non-aqueous, amperometry, thermometry, Karl Fischer,
+   coulometry, titrant standardization, GUM uncertainty.
+   Mirrors python/titration_sim/titration_sim/engine/extended.py (cross-checked in
+   tests/browser/test_web_ext.py against the Python engine).
+   ===================================================================== */
+(function () {
+'use strict';
+const { fx, table, esc, chart, core: C } = window.TitrationLab;
+const $ = id => document.getElementById(id);
+const FARADAY = 96485.33212, M_WATER = 18.01528;
+
+/* ---------- engine (port) ---------- */
+const SOLVENT_PKS = { water: [14.0, true], acetic_acid: [14.45, true], methanol: [16.7, true], ethanol: [19.5, true], acetonitrile: [33.3, false], dmso: [33.3, false] };
+const SOLVENT_FA = { water: 'آب', acetic_acid: 'استیک اسید یخی', methanol: 'متانول', ethanol: 'اتانول', acetonitrile: 'استونیتریل (تأییدنشده)', dmso: 'DMSO (تأییدنشده)' };
+function twoLine(v, y, expected, exclude) {
+  exclude = exclude == null ? 0.1 : exclude;
+  const A = [], B = [];
+  v.forEach((x, i) => { if (x < expected * (1 - exclude)) A.push([x, y[i]]); else if (x > expected * (1 + exclude)) B.push([x, y[i]]); });
+  if (A.length < 3 || B.length < 3) throw new Error('need at least 3 points on each side of the end point');
+  const fit = P => { const n = P.length; let sx = 0, sy = 0, sxx = 0, sxy = 0; P.forEach(([a, b]) => { sx += a; sy += b; sxx += a * a; sxy += a * b; });
+    const s = (n * sxy - sx * sy) / (n * sxx - sx * sx); return [s, (sy - s * sx) / n]; };
+  const [s1, i1] = fit(A), [s2, i2] = fit(B);
+  if (Math.abs(s1 - s2) < 1e-12 * Math.max(1, Math.abs(s1), Math.abs(s2))) throw new Error('lines are parallel');
+  return (i2 - i1) / (s1 - s2);
+}
+function ampCurrent(m, v, dil) {
+  if (v < 0) throw new Error('volume must be non-negative');
+  const nA = m.cA * m.vA, nT = m.cT * v, ext = Math.min(nA, nT / m.ratio), vt = m.vA + v;
+  let i = 1000 * (m.kA * (nA - ext) + m.kT * Math.max(0, nT - m.ratio * nA) + m.kP * ext) / vt + m.res;
+  return dil ? i * vt / m.vA : i;
+}
+function thermoDt(m, v, dil) {
+  if (v < 0) throw new Error('volume must be non-negative');
+  const ext = Math.min(m.cA * m.vA, m.cT * v / m.ratio), q = -m.dH * ext;
+  const d = (q / m.cp + m.dtT * v) / (m.vA + v);
+  return dil ? d * (m.vA + v) / m.vA : d;
+}
+const KF_STD = { water: 1.0, sodium_tartrate_dihydrate: 0.1566 };
+const kfTiter = (mStd, v, std, blank) => { if (!(std in KF_STD)) throw new Error('unknown standard'); blank = blank || 0;
+  if (v - blank <= 0 || mStd <= 0) throw new Error('mass and net volume must be positive'); return mStd * KF_STD[std] / (v - blank); };
+const kfWaterPct = (v, F, mS, drift, t, blank) => { if (mS <= 0) throw new Error('sample mass must be positive');
+  return (F * (v - (blank || 0)) - (drift || 0) * (t || 0) / 1000) / mS * 100; };
+const coulKfUg = q => { if (q < 0) throw new Error('charge must be >= 0'); return q / (2 * FARADAY) * M_WATER * 1e6; };
+const coulMmol = (i, t, ne, eff) => { eff = eff == null ? 1 : eff;
+  if (i < 0 || t < 0 || ne <= 0 || !(eff > 0 && eff <= 1)) throw new Error('i, t >= 0, n_e > 0 and 0 < efficiency <= 1 required'); return eff * i * t / (ne * FARADAY); };
+const STD = { khp_naoh: [204.22, 1, 'KHP → NaOH'], na2co3_hcl: [105.99, 0.5, 'Na₂CO₃ → HCl'], na2c2o4_kmno4: [134.00, 2.5, 'Na₂C₂O₄ → KMnO₄ (5:2)'],
+  kio3_thiosulfate: [214.00, 1 / 6, 'KIO₃ → Na₂S₂O₃ (1:6)'], caco3_edta: [100.09, 1, 'CaCO₃ → EDTA'], nacl_agno3: [58.44, 1, 'NaCl → AgNO₃'] };
+const standardize = (key, mass, v, purity) => { if (!(key in STD)) throw new Error('unknown standard');
+  if (!(mass > 0 && v > 0) || !(purity > 0 && purity <= 1)) throw new Error('mass and volume must be positive and 0 < purity <= 1');
+  const [mw, per] = STD[key]; return mass * purity / mw * 1000 / per / v; };
+const T95 = [[1, 13.97], [2, 4.53], [3, 3.31], [4, 2.87], [5, 2.65], [6, 2.52], [7, 2.43], [8, 2.37], [9, 2.32], [10, 2.28], [12, 2.23], [14, 2.20],
+  [16, 2.17], [18, 2.15], [20, 2.13], [25, 2.11], [30, 2.09], [40, 2.06], [50, 2.05], [100, 2.025]];
+function coverageFactor(dof) { if (!isFinite(dof) || dof > 1000) return 2.0; let k = T95[0][1]; for (const [d, t] of T95) if (dof >= d) k = t; return k; }
+function gumBudget(f, inputs, k) {
+  if (!inputs.length) throw new Error('at least one input quantity is required');
+  const x = inputs.map(q => q.value), y0 = f.apply(null, x), sens = [];
+  inputs.forEach((q, j) => { const h = Math.max(Math.abs(q.value), q.u, 1e-12) * 1e-6, xp = x.slice(), xm = x.slice(); xp[j] += h; xm[j] -= h;
+    sens.push((f.apply(null, xp) - f.apply(null, xm)) / (2 * h)); });
+  const parts = sens.map((c, j) => Math.pow(c * inputs[j].u, 2)), vr = parts.reduce((a, b) => a + b, 0), uc = Math.sqrt(vr);
+  let den = 0; parts.forEach((p, j) => { const d = inputs[j].dof == null ? Infinity : inputs[j].dof; if (isFinite(d)) den += p * p / d; });
+  const dofEff = den === 0 ? Infinity : vr * vr / den, kk = k == null ? coverageFactor(dofEff) : k;
+  return { value: y0, uc, U: kk * uc, k: kk, dofEff, contributions: inputs.map((q, j) => ({ name: q.name, c: sens[j], contrib: Math.abs(sens[j]) * q.u, share: vr > 0 ? 100 * parts[j] / vr : 0 })) };
+}
+const uRect = a => a / Math.sqrt(3), uTri = a => a / Math.sqrt(6);
+window.TLExt = { SOLVENT_PKS, twoLine, ampCurrent, thermoDt, kfTiter, kfWaterPct, coulKfUg, coulMmol, standardize, coverageFactor, gumBudget, uRect, uTri, STD };
+
+/* ---------- UI ---------- */
+const FA_ERR = [
+  ['need at least 3 points', 'برای برون‌یابی دو خط، در هر طرف حداقل ۳ نقطه لازم است.'],
+  ['lines are parallel', 'دو خط موازی‌اند؛ نقطه‌ی تقاطع وجود ندارد.'],
+  ['must be positive', 'مقادیر باید مثبت باشند.'], ['0 < efficiency', 'بازده جریان باید در بازه‌ی (۰، ۱] باشد.'],
+  ['unknown standard', 'استاندارد ناشناخته.'], ['0 < purity', 'خلوص باید در بازه‌ی (۰، ۱] باشد.']
+];
+const faErr = e => { const m = String(e && e.message || e); for (const [k, v] of FA_ERR) if (m.indexOf(k) >= 0) return v; return esc(m); };
+const sel = (id, label, opts, value) => ({ id, label, type: 'select', options: opts, value, wide: 1 });
+const fld = (id, label, value) => ({ id, label, value });
+const FORMS = {
+  nonaq: [
+    sel('solv', 'حلال', Object.keys(SOLVENT_PKS).map(k => [k, SOLVENT_FA[k] + ' — pKs ' + SOLVENT_PKS[k][0]]), 'ethanol'),
+    sel('role', 'آنالیت', [['acid', 'اسید ضعیف (تیترانت: باز قوی)'], ['base', 'باز ضعیف (تیترانت: اسید قوی)']], 'acid'),
+    fld('pka', 'pKa ظاهری در همان حلال (برای باز: pKa اسید مزدوج BH⁺)', 10), fld('C', 'غلظت آنالیت (mol/L)', 0.1), fld('V0', 'حجم آنالیت (mL)', 25), fld('Ct', 'غلظت تیترانت (mol/L)', 0.1)],
+  amp: [
+    fld('cA', 'غلظت آنالیت (mol/L)', 0.01), fld('vA', 'حجم آنالیت (mL)', 50), fld('cT', 'غلظت تیترانت (mol/L)', 0.1), fld('ratio', 'مول تیترانت به‌ازای هر مول آنالیت', 1),
+    fld('kA', 'حساسیت آنالیت (µA به‌ازای mmol/L)', 10), fld('kT', 'حساسیت تیترانت', 4), fld('kP', 'حساسیت فراورده', 0), fld('resid', 'جریان باقی‌مانده (µA)', 0),
+    { id: 'dil', label: 'تصحیح رقیق‌شدن (ضرب در (V₀+V)/V₀)', type: 'checkbox', value: true }],
+  thermo: [
+    fld('cA', 'غلظت آنالیت (mol/L)', 0.1), fld('vA', 'حجم آنالیت (mL)', 50), fld('cT', 'غلظت تیترانت (mol/L)', 0.1), fld('dH', 'ΔH واکنش (kJ/mol؛ گرماده منفی)', -55.8),
+    fld('cp', 'گنجایش گرمایی حجمی (J/mL/K)', 4.18), fld('dtT', 'دمای تیترانت منهای دمای سلول (K)', -2), fld('ratio', 'مول تیترانت به‌ازای هر مول آنالیت', 1),
+    { id: 'dil', label: 'تصحیح رقیق‌شدن', type: 'checkbox', value: true }],
+  kf: [
+    sel('std', 'استاندارد تیتر', [['sodium_tartrate_dihydrate', 'سدیم تارتارات دی‌هیدرات (۱۵٫۶۶٪ آب)'], ['water', 'آب خالص']], 'sodium_tartrate_dihydrate'),
+    fld('mStd', 'جرم استاندارد (mg)', 100), fld('vStd', 'حجم معرف مصرفی (mL)', 4), fld('blank', 'شاهد (mL)', 0),
+    fld('vS', 'حجم معرف برای نمونه (mL)', 3), fld('mS', 'جرم نمونه (mg)', 1000), fld('drift', 'رانش (µg/min)', 0), fld('time', 'زمان (min)', 0),
+    fld('q', 'بار کولن‌سنجی KF (C) — اختیاری', 10.711)],
+  coul: [
+    fld('i', 'جریان (mA)', 10), fld('t', 'زمان (s)', 965), fld('ne', 'الکترون به‌ازای هر ذره', 1), fld('eff', 'بازده جریان (۰ تا ۱)', 1), fld('mw', 'جرم مولی آنالیت (g/mol)', 100)],
+  std: [
+    sel('key', 'استاندارد اولیه ← تیترانت', Object.keys(STD).map(k => [k, STD[k][2]]), 'khp_naoh'),
+    fld('mass', 'جرم وزن‌شده (g)', 0.5106), fld('v', 'حجم تیترانت (mL)', 25), fld('pur', 'خلوص (۰ تا ۱)', 1)],
+  gum: [
+    fld('c', 'C_T (mol/L)', 0.1), fld('uc', 'u(C_T) از گواهی/استانداردسازی (mol/L)', 0.0002),
+    fld('vt', 'V_T (mL)', 25), fld('uvt', 'u(V_T): نیم‌پهنای بورت (mL) ← مستطیلی', 0.05),
+    fld('va', 'V_A (mL)', 25), fld('uva', 'u(V_A): نیم‌پهنای پیپت (mL) ← مستطیلی', 0.03),
+    fld('uep', 'u(نقطه‌ی پایان) (mL)', 0.02), fld('ratio', 'نسبت استوکیومتری a/b', 1)]
+};
+const X = { fam: 'nonaq', vals: {} };
+const g = id => { const el = $('ex-' + id); if (!el) return NaN; if (el.type === 'checkbox') return el.checked; if (el.tagName === 'SELECT') return el.value; return parseFloat(String(el.value).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/٫/g, '.')); };
+function fieldHTML(fam, f) {
+  const id = 'ex-' + f.id, v = (X.vals[fam] && X.vals[fam][f.id] !== undefined) ? X.vals[fam][f.id] : f.value, st = f.wide ? ' style="grid-column:1/-1"' : '';
+  if (f.type === 'select') return `<label${st}>${f.label}<select id="${id}">${f.options.map(o => `<option value="${o[0]}"${String(o[0]) === String(v) ? ' selected' : ''}>${o[1]}</option>`).join('')}</select></label>`;
+  if (f.type === 'checkbox') return `<label class="chk" style="grid-column:1/-1"><input type="checkbox" id="${id}"${v ? ' checked' : ''}> ${f.label}</label>`;
+  return `<label${st}>${f.label}<input id="${id}" type="number" step="any" value="${v}" inputmode="decimal"></label>`;
+}
+function renderForm() {
+  const fam = X.fam;
+  $('ex-form').innerHTML = `<div class="grid2">${FORMS[fam].map(f => fieldHTML(fam, f)).join('')}</div>`;
+  $('ex-form').querySelectorAll('input,select').forEach(el => el.addEventListener('change', () => {
+    X.vals[fam] = X.vals[fam] || {}; FORMS[fam].forEach(f => { const e = $('ex-' + f.id); if (e) X.vals[fam][f.id] = e.type === 'checkbox' ? e.checked : e.value; });
+  }));
+}
+document.querySelectorAll('#ex-fam button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#ex-fam button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  X.fam = b.dataset.fam; renderForm(); show({});
+}));
+function show(o) {
+  if (o.chart) { $('ex-plot').hidden = false; chart($('ex-plot'), Object.assign({ id: 'ex' }, o.chart)); } else { $('ex-plot').innerHTML = ''; $('ex-plot').hidden = true; }
+  $('ex-res').innerHTML = o.rows ? table(['کمیت', 'مقدار'], o.rows, ['', 'num']) : '';
+  $('ex-note').innerHTML = o.note || '';
+  const w = o.warns || []; $('ex-msg').innerHTML = w.length ? `<div class="msg warn">${w.map(x => `<div>${x}</div>`).join('')}</div>` : '';
+}
+const grid = (top, n) => Array.from({ length: n + 1 }, (_, i) => top * i / n);
+const f3 = v => isFinite(v) ? v.toFixed(3) : '—', f4 = v => isFinite(v) ? v.toFixed(4) : '—';
+
+function runNonaq() {
+  const [pks, ok] = SOLVENT_PKS[g('solv')], pKa = g('pka'), role = g('role'), warns = [];
+  const sim = C.buildSim({ kind: role, C: g('C'), V0: g('V0'), Ct: g('Ct'), pKa: [pKa], pKw: pks, pKwAuto: false, T: 25, dH: 0, thermal: false, tWeak: false });
+  const ve = sim.equivTotal, V = grid(1.5 * ve, 150).filter(v => v > 0), y = V.map(v => sim.pH(v));
+  const jump = Math.abs(sim.pH(ve * 1.001) - sim.pH(ve * 0.999));
+  const rows = [['V<sub>eq</sub> (mL)', f3(ve)], ['pKs حلال', pks], ['«pH» در هم‌ارزی (مقیاس حلال)', f3(sim.pH(ve))], ['پرش ±۰٫۱٪', f3(jump)]];
+  if (!ok) warns.push('pKs این حلال در این پروژه راستی‌آزمایی نشده است؛ با جدول خودتان مقایسه کنید.');
+  if (jump < 1.5) warns.push('پرش کوچک است؛ تشخیص نقطه‌ی پایان با شناساگر دشوار است (pKa ظاهری یا حلال را بررسی کنید).');
+  warns.push('pKa باید ثابت ظاهری در همین حلال باشد؛ جفت‌شدن یونی و هم‌ترکیبی مدل نشده است.');
+  show({ chart: { series: [{ x: V, y, name: '«pH» حلال' }], vlines: [{ x: ve, color: '#c9861a' }], xlabel: 'حجم تیترانت (mL)', ylabel: 'pH (مقیاس حلال)', ymin: 0, ymax: pks, title: 'تیتراسیون غیرآبی' }, rows, warns });
+}
+function runAmp() {
+  const m = { cA: g('cA'), vA: g('vA'), cT: g('cT'), ratio: g('ratio'), kA: g('kA'), kT: g('kT'), kP: g('kP'), res: g('resid') };
+  if (!(m.cA > 0 && m.vA > 0 && m.cT > 0 && m.ratio > 0)) throw new Error('amounts and ratio must be positive');
+  const ve = m.ratio * m.cA * m.vA / m.cT, dil = g('dil'), V = grid(1.5 * ve, 60), y = V.map(v => ampCurrent(m, v, dil)), rows = [['V<sub>eq</sub> نظری (mL)', f3(ve)]], warns = [];
+  try { const ep = twoLine(V, y, ve, 0.1); rows.push(['نقطه‌ی پایان از دو خط (mL)', f3(ep)], ['خطا (٪)', f3((ep - ve) / ve * 100)]); } catch (e) { warns.push(faErr(e)); }
+  if (!dil) warns.push('بدون تصحیح رقیق‌شدن شاخه‌ها خمیده‌اند و برون‌یابی دو خط سوگیری می‌دهد.');
+  show({ chart: { series: [{ x: V, y, name: 'i (µA)' }], vlines: [{ x: ve, color: '#c9861a' }], xlabel: 'حجم تیترانت (mL)', ylabel: 'جریان (µA)', title: 'تیتراسیون آمپرومتری' }, rows, warns, note: 'جریان حدی ∝ غلظت؛ بدون مهاجرت و جریان خازنی.' });
+}
+function runThermo() {
+  const m = { cA: g('cA'), vA: g('vA'), cT: g('cT'), dH: g('dH'), cp: g('cp'), dtT: g('dtT'), ratio: g('ratio') };
+  if (!(m.cA > 0 && m.vA > 0 && m.cT > 0 && m.cp > 0 && m.ratio > 0)) throw new Error('amounts, ratio and heat capacity must be positive');
+  const ve = m.ratio * m.cA * m.vA / m.cT, dil = g('dil'), V = grid(1.6 * ve, 64), y = V.map(v => thermoDt(m, v, dil)), rows = [['V<sub>eq</sub> (mL)', f3(ve)], ['ΔT در هم‌ارزی (K)', f4(thermoDt(m, ve, false))]], warns = [];
+  try { const ep = twoLine(V, y, ve, 0.1); rows.push(['نقطه‌ی پایان از دو خط (mL)', f3(ep)], ['خطا (٪)', f3((ep - ve) / ve * 100)]); } catch (e) { warns.push(faErr(e)); }
+  show({ chart: { series: [{ x: V, y, name: 'ΔT (K)' }], vlines: [{ x: ve, color: '#c9861a' }], xlabel: 'حجم تیترانت (mL)', ylabel: 'ΔT (K)', title: 'تیتراسیون ترمومتری' }, rows, warns, note: 'سلول بی‌دررو، گنجایش گرمایی ثابت، بدون اتلاف گرما.' });
+}
+function runKf() {
+  const F = kfTiter(g('mStd'), g('vStd'), g('std'), g('blank'));
+  const rows = [['تیتر F (mg آب / mL)', f4(F)], ['آب نمونه (٪ w/w)', f3(kfWaterPct(g('vS'), F, g('mS'), g('drift') || 0, g('time') || 0, g('blank') || 0))]];
+  const q = g('q'); if (isFinite(q) && q > 0) rows.push(['کولن‌سنجی KF: آب (µg)', f4(coulKfUg(q))]);
+  show({ rows, note: 'mg آب = F(V − شاهد) − رانش·زمان/۱۰۰۰؛ کولن‌سنجی: ۱۰٫۷۱ C به‌ازای هر mg آب.' });
+}
+function runCoul() {
+  const i = g('i'), t = g('t'), ne = g('ne'), eff = g('eff'), n = coulMmol(i, t, ne, eff), mw = g('mw'), rows = [['مقدار (mmol)', f4(n)]];
+  if (mw > 0) rows.push(['جرم (mg)', f3(n * mw)]);
+  rows.push(['خطای فرض بازده ۱ (٪)', f3((1 - eff) * 100)]);
+  show({ rows, note: 'قانون فاراده: n = η·i·t/(nₑF).' });
+}
+function runStd() {
+  const c = standardize(g('key'), g('mass'), g('v'), g('pur'));
+  show({ rows: [['غلظت تیترانت (mol/L)', f4(c)]], note: 'استوکیومتری دقیق؛ جرم‌های مولی مقادیر کتابی‌اند.' });
+}
+function runGum() {
+  const ratio = g('ratio');
+  const q = [{ name: 'C_T', value: g('c'), u: g('uc') }, { name: 'V_T', value: g('vt'), u: uRect(g('uvt')) }, { name: 'V_A', value: g('va'), u: uRect(g('uva')) }, { name: 'نقطه‌ی پایان', value: 0, u: g('uep') }];
+  const r = gumBudget((c, vt, va, ep) => ratio * c * (vt + ep) / va, q);
+  const rows = [['C_A (mol/L)', f4(r.value)], ['u<sub>c</sub> (mol/L)', r.uc.toExponential(3)], ['k', r.k], ['U (mol/L، ≈۹۵٪)', r.U.toExponential(3)]];
+  r.contributions.forEach(c => rows.push([`سهم ${esc(c.name)} در u<sub>c</sub>²`, c.share.toFixed(1) + ' %']));
+  show({ rows, note: 'GUM مرتبه‌ی اول، ورودی‌های ناهمبسته. جدول k از GUM پیوست G (از حافظه تایپ شده؛ بررسی کنید).' });
+}
+$('ex-run').addEventListener('click', () => {
+  try { ({ nonaq: runNonaq, amp: runAmp, thermo: runThermo, kf: runKf, coul: runCoul, std: runStd, gum: runGum })[X.fam](); }
+  catch (e) { show({}); $('ex-msg').innerHTML = `<div class="msg err">${faErr(e)}</div>`; }
+});
+renderForm();
+})();
+
+</script>
+
+</body>
+</html>
