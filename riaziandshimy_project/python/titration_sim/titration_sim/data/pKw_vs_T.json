@@ -1,0 +1,5 @@
+{
+  "_comment": "Table from the 'second answer' section 2.6 (pure water, I = 0) and the empirical fit of section 12.1: pKw(T) = 4787.3/T + 7.1321*log10(T) + 0.010365*T - 22.80 (T in kelvin). In a 0.1 M alkali chloride/nitrate medium pKw is about 13.77 at 25 C (Berto et al. 2024).",
+  "fit": {"a": 4787.3, "b": 7.1321, "c": 0.010365, "d": -22.80},
+  "table_c_to_pkw": {"0": 14.94, "20": 14.17, "25": 13.997, "37": 13.62, "50": 13.26, "100": 12.26}
+}

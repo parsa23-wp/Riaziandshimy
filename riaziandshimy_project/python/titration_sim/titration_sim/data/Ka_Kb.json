@@ -1,0 +1,18 @@
+{
+  "_comment": "Common acids/bases, pKa of the protonated form at 25 C (pKa ascending). delta_h_kj_mol is given only where the source documents provide it; null means unknown (no temperature correction applied).",
+  "species": [
+    {"name": "Acetic acid", "kind": "acid", "pka": [4.76], "delta_h_kj_mol": -0.4},
+    {"name": "Formic acid", "kind": "acid", "pka": [3.75], "delta_h_kj_mol": null},
+    {"name": "Benzoic acid", "kind": "acid", "pka": [4.20], "delta_h_kj_mol": null},
+    {"name": "Oxalic acid", "kind": "acid", "pka": [1.25, 4.27], "delta_h_kj_mol": null},
+    {"name": "Citric acid", "kind": "acid", "pka": [3.13, 4.76, 6.40], "delta_h_kj_mol": null},
+    {"name": "Phosphoric acid", "kind": "acid", "pka": [2.15, 7.20, 12.35], "delta_h_kj_mol": null},
+    {"name": "Carbonic acid (total CO2)", "kind": "acid", "pka": [6.35, 10.33], "delta_h_kj_mol": null},
+    {"name": "Boric acid", "kind": "acid", "pka": [9.24], "delta_h_kj_mol": null},
+    {"name": "EDTA (H4Y)", "kind": "acid", "pka": [2.0, 2.7, 6.2, 10.3], "delta_h_kj_mol": null},
+    {"name": "Hypothetical hexaprotic acid (Berto 2024)", "kind": "acid", "pka": [2, 3, 4, 6, 8, 10], "delta_h_kj_mol": null},
+    {"name": "Ammonia (as NH4+)", "kind": "base", "pka": [9.25], "delta_h_kj_mol": null},
+    {"name": "Methylamine (as CH3NH3+)", "kind": "base", "pka": [10.66], "delta_h_kj_mol": null},
+    {"name": "Carbonate (as H2CO3 pKa)", "kind": "base", "pka": [6.35, 10.33], "delta_h_kj_mol": null}
+  ]
+}

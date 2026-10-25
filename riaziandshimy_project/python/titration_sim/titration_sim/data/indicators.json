@@ -1,0 +1,15 @@
+{
+  "_comment": "pK_In and transition ranges from the 'second answer' section 4 (typical textbook values at 25 C, aqueous). Molar absorptivities are intentionally absent: no reliable values were provided; supply them at runtime to use the absorbance-threshold model.",
+  "indicators": [
+    {"name": "Methyl Violet", "pk_in": 0.8, "lo": 0.0, "hi": 1.6, "acid_color": "yellow", "base_color": "violet"},
+    {"name": "Thymol Blue (acid range)", "pk_in": 1.7, "lo": 1.2, "hi": 2.8, "acid_color": "red", "base_color": "yellow"},
+    {"name": "Methyl Orange", "pk_in": 3.7, "lo": 3.1, "hi": 4.4, "acid_color": "red", "base_color": "yellow"},
+    {"name": "Bromocresol Green", "pk_in": 4.7, "lo": 3.8, "hi": 5.4, "acid_color": "yellow", "base_color": "blue"},
+    {"name": "Methyl Red", "pk_in": 5.1, "lo": 4.4, "hi": 6.2, "acid_color": "red", "base_color": "yellow"},
+    {"name": "Bromothymol Blue", "pk_in": 7.0, "lo": 6.0, "hi": 7.6, "acid_color": "yellow", "base_color": "blue"},
+    {"name": "Phenol Red", "pk_in": 7.9, "lo": 6.8, "hi": 8.2, "acid_color": "yellow", "base_color": "red"},
+    {"name": "Thymol Blue (base range)", "pk_in": 8.9, "lo": 8.0, "hi": 9.6, "acid_color": "yellow", "base_color": "blue"},
+    {"name": "Phenolphthalein", "pk_in": 9.4, "lo": 8.2, "hi": 10.0, "acid_color": "colorless", "base_color": "pink", "fade_ph": 13.0},
+    {"name": "Alizarin Yellow R", "pk_in": 11.2, "lo": 10.1, "hi": 12.0, "acid_color": "yellow", "base_color": "red"}
+  ]
+}
