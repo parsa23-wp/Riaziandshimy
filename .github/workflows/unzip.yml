@@ -1,0 +1,20 @@
+name: Unzip Files
+on: [push]
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Unzip archive
+        run: |
+          if ls *.zip >/dev/null 2>&1; then
+            unzip -o *.zip
+            rm *.zip
+            git config --global user.name "GitHub Action"
+            git config --global user.email "action@github.com"
+            git add .
+            git commit -m "Auto-unzipped files"
+            git push
+          else
+            echo "No zip file found!"
+          fi
