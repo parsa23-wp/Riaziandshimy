@@ -1,0 +1,18 @@
+name: Move files to root
+on: [push]
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Move files
+        run: |
+          # این دستور دو فایل اصلی رو می‌بره به ریشه اصلی
+          mv riaziandishmy_project/index.html ./index.html || true
+          mv riaziandishmy_project/titration-lab.html ./titration-lab.html || true
+          
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add .
+          git commit -m "Move main HTML files to root" || true
+          git push
